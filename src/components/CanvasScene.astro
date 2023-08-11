@@ -1,4 +1,17 @@
 ---
 // CanvasScene.astro
 ---
+<script>
+  import { ThreeCanvas } from '../graphics/ThreeCanvas';
+  const canvasElement = document.querySelector<HTMLDivElement>('.canvas-scene');
+  
+  if (canvasElement) {
+    const canvas = new ThreeCanvas(canvasElement);
+    
+    window.addEventListener('beforeunload', () => {
+      canvas.dispose();
+    });
+  }
+</script>
+
 <section class="canvas-scene w-8/10 h-8/10 overflow-hidden bg-gray-100 mb-5 rounded-2xl" id="canvasScene"></section>
