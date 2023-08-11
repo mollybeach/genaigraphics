@@ -1,0 +1,17 @@
+---
+// CanvasBar.astro
+import ArrowButton from "./primitives/ArrowButton.astro";
+import ZoomButton from "./primitives/ZoomButton.astro";
+---
+<section class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+    <div class="flex-grow ml-8">
+        <div class="relative w-full">
+            <ArrowButton direction="left" />
+            <ArrowButton direction="right" />
+        </div>
+    </div>
+    <div class="mr-8">
+            <ZoomButton text="Zoom In" />
+            <ZoomButton text="Zoom Out" />
+        </div>
+</section>
