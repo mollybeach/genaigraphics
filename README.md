@@ -2,8 +2,24 @@
 
 AI Prompt Project
 
-Overview
-This project is a web application built with Astro, React, and Three.js that leverages the ChatEngine API to post messages and create users. The application is a temporary messaging form with a 3D canvas, meant as a placeholder for the future AI Sculpture Promo.
+Project Overview
+ 
+A web application that integrates advanced graphics rendering with AI chat functionalities, and it is set up using Astro, a modern frontend framework. The application leverages the following key components and features:
+
+WebGL Integration: The application has a core WebGL class that sets up Three.js, a popular 3D graphics library. This class, named WebGL, handles rendering, scene, camera, resizing events, and frame animations. Shader programs are also being developed for this purpose, with both vertex and fragment shaders (vs.glsl and fs.glsl) for various graphical effects.
+
+Astro Framework: The frontend is built using the Astro framework. There are distinct pages (index.astro, agent.astro) and reusable components (e.g., Hero, Layout, Card, Canvas, and Chat). The Astro configuration (astro.config.mjs) has been set up to work with TailwindCSS and includes server-side configurations to proxy API requests.
+
+Chat Functionality: Within the application, there's a chat component, an AI-driven chatbot. It communicates with Azure ML, as seen from the azureML.js module, which handles posting data to an Azure endpoint. This module was refactored to use Axios for HTTP requests and better handle chat histories.
+
+Server-Side Operations: A separate Express server (server.js) has been established, to act as a middleware or proxy server. This server is responsible for making post requests, using Axios, to an external API. The server is set up with CORS for cross-origin requests and includes logging middleware for monitoring incoming request bodies.
+
+Configuration and Build Tools: The project has TypeScript (ts.config.json) for static typing and robust tooling. The build and development processes are managed using npm scripts defined in package.json.
+
+Styling with TailwindCSS: TailwindCSS is integrated into the Astro framework, allowing for utility-first CSS, which makes for rapid UI development.
+
+In essence, the jostaberry project seems to be a rich web application that merges 3D graphics rendering capabilities with interactive chat functionalities, AI-powered, all built on a modern stack comprising Astro, Three.js, TypeScript, and Express.
+
 
 Getting Started
 1. Installation
@@ -11,13 +27,13 @@ Getting Started
 Clone the repository:
 
 ```
-git clone https://github.com/arsa-acn/aristotle.git
+git clone https://github.com/mollybeach/jostaberry.git
 ```
 
 2. Navigate into the project directory:
 
 ```
-cd aristotle
+cd jostaberry
 ```
 
 3. Start the application:
@@ -25,20 +41,20 @@ cd aristotle
 ```
 npm run start
 ```
-![Aristotle Application Screenshot](webapp/src/images/router-green-button.png)
+![jostaberry Application Screenshot](src/images/router-green-button.png)
 
-![Aristotle Application Screenshot](webapp/src/images/brand-agent.png)
+![jostaberry Application Screenshot](src/images/brand-agent.png)
 
-![Aristotle Application Screenshot](webapp/src/images/cable-router.png)
+![jostaberry Application Screenshot](src/images/cable-router.png)
 
-![Aristotle Application Screenshot](webapp/src/images/home-page.png)
+![jostaberry Application Screenshot](src/images/home-page.png)
 
 Key Features
 Intuitive AI Assistant: Interact with a powerful AI assistant that guides your 3D creation process and helps you navigate your 3D canvas with ease.
 Interactive 3D Canvas: Use a flexible 3D space built on the Three.js framework to view, analyze, and manipulate your projects.
 
-Messaging: A directory that will contain the components related to messaging.
-ThreeCanvas: A component for displaying a 3D canvas using Three.js.
+Chat: A component related to messaging and chat functionality.
+Canvas: A component for displaying a 3D canvas using Three.js.
 
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
@@ -56,15 +72,78 @@ Inside of your Astro project, you'll see the following folders and files:
 ```
 /
 ├── public/
-│   └── favicon.svg
+│   └── images/
+│   │   ├── router_diff.png 
+│       └── router_nrm.png     
 ├── src/
 │   ├── components/
-│   │   └── Card.astro
+│   │   ├── common/
+│   │   │   ├── Box.astro
+│   │   │   ├── Card.astro
+│   │   │   ├── Container.astro
+│   │   ├── primitives/
+│   │   │   ├── ArrowButton.astro
+│   │   │   ├── Avatar.astro
+│   │   │   ├── Button.astro
+│   │   │   ├── ButtonMessage.astro
+│   │   │   ├── EmojiButton.astro
+│   │   │   ├── GitHubButton.astro
+│   │   │   ├── IconHeader.astro
+│   │   │   ├── SendButton.astro
+│   │   │   ├── SuggestionButton.astro
+│   │   │   ├── TwitterButton.astro
+│   │   │   ├── UploadFileButton.astro
+│   │   │   ├── ZoomButton.astro
+│   │   ├── Canvas.astro
+│   │   ├── CanvasBar.astro
+│   │   ├── CanvasScene.astro 
+│   │   ├── Chat.astro
+│   │   ├── ChatBar.astro
+│   │   ├── ChatMessages.astro
+│   │   ├── ChatSuggestions.astro
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   └── Hero.astro
+│   ├── data/
+│   │   ├── sampleMessageData.js
+│   │   ├── sampleMessageData.json
+│   │   ├── sampleSuggestionsData.js
+│   │   └── sampleSuggestionsData.json
+│   ├── images
+│   │   ├── brand-agent.png
+│   │   ├── cable-router.png
+│   │   ├── home-page.pn
+│   │   ├── logo.svg
+│   │   └── router-green-button.png
 │   ├── layouts/
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── pages/
+│   │   ├── agent.astro
+│   │   └── index.astro
+│   ├── scripts/
+│   │   ├── webgl/
+│   │   │   ├── core/
+│   │   │   │   └── WebGL.js
+│   │   │   ├── shader/
+│   │   │   │   ├── fs.glsl
+│   │   │   │   └── vs.glsl
+│   │   │   └── utils/
+│   │   │       ├── assetLoader.js
+│   │   │       └── OrbitControls.js
+│   │   ├── entry.ts
+│   │   └── utils.ts
+│   ├── stores/
+│   │    └── store.js
+│   └── types/
+│       └── glsl.d.ts
+├── env.d.ts
+├── astro.config.mjs
+├── package.json
+├── prettier.config.js
+├── README.md
+├── server.js
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
