@@ -1,0 +1,41 @@
+---
+// IconHeader.astro
+const { title, type } = Astro.props as {
+    title: string;
+    type: string;
+};
+---
+
+<div class="flex flex-row items-center justify-center h-12 w-full mb-2">
+    <div class="flex items-center justify-center rounded-2xl text-purple-700 bg-purple-100 h-10 w-10">
+        {type === 'chat' && (
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                ></path>
+            </svg>
+        )}
+        {type === 'animation' && (
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 64 64" viewBox="0 0 64 64" id="cube">
+                <defs>
+                    <linearGradient id="a">
+                        <stop offset="0" stop-color="#000092"></stop>
+                        <stop offset="1" stop-color="#ff00f3"></stop>
+                    </linearGradient>
+                    <linearGradient id="b" x1="7.75" x2="53.784" y1="32.288" y2="32.288" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient>
+                </defs>
+                <path fill="url(#b)" d="M 7.75 5.9140625 L 7.75 9.9140625 L 8.75 9.9140625 L 8.75 8.4140625 L 48.75 8.4140625 L 48.75 9.9140625 L 49.75 9.9140625 L 49.75 5.9140625 L 48.75 5.9140625 L 48.75 7.4140625 L 8.75 7.4140625 L 8.75 5.9140625 L 7.75 5.9140625 z M 28.75 10.166016 L 7.75 22.289062 L 7.75 46.539062 L 28.75 58.662109 L 49.75 46.539062 L 49.75 22.289062 L 28.75 10.166016 z M 51.75 10.242188 L 51.75 11.242188 L 53.25 11.242188 L 53.25 57.585938 L 51.75 57.585938 L 51.75 58.585938 L 55.75 58.585938 L 55.75 57.585938 L 54.25 57.585938 L 54.25 11.242188 L 55.75 11.242188 L 55.75 10.242188 L 51.75 10.242188 z M 28.75 11.320312 L 48.25 22.578125 L 28.75 33.837891 L 9.25 22.578125 L 28.75 11.320312 z M 8.75 23.445312 L 28.25 34.703125 L 28.25 57.220703 L 8.75 45.960938 L 8.75 23.445312 z M 48.75 23.445312 L 48.75 45.962891 L 29.25 57.220703 L 29.25 34.703125 L 48.75 23.445312 z "></path>
+            </svg>
+        )}
+    </div>
+    <div class="ml-2 font-bold text-2xl">{title}</div>
+</div>
