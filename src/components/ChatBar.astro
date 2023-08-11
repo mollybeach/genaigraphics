@@ -1,0 +1,47 @@
+---
+//ChatBar.astro
+import UploadFileButton from './primitives/UploadFileButton.astro';
+import EmojiButton from './primitives/EmojiButton.astro';
+import SendButton from './primitives/SendButton.astro';
+---
+<script>
+    import { postMessageEvent } from "../stores/store";
+
+    function createMessage(event: any) {
+      event.preventDefault();
+
+      const messageContent = event.target.elements.message.value.trim();
+      if (!messageContent) {
+        alert("Please fill in the message.");
+        return;
+      }
+      postMessageEvent(messageContent);
+      event.target.elements.message.value = "";
+    }
+
+    const formElement = document.querySelector(".message-form");
+    if (formElement) {
+      formElement.addEventListener("submit", createMessage);
+    } else {
+      console.warn("Could not find the '.message-form' element.");
+    }
+</script>
+
+<section>
+    <form  class="message-form flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+        <UploadFileButton />
+        <div class="flex-grow ml-4">
+          <div class="relative w-full">
+            <input
+              id="inputMessage"
+              type="text"
+              name="message"
+              class="message-form__message flex w-full border rounded-xl focus:outline-none focus:border-purple-300 pl-4 h-10"
+              placeholder="Message..."
+            />
+            <EmojiButton />
+          </div>
+        </div>
+        <SendButton text="Send" />
+    </form>
+</section>
