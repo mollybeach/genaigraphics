@@ -72,10 +72,26 @@ Inside of your Astro project, you'll see the following folders and files:
 ```
 /
 ├── public/
-│   └── images/
-│   │   ├── router_diff.png 
-│       └── router_nrm.png     
+│   ├── images/
+│   │   └── favicon.svg
+│   └── models/
+│       ├── fbx
+│       │   ├── router_diff.png
+│       │   ├── router_nrm.png
+│       │   └── router_v01.fbx
+│       ├── glb
+│       │   ├── router_notexture.glb
+│       │   ├── router_texture_cabletest4.glb
+│       │   ├── router_texture_lightblinktest.glb
+│       │   └── router_texture_restbuttontest.glb
+│       └── gltf
+│           ├── router_notexture.gltf
+│           ├── router_texture_cabletest4.gltf
+│           ├── router_texture_lightblinktest.gltf
+│           └── router_texture_restbuttontest.gltf
 ├── src/
+│   ├── api/
+│   │   └── azureML.js
 │   ├── components/
 │   │   ├── common/
 │   │   │   ├── Box.astro
@@ -93,7 +109,7 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   │   ├── SuggestionButton.astro
 │   │   │   ├── TwitterButton.astro
 │   │   │   ├── UploadFileButton.astro
-│   │   │   ├── ZoomButton.astro
+│   │   │   └── ZoomButton.astro
 │   │   ├── Canvas.astro
 │   │   ├── CanvasBar.astro
 │   │   ├── CanvasScene.astro 
@@ -110,11 +126,12 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   ├── sampleSuggestionsData.js
 │   │   └── sampleSuggestionsData.json
 │   ├── images
-│   │   ├── brand-agent.png
-│   │   ├── cable-router.png
-│   │   ├── home-page.pn
-│   │   ├── logo.svg
-│   │   └── router-green-button.png
+│   │   ├── readme/
+│   │   │   ├── brand-agent.png
+│   │   │   ├── cable-router.png
+│   │   │   ├── home-page.pn
+│   │   │   └── router-green-button.png
+│   │   └── logo.svg
 │   ├── layouts/
 │   │   └── Layout.astro
 │   ├── pages/
@@ -125,12 +142,12 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   │   ├── core/
 │   │   │   │   └── WebGL.js
 │   │   │   ├── shader/
-│   │   │   │   ├── fs.glsl
-│   │   │   │   └── vs.glsl
+│   │   │   │   ├── fragmentShader.glsl
+│   │   │   │   └── vertexShader.glsl
 │   │   │   └── utils/
 │   │   │       ├── assetLoader.js
 │   │   │       └── OrbitControls.js
-│   │   ├── entry.ts
+│   │   ├── canvasSetup.ts
 │   │   └── utils.ts
 │   ├── stores/
 │   │    └── store.js
