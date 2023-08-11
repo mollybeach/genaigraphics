@@ -1,0 +1,17 @@
+---
+// Chat.astro
+import IconHeader from './primitives/IconHeader.astro';
+import ChatMessages from './ChatMessages.astro';
+import ChatSuggestionBar from './ChatSuggestionBar.astro';
+import ChatBar from './ChatBar.astro';
+import Box from "./common/Box.astro";
+
+const title = 'Brand Agent';
+---
+
+<Box>
+  <IconHeader title={title} type="chat"/>
+  <ChatMessages/>
+  <ChatSuggestionBar/>
+  <ChatBar/>
+</Box>
