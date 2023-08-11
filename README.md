@@ -49,28 +49,10 @@ npm run start
 
 ![jostaberry Application Screenshot](src/images/home-page.png)
 
-Key Features
-Intuitive AI Assistant: Interact with a powerful AI assistant that guides your 3D creation process and helps you navigate your 3D canvas with ease.
-Interactive 3D Canvas: Use a flexible 3D space built on the Three.js framework to view, analyze, and manipulate your projects.
-
-Chat: A component related to messaging and chat functionality.
-Canvas: A component for displaying a 3D canvas using Three.js.
-
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```
-/
 ├── public/
 │   ├── images/
 │   │   └── favicon.svg
@@ -125,6 +107,16 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   ├── sampleMessageData.json
 │   │   ├── sampleSuggestionsData.js
 │   │   └── sampleSuggestionsData.json
+│   ├── graphics/ 
+│   │   ├── core/
+│   │   │   └── WebGL.js
+│   │   ├── shader/
+│   │   │   ├── fragmentShader.glsl
+│   │   │   └── vertexShader.glsl
+│   │   ├──utils/
+│   │   │       ├── assetLoader.js
+│   │   │       └── OrbitControls.js
+│   │   └── ThreeCanvas.ts
 │   ├── images
 │   │   ├── readme/
 │   │   │   ├── brand-agent.png
@@ -137,18 +129,6 @@ Inside of your Astro project, you'll see the following folders and files:
 │   ├── pages/
 │   │   ├── agent.astro
 │   │   └── index.astro
-│   ├── scripts/
-│   │   ├── webgl/
-│   │   │   ├── core/
-│   │   │   │   └── WebGL.js
-│   │   │   ├── shader/
-│   │   │   │   ├── fragmentShader.glsl
-│   │   │   │   └── vertexShader.glsl
-│   │   │   └── utils/
-│   │   │       ├── assetLoader.js
-│   │   │       └── OrbitControls.js
-│   │   ├── canvasSetup.ts
-│   │   └── utils.ts
 │   ├── stores/
 │   │    └── store.js
 │   └── types/
