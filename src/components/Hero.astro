@@ -1,0 +1,17 @@
+---
+//Hero.astro
+import Container from "./common/Container.astro"
+import ChatBar from "./ChatBar.astro"
+---
+<section class="flex flex-col h-screen" id="home">
+    <Container>
+        <div class="h-full mb-20"></div>
+            <h1 class="text-gray-400 font-bold text-5xl md:text-6xl xl:text-7xl">
+                <span class="text-primary">Ask me anything?</span>
+            </h1>
+        </div>
+        <div class="flex-grow-0 mt-10">
+            <ChatBar/>
+        </div>
+    </Container>
+</section>
