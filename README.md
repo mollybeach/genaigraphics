@@ -1,12 +1,9 @@
-# jostaberry
-
-AI Prompt Project
-
+# jostaberry - 👾 3D Graphics Rendering and AI Chat Application 💬 
 Project Overview
  
 A web application that integrates advanced graphics rendering with AI chat functionalities, and it is set up using Astro, a modern frontend framework. The application leverages the following key components and features:
 
-WebGL Integration: The application has a core WebGL class that sets up Three.js, a popular 3D graphics library. This class, named WebGL, handles rendering, scene, camera, resizing events, and frame animations. Shader programs are also being developed for this purpose, with both vertex and fragment shaders (vs.glsl and fs.glsl) for various graphical effects.
+WebGL Integration: The application has a core WebGL class that sets up Three.js, a popular 3D graphics library. This class, named WebGL, handles rendering, scene, camera, resizing events, and frame animations. Shader programs are also being developed for this purpose, with both vertex and fragment shaders (vertexShader.glsl and fragmentShader.glsl) for various graphical effects.
 
 Astro Framework: The frontend is built using the Astro framework. There are distinct pages (index.astro, agent.astro) and reusable components (e.g., Hero, Layout, Card, Canvas, and Chat). The Astro configuration (astro.config.mjs) has been set up to work with TailwindCSS and includes server-side configurations to proxy API requests.
 
@@ -34,6 +31,7 @@ git clone https://github.com/mollybeach/jostaberry.git
 
 ```
 cd jostaberry
+cd webapp
 ```
 
 3. Start the application:
@@ -41,18 +39,21 @@ cd jostaberry
 ```
 npm run start
 ```
-![jostaberry Application Screenshot](src/images/router-green-button.png)
 
-![jostaberry Application Screenshot](src/images/brand-agent.png)
+![jostaberry Application Screenshot](webapp/src/images/readme/router-green-button.png)
 
-![jostaberry Application Screenshot](src/images/cable-router.png)
+![jostaberry Application Screenshot](webapp/src/images/readme/brand-agent.png)
 
-![jostaberry Application Screenshot](src/images/home-page.png)
+![jostaberry Application Screenshot](webapp/src/images/readme/cable-router.png)
+
+![jostaberry Application Screenshot](webapp/src/images/readme/home-page.png)
 
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
 
+```
+webapp/
 ├── public/
 │   ├── images/
 │   │   └── favicon.svg
