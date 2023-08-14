@@ -1,3 +1,4 @@
+// assetLoader.ts
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
@@ -6,6 +7,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 export type Assets = {
   model?: { data?: THREE.Group, path: string },
   texture?: { data?: GLTF, path: string },
+  noTexture?: { data?: GLTF, path: string },
   lightTexture?: { data?: GLTF, path: string },
   buttonTexture?: { data?: GLTF, path: string },
 };
@@ -19,6 +21,9 @@ export async function loadAssets(assets: Assets) {
     const ext = asset.path.split('.').pop();
 
     if (ext === 'gltf') {
+      const object = await gltfLoader.loadAsync(asset.path);
+      asset.data = object;
+    } else if (ext === 'glb') {
       const object = await gltfLoader.loadAsync(asset.path);
       asset.data = object;
     } else if (ext === 'fbx') {
