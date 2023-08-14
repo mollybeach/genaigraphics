@@ -81,6 +81,18 @@ class WebGL {
     this.cancelAnimationFrame();
     gl.scene?.clear();
   }
+
+  // The new zoom methods
+  zoomIn(delta = 0.1) {
+    this.camera.position.z -= delta; // Closer
+    // Or, for FOV: this.camera.fov -= delta; this.camera.updateProjectionMatrix();
+  }
+
+  zoomOut(delta = 0.1) {
+    this.camera.position.z += delta; // Farther
+    // Or, for FOV: this.camera.fov += delta; this.camera.updateProjectionMatrix();
+  }
+  
 }
 
 export const gl = new WebGL();
