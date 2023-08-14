@@ -3,6 +3,10 @@
 import UploadFileButton from './primitives/UploadFileButton.astro';
 import EmojiButton from './primitives/EmojiButton.astro';
 import SendButton from './primitives/SendButton.astro';
+
+const { currentPage } = Astro.props as {
+    currentPage: string;
+};
 ---
 <script>
     import { postMessageEvent } from "../stores/store";
@@ -42,6 +46,6 @@ import SendButton from './primitives/SendButton.astro';
             <EmojiButton />
           </div>
         </div>
-        <SendButton text="Send" />
+        <SendButton text="Send" currentPage={currentPage} />
     </form>
 </section>
