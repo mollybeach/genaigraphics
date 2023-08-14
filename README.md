@@ -41,13 +41,13 @@ npm run start
 ```
 ![Jostaberry Application Screenshot](https://github.com/mollybeach/jostaberry/blob/main/public/images/readme/lighting-sculpture.gif)
 
-![jostaberry Application Screenshot](webapp/src/images/readme/router-green-button.png)
+![jostaberry Application Screenshot](public/images/readme/router-green-button.png)
 
-![jostaberry Application Screenshot](webapp/src/images/readme/brand-agent.png)
+![jostaberry Application Screenshot](public/images/readme/brand-agent.png)
 
-![jostaberry Application Screenshot](webapp/src/images/readme/cable-router.png)
+![jostaberry Application Screenshot](public/images/readme/cable-router.png)
 
-![jostaberry Application Screenshot](webapp/src/images/readme/home-page.png)
+![jostaberry Application Screenshot](public/images/readme/home-page.png)
 
 ## 🚀 Project Structure
 
