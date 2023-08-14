@@ -1,28 +1,30 @@
 ---
 // SendButton.astro
 import Button from "./Button.astro";
-const { text} = Astro.props as {
+const { text, currentPage} = Astro.props as {
     text: string;
+    currentPage: string;
 };
 ---
 <div class="ml-4">
-  <Button>
-    <span>{text}</span>
-    <span class="ml-2">
-      <svg
-        class="w-4 h-4 transform rotate-45 -mt-px"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-        ></path>
-      </svg>
-    </span>
-  </Button>
+    <Button currentPage={currentPage}>
+      <span>{text}</span>
+      <span class="ml-2">
+        <svg
+          class="w-4 h-4 transform rotate-45 -mt-px"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+          ></path>
+        </svg>
+      </span>
+    </Button>
 </div>
+
