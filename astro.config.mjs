@@ -4,11 +4,11 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://localhost:3000',
+  base: '/',
   build: {
     server: './server'
   },
-  base: '/',
+  envDir: '/',
   integrations: [tailwind()],
   server: {
     port: 3000,
@@ -19,5 +19,6 @@ export default defineConfig({
         secure: false,
       }
     }
-  }
+  },
+  site: 'http://localhost:3000',
 });
