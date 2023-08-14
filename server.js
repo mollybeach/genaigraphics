@@ -7,8 +7,8 @@ import cors from 'cors';
 const app = express();
 const port = 3001;
 
-const API_ENDPOINT = "";
-const API_BEARER_TOKEN = "";
+const API_ENDPOINT = import.meta.env.PUBLIC_API_ENDPOINT;
+const API_BEARER_TOKEN = import.meta.env.PUBLIC_API_BEARER_TOKEN;
 
 // Middleware
 app.use(bodyParser.json());
