@@ -57,18 +57,23 @@ Inside of your Astro project, you'll see the following folders and files:
 webapp/
 ├── public/
 │   ├── images/
+│   │   ├── readme/
+│   │   │   ├── brand-agent.png
+│   │   │   ├── cable-router.png
+│   │   │   ├── home-page.png
+│   │   │   └── router-green-button.png
 │   │   └── favicon.svg
 │   └── models/
-│       ├── fbx
+│       ├── fbx/
 │       │   ├── router_diff.png
 │       │   ├── router_nrm.png
 │       │   └── router_v01.fbx
-│       ├── glb
+│       ├── glb/
 │       │   ├── router_notexture.glb
 │       │   ├── router_texture_cabletest4.glb
 │       │   ├── router_texture_lightblinktest.glb
 │       │   └── router_texture_restbuttontest.glb
-│       └── gltf
+│       └── gltf/
 │           ├── router_notexture.gltf
 │           ├── router_texture_cabletest4.gltf
 │           ├── router_texture_lightblinktest.gltf
@@ -119,13 +124,6 @@ webapp/
 │   │   │       ├── assetLoader.js
 │   │   │       └── OrbitControls.js
 │   │   └── ThreeCanvas.ts
-│   ├── images
-│   │   ├── readme/
-│   │   │   ├── brand-agent.png
-│   │   │   ├── cable-router.png
-│   │   │   ├── home-page.pn
-│   │   │   └── router-green-button.png
-│   │   └── logo.svg
 │   ├── layouts/
 │   │   └── Layout.astro
 │   ├── pages/
