@@ -39,6 +39,7 @@ cd webapp
 ```
 npm run start
 ```
+![Jostaberry Application Screenshot](https://github.com/mollybeach/jostaberry/blob/main/public/images/readme/lighting-sculpture.gif)
 
 ![jostaberry Application Screenshot](webapp/src/images/readme/router-green-button.png)
 
