@@ -3,7 +3,7 @@ export async function postAzureMLData(question, my_chat_history) {
     console.log('postAzureMLData my_chat_history:', my_chat_history);
     const chat_history = transformChatHistory(my_chat_history);
     try {
-        const response = await fetch('https://verison-promptflow-endpoint.azurewebsites.net/api/dells-curry-endpoint?code=5eaDHmy7JLPoSTvN1Cjb12BUTcIR5u-e_74uwsTMc1w2AzFuC-ZGng==', {
+        const response = await fetch(import.meta.env.PUBLIC_AZURE_API_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
