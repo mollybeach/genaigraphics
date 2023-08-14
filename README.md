@@ -64,16 +64,16 @@ webapp/
 │   │   │   └── router-green-button.png
 │   │   └── favicon.svg
 │   └── models/
-│       ├── fbx/
+│       ├── fbx
 │       │   ├── router_diff.png
 │       │   ├── router_nrm.png
 │       │   └── router_v01.fbx
-│       ├── glb/
+│       ├── glb
 │       │   ├── router_notexture.glb
 │       │   ├── router_texture_cabletest4.glb
 │       │   ├── router_texture_lightblinktest.glb
 │       │   └── router_texture_restbuttontest.glb
-│       └── gltf/
+│       └── gltf
 │           ├── router_notexture.gltf
 │           ├── router_texture_cabletest4.gltf
 │           ├── router_texture_lightblinktest.gltf
