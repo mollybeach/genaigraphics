@@ -29,7 +29,7 @@ export class ThreeCanvas {
 
     // Camera Position
     gl.camera.position.z = -0.75;
-    gl.camera.position.y = 0.5;
+    gl.camera.position.y = 0.65;
     gl.camera.position.x = 0.5;
 
     // Add Lighting
@@ -66,5 +66,14 @@ export class ThreeCanvas {
 
   dispose() {
     gl.dispose();
+  }
+
+  // Zoom methods
+  zoomIn(delta = 0.1) {
+    gl.camera.position.z += delta; // Move the camera closer
+  }
+
+  zoomOut(delta = 0.1) {
+    gl.camera.position.z -= delta; // Move the camera farther away
   }
 }
