@@ -1,6 +1,5 @@
-// azureML.js
+// path: webapp/src/api/azureML.js
 export async function postAzureMLData(question, my_chat_history) {
-    console.log('postAzureMLData my_chat_history:', my_chat_history);
     const chat_history = transformChatHistory(my_chat_history);
     try {
         const response = await fetch(import.meta.env.PUBLIC_AZURE_API_ENDPOINT, {
