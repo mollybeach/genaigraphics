@@ -1,12 +1,13 @@
 ---
-// CanvasScene.astro
+//path: src/components/animations/CanvasScene.astro
 ---
 <script>
-  import { ThreeCanvas } from '../graphics/ThreeCanvas';
-  const canvasElement = document.querySelector<HTMLDivElement>('.canvas-scene');
-  
+  import { ThreeCanvas } from '../../graphics/ThreeCanvas';
+  const canvasElement = document.querySelector<HTMLSectionElement>('#canvas-scene');
+
   if (canvasElement) {
     const canvas = new ThreeCanvas(canvasElement);
+    window.myCanvas = canvas; // Expose the canvas instance to the window
     
     window.addEventListener('beforeunload', () => {
       canvas.dispose();
@@ -14,4 +15,4 @@
   }
 </script>
 
-<section class="canvas-scene w-8/10 h-8/10 overflow-hidden bg-gray-100 mb-5 rounded-2xl" id="canvasScene"></section>
+<section id="canvas-scene" class="w-full overflow-x-auto mt-6 rounded-2xl"></section>

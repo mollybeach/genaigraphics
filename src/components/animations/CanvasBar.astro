@@ -1,17 +1,24 @@
 ---
-// CanvasBar.astro
-import ArrowButton from "./primitives/ArrowButton.astro";
-import ZoomButton from "./primitives/ZoomButton.astro";
+//path: src/components/animations/CanvasBar.astro
+import ArrowSvg from "../primitives/Svg.astro";
+import Button from "../primitives/Button.astro";
+import ZoomSvg from "../primitives/Svg.astro";
 ---
-<section class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
-    <div class="flex-grow ml-8">
-        <div class="relative w-full">
-            <ArrowButton direction="left" />
-            <ArrowButton direction="right" />
-        </div>
+<section class="flex flex-row items-center h-16 rounded-xl bg-white mt-[108px] px-4">
+    <div class="flex flex-row flex-grow ml-8 relative w-full">
+        <Button className="purpleButton" onClicked="rotateLeft">
+            <ArrowSvg type="arrowLeft" group="arrow" />
+        </Button>
+        <Button className="purpleButton" onClicked="rotateRight">
+            <ArrowSvg type="arrowRight" group="arrow" />
+        </Button>
     </div>
-    <div class="mr-8">
-            <ZoomButton text="Zoom In" />
-            <ZoomButton text="Zoom Out" />
-        </div>
+    <div class="flex mr-8 flex-row">
+        <Button className="purpleButton" onClicked="zoomIn">
+            <ZoomSvg type="zoomIn" group="zoom" />
+        </Button>
+        <Button className="purpleButton" onClicked="zoomOut">
+            <ZoomSvg type="zoomOut" group="zoom" />
+        </Button>
+    </div>
 </section>

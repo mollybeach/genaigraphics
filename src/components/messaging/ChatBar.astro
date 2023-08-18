@@ -1,15 +1,17 @@
 ---
-//ChatBar.astro
-import UploadFileButton from './primitives/UploadFileButton.astro';
-import EmojiButton from './primitives/EmojiButton.astro';
-import SendButton from './primitives/SendButton.astro';
+//path: src/components/messages/ChatBar.astro
+import Button from '../primitives/Button.astro';
+import EmojiSvg from '../primitives/Svg.astro';
+import FileSvg from '../primitives/Svg.astro';
+import SendSvg from '../primitives/Svg.astro';
+import form from '../../data/classData';
 
-const { currentPage } = Astro.props as {
-    currentPage: string;
+const { page } = Astro.props as {
+    page: string;
 };
 ---
 <script>
-    import { postMessageEvent } from "../stores/store";
+    import { updateMessagesStateEvent } from "../../stores/store";
 
     function createMessage(event: any) {
       event.preventDefault();
@@ -19,33 +21,51 @@ const { currentPage } = Astro.props as {
         alert("Please fill in the message.");
         return;
       }
-      postMessageEvent(messageContent);
+      updateMessagesStateEvent(messageContent);
       event.target.elements.message.value = "";
     }
 
-    const formElement = document.querySelector(".message-form");
+    function clearInputOnFocus(event: Event) {
+      const input = event.target as HTMLInputElement;
+      input.value = '';
+    }
+
+    
+    const formElement = document.querySelector<HTMLFormElement>('#message-form');
     if (formElement) {
       formElement.addEventListener("submit", createMessage);
     } else {
       console.warn("Could not find the '.message-form' element.");
     }
+
+    const inputElement = document.querySelector<HTMLInputElement>('#input-message');
+    if (inputElement) {
+      inputElement.addEventListener("click", clearInputOnFocus);
+    } else {
+      console.warn("Could not find the '#input-message' element.");
+    }
 </script>
 
 <section>
-    <form  class="message-form flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
-        <UploadFileButton />
-        <div class="flex-grow ml-4">
-          <div class="relative w-full">
-            <input
-              id="inputMessage"
-              type="text"
-              name="message"
-              class="message-form__message flex w-full border rounded-xl focus:outline-none focus:border-purple-300 pl-4 h-10"
-              placeholder="Message..."
-            />
-            <EmojiButton />
-          </div>
-        </div>
-        <SendButton text="Send" currentPage={currentPage} />
-    </form>
+  <form id="message-form" class="flex flex-row items-center h-16 rounded-xl bg-white px-4">
+    <Button className="purpleButton">
+      <FileSvg type="file" group="message"/>
+    </Button>
+    <div class="flex-grow ml-4 relative gap-7">
+      <input
+        id="input-message"
+        type="text"
+        name="message"
+        class="w-full border rounded-xl focus:outline-none focus:border-purple-300 pl-2 h-10"
+        placeholder="Message..."
+        value=""
+      />
+      <Button className="emojiButton">
+        <EmojiSvg type="emoji" group="message"/>
+      </Button>
+    </div>
+    <Button className="purpleButton" text="Send" page={page} onClicked="route">
+      <SendSvg type="send" group="message"/>
+    </Button>
+  </form>
 </section>

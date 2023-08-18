@@ -1,3 +1,4 @@
+// path: src/graphics/utils/OrbitControls.ts
 import { OrbitControls as OC } from 'three/examples/jsm/controls/OrbitControls'
 import { gl } from '../core/WebGL'
 
@@ -22,5 +23,4 @@ class OrbitControls {
     this.orbitControls.update()
   }
 }
-
 export const controls = new OrbitControls()

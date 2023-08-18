@@ -1,0 +1,55 @@
+---
+//path: src/components/messages/ChatSuggestionBar.astro
+---
+<script>
+    import {  
+        inputValueSuggestionState, 
+        updateInputValueSuggestionStateEvent,  
+        suggestionsState
+    } from "../../stores/store";
+    const targetDiv = document.querySelector<HTMLDivElement>('#suggestion-parent');
+    
+    // Render Suggestion Buttons
+    function renderMySuggestions(suggestion: any) {
+        const suggestionHtml = `
+            <button
+              id="select-suggestion-option"
+              class="flex items-center justify-center bg-gray-300 bg-opacity-50 hover:bg-purple-600 hover:bg-opacity-75 active:bg-purple-800 transform transition-transform duration-150 active:scale-95 rounded-xl text-white px-4 py-1 flex-shrink-0 mb-1 focus:outline-none"
+            >
+              ${suggestion}
+            </button>
+        `;
+        targetDiv.innerHTML += suggestionHtml;
+    }
+    let unsubscribe;
+    unsubscribe;
+    function initialize() {
+        unsubscribe = suggestionsState.subscribe(updatedSuggestions => {  
+            targetDiv.innerHTML = '';
+            updatedSuggestions.forEach(renderMySuggestions);
+        }); 
+    }
+    initialize();
+
+    // Update Value of Input Placeholder
+    document.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        // Handling suggestion button click
+        if (target.matches("#select-suggestion-option")) {
+            const suggestion = target.textContent;
+            updateInputValueSuggestionStateEvent(suggestion);
+            return;
+        }
+    });
+
+    // Listen to changes in the inputValueSuggestionState store and update the input value
+    const input = document.querySelector("#input-message") as HTMLInputElement;
+    inputValueSuggestionState.subscribe((suggestion) => {
+      input.value = suggestion;
+    });
+</script>
+
+<section class="mb-1">
+    <div id="suggestion-parent">
+    </div>
+</section>

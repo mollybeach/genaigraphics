@@ -1,4 +1,4 @@
-//path: webapp/server.js
+//path: server.js
 import axios from 'axios';
 import express from 'express';
 import bodyParser from 'body-parser';

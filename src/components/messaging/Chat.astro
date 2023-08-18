@@ -1,17 +1,19 @@
 ---
-// Chat.astro
-import IconHeader from './primitives/IconHeader.astro';
+//path: src/components/messages/Chat.astro
+import Box from "../common/Box.astro";
+import CardHeader from '../primitives/CardHeader.astro';
 import ChatMessages from './ChatMessages.astro';
 import ChatSuggestionBar from './ChatSuggestionBar.astro';
 import ChatBar from './ChatBar.astro';
-import Box from "./common/Box.astro";
-
-const title = 'Brand Agent';
+import ChatBubbleSvg from '../primitives/Svg.astro';
 ---
-
 <Box>
-  <IconHeader title={title} type="chat"/>
+  <CardHeader 
+    title="Brand Agent"
+  >
+    <ChatBubbleSvg type="chat" group="message"/>
+  </CardHeader>
   <ChatMessages/>
   <ChatSuggestionBar/>
-  <ChatBar/>
+  <ChatBar page="agent" />
 </Box>

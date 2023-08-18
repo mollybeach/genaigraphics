@@ -1,0 +1,61 @@
+---
+// path: src/components/primitives/Svg.astro
+import Button from "./Button.astro";
+import Link from "./Link.astro";
+import {svgStructure, svgOptions, pathOptions, linearGradientOptions, stopOptions} from "../../data/svgData.js";
+const { group, type} = Astro.props as { group: string, type?: string};
+
+const optionsMap = {
+    svg: svgOptions,
+    path: pathOptions,
+    linearGradient: linearGradientOptions,
+    stop: stopOptions, 
+};
+
+const svgStructureForType = svgStructure[group];
+
+const svgOutput = createSVGElements(svgStructureForType, group);
+
+
+function createOptions(tagName, group, index = 0) {
+    const optionsData = optionsMap[tagName];
+    const allOptions = [];
+
+    for (let key in optionsData) {
+        const specialized = key === "class" || key === "d" ? true : false; 
+        let value = specialized && type ? optionsData[key][type] : optionsData[key][group];
+
+        if (Array.isArray(value)) {
+            value = value[index];
+        }
+        if (value) {
+            allOptions.push(`${key}="${value}"`);
+        }
+    }
+    return allOptions.join(" ");
+}
+
+function createSVGElements(elements, group, parentIndex = 0) {
+    let result = "";
+
+    for (let i = 0; i < elements.length; i++) {
+        let el = elements[i];
+        
+        if (typeof el === "string") {
+            const options = createOptions(el, group);
+            result += `<${el} ${options}></${el}>`;
+        } else {
+            const options = createOptions(el.tag, group, i);  // Using 'i' as index for children
+            result += `<${el.tag} ${options}>`;  // Open the tag with the options
+            if (el.children) {
+                result += createSVGElements(el.children, group);  // Do not increment index for direct children
+            }
+            result += `</${el.tag}>`;  // Close the tag
+        }
+    }
+    return result;
+}
+---
+<slot set:html={svgOutput}/>
+
+

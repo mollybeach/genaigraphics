@@ -1,16 +1,15 @@
 ---
-// Canvas.astro
+//path: src/components/animations/Canvas.astro
+import Box from "../common/Box.astro";
 import CanvasBar from "./CanvasBar.astro";
-import IconHeader from "./primitives/IconHeader.astro";
 import CanvasScene from "./CanvasScene.astro";
-import Box from "./common/Box.astro";
-
-const title = "3D Animation";
+import CardHeader from "../primitives/CardHeader.astro";
+import CubeSvg from "../primitives/Svg.astro";
 ---
-<script src="../scripts/entry.ts"></script>
-
 <Box>
-  <IconHeader title={title} type="animation"/>
+  <CardHeader title="3D Animation">
+    <CubeSvg type="cube" group="cube"/>
+  </CardHeader>
   <CanvasScene/>
   <CanvasBar/>
 </Box>

@@ -21,7 +21,7 @@ class WebGL {
     this.renderer.shadowMap.enabled = true;
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(50, aspect, 0.01, 100);
+    this.camera = new THREE.PerspectiveCamera(40, aspect, 0.01, 100);
 
     window.addEventListener('resize', this.handleResize);
   }
@@ -38,7 +38,7 @@ class WebGL {
 
   get size() {
     const width = this.container ? this.container.clientWidth : window.innerWidth * 0.5;
-    const height = this.container ? this.container.clientHeight : window.innerHeight * 0.8;
+    const height = this.container ? this.container.clientHeight : window.innerHeight * 0.6;
     return { width, height, aspect: width / height }; 
   }
 
@@ -80,17 +80,6 @@ class WebGL {
   dispose() {
     this.cancelAnimationFrame();
     gl.scene?.clear();
-  }
-
-  // The new zoom methods
-  zoomIn(delta = 0.1) {
-    this.camera.position.z -= delta; // Closer
-    // Or, for FOV: this.camera.fov -= delta; this.camera.updateProjectionMatrix();
-  }
-
-  zoomOut(delta = 0.1) {
-    this.camera.position.z += delta; // Farther
-    // Or, for FOV: this.camera.fov += delta; this.camera.updateProjectionMatrix();
   }
   
 }

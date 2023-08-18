@@ -1,5 +1,5 @@
 /// <reference types="astro/client" />
-// path: webapp/env.d.ts
+// path: env.d.ts
 interface ImportMetaEnv {
     readonly PUBLIC_API_ENDPOINT: string;
     readonly PUBLIC_API_BEARER_TOKEN: string;
