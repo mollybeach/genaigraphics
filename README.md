@@ -54,7 +54,13 @@ npm run start
 Inside of your Astro project, you'll see the following folders and files:
 
 ```
-
+webapp/
+├── config/
+│   ├── astro.config.mjs
+│   ├── config.js
+│   ├── pretter.config.cjs
+│   ├── tailwind.config.cjs
+│   └── tsconfig.json
 ├── public/
 │   ├── images/
 │   │   ├── readme/
@@ -62,58 +68,58 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   │   ├── cable-router.png
 │   │   │   ├── home-page.png
 │   │   │   └── router-green-button.png
-│   │   └── favicon.svg
+│   │   └── svg/
+│   │       └── favicon.svg
 │   └── models/
-│       ├── fbx
+│       ├── fbx/
 │       │   ├── router_diff.png
 │       │   ├── router_nrm.png
-│       │   └── router_v01.fbx
-│       ├── glb
-│       │   ├── router_notexture.glb
-│       │   ├── router_texture_cabletest4.glb
-│       │   ├── router_texture_lightblinktest.glb
-│       │   └── router_texture_restbuttontest.glb
-│       └── gltf
+│       │   └── routerModel.fbx
+│       ├── glb/
+│       │   ├── routerModel_noTexture.glb
+│       │   ├── routerModel_cableTexture.glb
+│       │   ├── routerModel_lightBlinkTexture.glb
+│       │   └── routerModel_resetButtonTexture.glb
+│       └── gltf/
 │           ├── router_notexture.gltf
 │           ├── router_texture_cabletest4.gltf
 │           ├── router_texture_lightblinktest.gltf
 │           └── router_texture_restbuttontest.gltf
+├── server/
+│   └── server.js
 ├── src/
 │   ├── api/
 │   │   └── azureML.js
 │   ├── components/
+│   │   ├── animations/
+│   │   │   ├── Canvas.astro
+│   │   │   ├── CanvasBar.astro
+│   │   │   └── CanvasScene.astro 
 │   │   ├── common/
 │   │   │   ├── Box.astro
-│   │   │   ├── Card.astro
-│   │   │   ├── Container.astro
+│   │   │   ├── Card.
+│   │   │   ├── CardHolder.astro
+│   │   │   └── Container.astro
+│   │   ├── messages/
+│   │   │   ├── Chat.astro
+│   │   │   ├── ChatBar.astro
+│   │   │   ├── ChatMessages.astro
+│   │   │   └── ChatSuggestionBar.astro
 │   │   ├── primitives/
-│   │   │   ├── ArrowButton.astro
-│   │   │   ├── Avatar.astro
 │   │   │   ├── Button.astro
-│   │   │   ├── ButtonMessage.astro
-│   │   │   ├── EmojiButton.astro
-│   │   │   ├── GitHubButton.astro
-│   │   │   ├── IconHeader.astro
-│   │   │   ├── SendButton.astro
-│   │   │   ├── SuggestionButton.astro
-│   │   │   ├── TwitterButton.astro
-│   │   │   ├── UploadFileButton.astro
-│   │   │   └── ZoomButton.astro
-│   │   ├── Canvas.astro
-│   │   ├── CanvasBar.astro
-│   │   ├── CanvasScene.astro 
-│   │   ├── Chat.astro
-│   │   ├── ChatBar.astro
-│   │   ├── ChatMessages.astro
-│   │   ├── ChatSuggestions.astro
-│   │   ├── Footer.astro
-│   │   ├── Header.astro
-│   │   └── Hero.astro
+│   │   │   ├── CardHeader.astro
+│   │   │   ├── Link.astro
+│   │   │   └── Svg.astro
+│   │   └── templates/
+│   │       ├── Footer.astro
+│   │       ├── Header.astro
+│   │       └── Hero.astro 
 │   ├── data/
 │   │   ├── sampleMessageData.js
 │   │   ├── sampleMessageData.json
 │   │   ├── sampleSuggestionsData.js
-│   │   └── sampleSuggestionsData.json
+│   │   ├── sampleSuggestionsData.json
+│   │   └── svgData.js
 │   ├── graphics/ 
 │   │   ├── core/
 │   │   │   └── WebGL.js
@@ -129,18 +135,15 @@ Inside of your Astro project, you'll see the following folders and files:
 │   ├── pages/
 │   │   ├── agent.astro
 │   │   └── index.astro
-│   ├── stores/
-│   │    └── store.js
-│   └── types/
+│   └── stores/
+│       └── store.js     
+├── types/
+│   └── env.d.ts
+│       ├── env.d.ts
 │       └── glsl.d.ts
-├── env.d.ts
-├── astro.config.mjs
+├── .env
 ├── package.json
-├── prettier.config.js
-├── README.md
-├── server.js
-├── tailwind.config.js
-└── tsconfig.json
+└── README.md
 ```
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
