@@ -1,12 +1,12 @@
 /// <reference types="astro/client" />
-// env.d.ts
+// path: webapp/env.d.ts
 interface ImportMetaEnv {
     readonly PUBLIC_API_ENDPOINT: string;
     readonly PUBLIC_API_BEARER_TOKEN: string;
     readonly PUBLIC_AZURE_API_ENDPOINT: string;
-    // more env variables...
+    readonly PUBLIC_AZURE_SUGGESTION_API: string;
+    readonly PUBLIC_AZURE_ANIMATION_API: string;
 }
-  
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }

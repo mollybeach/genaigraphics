@@ -4,13 +4,14 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "dev": "astro dev --config config/astro.config.mjs",
+    "start": "astro dev --config config/astro.config.mjs",
+    "build": "astro build --config config/astro.config.mjs",
     "preview": "astro preview",
-    "astro": "astro",
+    "astro": "astro --config config/astro.config.mjs",
     "go": "npm run build && npm run start",
-    "server": "node server.js"
+    "server": "node ./server/server.js",
+    "tsc:watch": "tsc --project config/tsconfig.json --watch"
   },
   "dependencies": {
     "astro": "^2.10.3",
