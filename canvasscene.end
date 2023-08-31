@@ -1,0 +1,31 @@
+---
+// path: webapp/src/components/animations/CanvasScene.astro
+import { classNames } from "../../data/classData";
+---
+<script>
+  import { ThreeCanvas } from '../../graphics/ThreeCanvas';
+
+  const canvasElement = document.getElementById('canvas-scene') as HTMLElement;
+
+    if (canvasElement) {
+      console.log('canvasElement', canvasElement)
+   
+    const canvas = new ThreeCanvas(canvasElement);
+    window.myCanvas = canvas;
+  
+    window.addEventListener('beforeunload', () => {
+      canvas.dispose();
+    });
+
+    // Add a resize event listener to update the renderer size
+    window.addEventListener('resize', () => {
+      console.log("window resize");
+     console.log("clientWidth", canvasElement.clientWidth);
+      console.log("clientHeight", canvasElement.clientHeight);
+      canvas.updateRendererSize(canvasElement.clientWidth, canvasElement.clientHeight);
+    });
+  }
+</script>
+
+
+<div id="canvas-scene" class={classNames("canvasScene")}></div>
