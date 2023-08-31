@@ -1,0 +1,387 @@
+---
+//path: webapp/src/components/animations/CanvasScene.astro
+import {classNames} from "../../data/classData";
+---
+<script>
+ import * as THREE from 'three';
+ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+ import Stats from 'three/examples/jsm/libs/stats.module';
+ import { controls } from './utils/OrbitControls';
+ import { activeModels, getBaseModel, getMappedAttributes } from '../../data/modelData.js';
+
+ const canvasElement = document.getElementById('canvas-scene') as HTMLElement;
+
+  function getWidth(){
+   // return parseInt(window.getComputedStyle(canvasElement).width);
+      return canvasElement.clientWidth;
+  }
+  function getHeight(){
+  //  return parseInt(window.getComputedStyle(canvasElement).height);
+    return canvasElement.clientHeight;
+  }
+
+  interface Mixer {
+    update(delta: number): void;
+  }
+  const FOV = 50;
+  const ASPECT_RATIO = getWidth() / getHeight();
+  const NEAR_PLANE = 0.1;
+  const FAR_PLANE = 1000;
+  const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const clock = new THREE.Clock({delta: 0, elapsedTime: 0});
+  const stats = Stats();
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  const camera = new THREE.PerspectiveCamera(FOV, ASPECT_RATIO, NEAR_PLANE, FAR_PLANE);
+  const background = new THREE.Color('#fff');
+  const mixers = [];
+  let currentModel = activeModels[0];
+
+  function setup(htmlElement) {
+    renderer.setSize(getWidth(), getHeight());
+    renderer.setClearColor(background);
+    renderer.setPixelRatio(htmlElement.devicePixelRatio);
+    renderer.domElement.width = htmlElement.clientWidth;
+    renderer.domElement.height = htmlElement.clientHeight;
+    htmlElement.appendChild(renderer.domElement); 
+  }
+
+  //SELECT MODEL TYPE AND LOAD MODEL
+  async function loadModel(asset) {
+    switch (asset.type) {
+      case 'glb':
+        return loadGLB(asset);
+      case 'fbx':
+        return loadFBX(asset);
+      case 'mp4':
+        return loadMP4(asset);
+      case 'multipleMp4s':
+        return loadMultipleMp4s(asset.assets);
+      default:
+        return loadGLB(asset);
+    }
+  }
+
+  //LOAD GLB ASSET TO SCENE
+  async function loadGLB(asset) {
+    console.log('loadGLB', asset)
+    const gltfLoader = new GLTFLoader();
+    const gltf = await gltfLoader.loadAsync(asset.path);
+    asset.data = gltf;
+
+    //SCALE MODEL
+    const scaleMultiplier = 1;
+    gltf.scene.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
+    
+    // ADD LIGHTS TO SCENE
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Color: white, Intensity: 1
+    directionalLight.position.set(3, 2, 1);
+    scene.add(directionalLight);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // Color: white, Intensity: 3
+    scene.add(ambientLight);
+
+    // CHANGE SPECIFIC MATERIAL COLORS 
+    const newColor = new THREE.Color(0.7, 0.7, 0.7); // Grey color 
+    gltf.scene.traverse(child => {
+        if (child instanceof THREE.Mesh) {
+            const material = child.material as THREE.MeshStandardMaterial;
+    //ADJUST BLACK THRESHOLD TO CHANGE COLOR OF DARKER MATERIALS
+            const blackThreshold = 0.1;
+            if (material.color.r < blackThreshold && material.color.g < blackThreshold && material.color.b < blackThreshold) {
+                material.color = newColor; 
+            }
+        }
+    });
+    console.log('GLB MODEL:', asset);
+
+    // PLAY ANIMATION
+    const mixer = new THREE.AnimationMixer(gltf.scene);
+    mixers.push(mixer);
+    gltf.animations.forEach((clip) => {
+        console.log('clip', clip);
+        mixer.clipAction(clip).play();
+    });
+    
+    return asset
+  }
+
+  //LOAD FBX ASSET TO SCENE
+  async function loadFBX(asset) {
+    const fbxLoader = new FBXLoader();
+    const fbx = await fbxLoader.loadAsync(asset.path);
+    asset.data = fbx;
+    return asset
+  }
+
+  //LOAD MP4 ASSET TO SCENE
+  async function loadMP4(asset){
+    console.log('loadMP4', asset)
+    
+    //CREATE VIDEO ELEMENT ADD PROPERTIES APPEND TO DOM
+    const video = document.createElement('video');
+    video.src = asset.path;
+    video.playsInline = true;
+    video.loop = true;
+    video.muted = true;
+    video.autoplay = true;
+    video.preload = 'metadata';
+    video.play();
+    
+     // WAIT FOR VIDEO METADATA TO LOAD
+     await new Promise<void>((resolve) => {
+        video.addEventListener('loadedmetadata', () => resolve());
+     });
+
+    // GET VIDEO DURATION
+    const videoDuration = video.duration;
+    asset.data.duration = videoDuration;
+
+    //GET VIDEO ASPECT RATIO
+    const mp4Width = video.videoWidth;
+    const mp4Height = video.videoHeight;
+
+    console.log(video.videoWidth, video.videoHeight)
+
+    function reduceFraction(numerator,denominator){
+      let gcd = function gcd(a,b){
+        return b ? gcd(b, a%b) : a;
+      };
+      gcd = gcd(numerator,denominator);
+      const result = {
+        width: numerator/gcd,
+        height: denominator/gcd
+      }
+      return result;
+    }
+
+    const aspect = reduceFraction(mp4Width, mp4Height);
+    console.log(aspect.width, aspect.height);
+
+    // CREATE VIDEO TEXTURE
+    const videoTexture = new THREE.VideoTexture(video);
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+
+    // CREATE VIDEO MODEL FROM MESH
+    const videoGeometry = new THREE.PlaneGeometry(aspect.width, aspect.height, 2); 
+    const videoMaterial = new THREE.MeshBasicMaterial( { map: videoTexture, side: THREE.DoubleSide } );
+    const model = new THREE.Mesh( videoGeometry, videoMaterial );
+    asset.data.scene = model;
+
+    camera.position.z = 10;
+    camera.fov = 20;
+
+    return asset
+  }
+
+  //LOAD MULTIPLE MP4 ASSETS TO SCENE
+  async function loadMultipleMp4s(assets: Array) {
+
+     // LOOP THROUGH EACH MP4 ASSET
+     for (const asset of assets) {
+      const model = await loadMP4(asset);
+      scene.add(model.data.scene);
+    
+      // WAIT FOR VIDEO TO FINISH PLAYING BEFORE LOADING NEXT VIDEO
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, model.data.duration * 1000);
+      });
+
+      // REMOVE VIDEO FROM SCENE TO MAKE ROOM FOR NEXT VIDEO
+      removeAsset(model.data.scene);
+    }
+  };
+
+  // REMOVE ASSET FROM SCENE
+  function removeAsset(asset) {
+    scene.remove(asset);
+  }
+
+  const fovSlider = document.getElementById('fovSlider');
+  const xSlider = document.getElementById('xSlider');
+  const ySlider = document.getElementById('ySlider');
+  const zSlider = document.getElementById('zSlider');
+  const zoomIn = document.getElementById('zoomIn');
+  const zoomOut = document.getElementById('zoomOut');
+
+  // POSITION CAMERA
+
+  fovSlider.addEventListener('input', () => {
+    const fov = parseInt(fovSlider.value);
+    camera.fov = fov;
+    console.log('fovSlider.value', fovSlider.value)
+    camera.updateProjectionMatrix();
+  });
+
+  zoomIn.addEventListener('click', () => {
+
+    camera.fov = camera.fov - 5;
+    camera.updateProjectionMatrix();
+  });
+
+  zoomOut.addEventListener('click', () => {
+   // zoomOutCurrentValue = camera.fov;
+    camera.fov = camera.fov + 5;
+    camera.updateProjectionMatrix();
+  });
+
+  xSlider.addEventListener('input', () => {
+    const x = parseInt(xSlider.value);
+    camera.position.x = x;
+  });
+  ySlider.addEventListener('input', () => {
+    const y = parseInt(ySlider.value);
+    camera.position.y = y;
+  });
+  zSlider.addEventListener('input', () => {
+    const z = parseInt(zSlider.value);
+    camera.position.z = z;
+  });
+
+  // ROTATE MODEL
+  const rotationSliderX = document.getElementById('rotationSliderX');
+  const rotationSliderY = document.getElementById('rotationSliderY');
+  const rotationSliderZ = document.getElementById('rotationSliderZ');
+  const rotateX = document.getElementById('rotateX');
+  const rotateY = document.getElementById('rotateY');
+  // make two buttons one for rotating on x axis and one for rotating on y axis
+  
+  rotateY.addEventListener('click', () => {
+    currentModel.rotation.y += 0.1;
+  });
+
+  rotateX.addEventListener('click', () => {
+    currentModel.rotation.x += 0.1;
+  });
+
+  rotationSliderX.addEventListener('input', () => {
+    const rotationX = parseInt(rotationSliderX.value);
+    currentModel.rotation.x = (rotationX * Math.PI) / 180; // Convert degrees to radians
+  });
+
+  rotationSliderY.addEventListener('input', () => {
+    const rotationY = parseInt(rotationSliderY.value);
+    currentModel.rotation.y = (rotationY * Math.PI) / 180; // Convert degrees to radians
+  });
+
+  rotationSliderZ.addEventListener('input', () => {
+    const rotationZ = parseInt(rotationSliderZ.value);
+    console.log('currentModel', currentModel);
+    currentModel.rotation.z = (rotationZ * Math.PI) / 180; // Convert degrees to radians
+  });
+
+  const spin = () => {
+    model.rotation.x += 0.01;
+    model.rotation.y += 0.01;
+  };
+
+  const animate = () => {
+    requestAnimationFrame(animate);
+    //spin();
+    renderer.render(scene, camera);
+  };
+
+  animate();
+
+  function getMesh<T extends THREE.Material>(name: string) {
+    return scene.getObjectByName(name) as THREE.Mesh<THREE.BufferGeometry, T>;
+  }
+
+  function render() {
+    renderer.render(scene, camera);
+  }
+
+  function requestAnimationFrame(callback) {
+    renderer.setAnimationLoop(() => {
+      const delta = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+      mixers.forEach(mixer => mixer.update(delta));
+      render();
+      stats?.update();
+      callback();
+    });
+  }
+
+  function cancelAnimationFrame() {
+    renderer.setAnimationLoop(null);
+  }
+
+  function dispose() {
+    cancelAnimationFrame();
+    scene?.clear();
+  }
+  
+  //EXECUTE COMMAND 
+  async function executeCommand(command) {
+    //REMOVE PREVIOUS ASSET FROM SCENE
+    console.log('activeModels', activeModels)
+    if (activeModels.length > 0 && activeModels[0].data) { 
+      removeAsset(activeModels[0].data.scene);
+    }
+
+    // REMOVE PREVIOUS COMMAND FROM ACTIVE MODELS ARRAY
+    activeModels.splice(0, activeModels.length);
+    console.log('activeModels', activeModels)
+   
+   
+    // LOAD ASSET THAT CORRESPONDS TO COMMAND TO SCENE
+    const asset = getMappedAttributes(command);
+   
+    console.log('asset', asset)
+    const model = await loadModel(asset);
+
+     // ADD NEW COMMAND TO ACTIVE MODELS AND CURRENT MODEL
+    activeModels.push(model);
+    currentModel = model.data.scene;
+    console.log('execute command model', model)
+    console.log(activeModels)
+    scene.add(model.data.scene);
+    
+  }
+
+ // glb : default, router, routerStatic
+ // mp4 : house
+ // mp4multi:  upsell
+  setup(canvasElement);
+  executeCommand('house');
+</script>
+
+<div id="controls">
+
+  
+  <div>
+  <label for="xSlider">X-Axis:</label>
+  <input type="range" id="xSlider" min="1" max="99" value="20">
+  <label for="ySlider">Y-Axis:</label>
+  <input type="range" id="ySlider" min="1" max="99" value="20">
+  <label for="zSlider">Z-Axis:</label>
+  <input type="range" id="zSlider" min="1" max="99" value="20">
+  </div>
+
+
+<div>
+  <label for="rotationSliderX">Rotate X:</label>
+  <input type="range" id="rotationSliderX" min="0" max="360" value="0">
+  <label for="rotationSliderY">Rotate Y:</label>
+  <input type="range" id="rotationSliderY" min="0" max="360" value="0">
+  <label for="rotationSliderZ">Rotate Z:</label>
+  <input type="range" id="rotationSliderZ" min="0" max="360" value="0">
+</div>
+
+<label for="fovSlider">FOV:</label>
+<input type="range" id="fovSlider" min="1" max="180" value="75">
+
+
+<button id="zoomIn" class="flex items-center justify-center bg-accent-light-purple bg-opacity-85 hover:secondary-light-purple hover:bg-opacity-75 active:secondary-light-purple transform transition-transform duration-150 active:scale-95 rounded-full text-white p-2 flex-shrink-0 m-2 focus:outline-none">Zoom In</button>
+<button id="zoomOut" class="flex items-center justify-center bg-accent-light-purple bg-opacity-85 hover:secondary-light-purple hover:bg-opacity-75 active:secondary-light-purple transform transition-transform duration-150 active:scale-95 rounded-full text-white p-2 flex-shrink-0 m-2 focus:outline-none">Zoom Out</button>
+
+<button id="rotateX" class="flex items-center justify-center bg-accent-light-purple bg-opacity-85 hover:secondary-light-purple hover:bg-opacity-75 active:secondary-light-purple transform transition-transform duration-150 active:scale-95 rounded-full text-white p-2 flex-shrink-0 m-2 focus:outline-none">Rotate X</button>
+<button id="rotateY" class="flex items-center justify-center bg-accent-light-purple bg-opacity-85 hover:secondary-light-purple hover:bg-opacity-75 active:secondary-light-purple transform transition-transform duration-150 active:scale-95 rounded-full text-white p-2 flex-shrink-0 m-2 focus:outline-none">Rotate Y</button>
+
+</div>
+<div id="canvas-scene" class={classNames("canvasScene")}>
+</div>
