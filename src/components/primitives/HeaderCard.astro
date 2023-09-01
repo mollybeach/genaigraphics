@@ -1,0 +1,76 @@
+---
+// path: webapp/src/components/primitives/CardHeader.astro
+import HomeButton from './Button.astro';
+import Svg from './Svg.astro';
+import { classNames } from "../../styles/classStyles";
+
+const { classes, title, type} = Astro.props as {
+    classes: string;
+    title: string;
+    type: string;
+};
+
+---
+<script>
+    import { canvasTitleHeaderState, $STATEVECTORS } from "../../stores/store";
+    import { classNames } from "../../styles/classStyles";
+    const targetDiv = document.querySelector<HTMLDivElement>('#common-card-header-animation-container');
+    function renderTitle() {
+        const titleHtml = `
+            <div id="common-card-header-title" class="${classNames("commonCardHeaderTitleAnimation")}">
+                ${canvasTitleHeaderState.get()}
+            </div>
+        
+            <table id="common-card-header-table" class="${classNames("commonCardHeaderTable")}">
+                    <thead id="common-card-header-table-thead" class="${classNames("commonCardHeaderTableThead")}">
+                      <tr>
+                        <th>x</th>
+                        <th>y</th>
+                        <th>z</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="${classNames("commonCardHeaderTableTr")}">
+                        <td id="common-card-header-table-td" class="p-2">${$STATEVECTORS.get().x}</td>
+                        <td id="common-card-header-table-td" class="p-2" >${$STATEVECTORS.get().y}</td>
+                        <td id="common-card-header-table-td" class="p-2" >${$STATEVECTORS.get().z}</td>
+                      </tr>
+                    </tbody>
+                </table>
+        
+            `;
+            targetDiv.innerHTML += titleHtml;
+    }
+
+    function initialize() {
+    canvasTitleHeaderState.subscribe( newState => {  
+            targetDiv.innerHTML = ''; // clear the div
+            renderTitle();
+        }); 
+        
+    $STATEVECTORS.subscribe( newState => {  
+            targetDiv.innerHTML = ''; // clear the div
+            renderTitle();
+        });
+   
+    }
+    initialize();
+</script>
+
+{type === "message" && (
+    <section id="common-card-header" class={classNames(classes)}>
+        <div id="card-header-slot-container" class={classNames("commonCardHeaderSlotContainer")}>
+            <slot/>
+        </div>
+        <div class={classNames("commonCardHeaderTitleMessages")}> 
+            {title} 
+        </div>
+    </section>
+)}
+{type === "animation" && (
+    <section id="common-card-header" class={classNames(classes)}>
+       <div id="common-card-header-animation-container" class={classNames("commonCardHeaderAnimationContainer")}>
+        </div>
+    </section>
+)}
+
