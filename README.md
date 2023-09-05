@@ -49,6 +49,15 @@ npm run start
 
 ![jostaberry Application Screenshot](public/images/readme/home-page.png)
 
+![jostaberry Application Screenshot](public/images/readme/readme_ModelBoomBox.png)
+
+![jostaberry Application Lighting Screenshot](public/images/readme/readme_ModelWifiExtender.png)
+![jostaberry Application Screenshot](public/images/readme/router-green-button.png)
+
+![jostaberry Application Screenshot](public/images/readme/readme_ModelLaptop.png)
+
+![jostaberry Application Screenshot](public/images/readme/home-page.png)
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:

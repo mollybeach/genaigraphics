@@ -4,14 +4,9 @@ import tailwind from "@astrojs/tailwind";
 import { fileURLToPath } from 'url';
 import {BASE_URL, PORT, API_PORT} from './config.js';
 
+
 export default defineConfig({
   base: BASE_URL,
-  build: {
-    server: '../server/server.js',
-  },
-  env: {
-    PUBLIC_AZURE_API_ENDPOINT: process.env.PUBLIC_AZURE_API_ENDPOINT
-  },
   envDir: '../',
   integrations: [
     tailwind({

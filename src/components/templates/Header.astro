@@ -13,26 +13,6 @@ const links = [
     label: "Agent",
   }
 ];
-export const classData = {
-  "nav": "w-full bg-primary-purple lg:border-transparent",
-  "navContentsContainer": "relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4",
-  "navLogoContainer": "relative flex w-full justify-between md:px-0 lg:w-max",
-  "navLogoLink": "flex items-center space-x-2",
-  "navLogoImageContainer": "flex space-x-1",
-  "navLogoImage": "w-10 h-10",
-  "navLogoImageDot": "h-6 w-2 bg-primary",
-  "navLogoCompanySpan": "text-1xl font-bold text-white",
-  "navHamburgerContainer": "relative flex max-h-10 items-center lg:hidden",
-  "navHamburgerButton": "relative mr-6 p-6",
-  "navHamburgerLineOne": "m-auto h-0.5 w-5 rounded bg-sky-900 transition duration-300 dark:bg-gray-300",
-  "navHamburgerLineTwo": "m-auto mt-2 h-0.5 w-5 rounded bg-sky-900 transition duration-300 dark:bg-gray-300",
-  "navLinks": "invisible z-10 absolute top-full left-0 w-full origin-top-right translate-y-1 scale-90 flex-col flex-wrap justify-end gap-6 rounded-3xl border border-gray-100 bg-primary-white p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all duration-300 dark:border-gray-700 dark:bg-gray-800 dark:shadow-none lg:visible lg:relative lg:flex lg:w-7/12 lg:translate-y-0 lg:scale-100 lg:flex-row lg:items-center lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none",
-  "navLinksListContainer": "w-full text-white lg:w-auto lg:pr-4 lg:pt-0",
-  "navLinksList": "flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm",
-  "navLinksListLi": "font-bold hover:text-primary block transition dark:hover:text-white md:px-4",
-  "navLinksListSpan": "",
-
-}
 ---
 <script>
   let isToggled = false;
@@ -89,7 +69,7 @@ export const classData = {
           </div>
         </div>
         <div id="nav-links" class={classNames("navLinks")}>
-          <div "id="nav-links-list-container" class={classNames("navLinksListContainer")}>
+          <div id="nav-links-list-container" class={classNames("navLinksListContainer")}>
             <ul id="nav-links-list" class={classNames("navLinksList")}>
               {
                 links.map((link) => (
@@ -107,9 +87,4 @@ export const classData = {
     </Container>
   </nav>
 </header>
-
-
-
-
-  
 
