@@ -1,15 +1,53 @@
 ---
-// path: src/components/primitives/Svg.astro
-import Button from "./Button.astro";
-import Link from "./Link.astro";
-import {svgStructure, svgOptions, pathOptions, linearGradientOptions, stopOptions} from "../../data/svgData.js";
-const { group, type} = Astro.props as { group: string, type?: string};
+// path: /src/components/primitives/Svg.astro
+import {svgStructure, svgOptions, circleOptions, defsOptions, imageOptions, gOptions,  linearGradientOptions, pathOptions,  patternOptions, rectOptions, stopOptions, } from "../../styles/svgStyles.js";
+const { group, type} = Astro.props as 
+{ 
+    group: string,
+    type: string
+};
 
 const optionsMap = {
-    svg: svgOptions,
-    path: pathOptions,
-    linearGradient: linearGradientOptions,
-    stop: stopOptions, 
+    svg:{
+        options :svgOptions,
+        currentTag : 0
+    },
+    circle: {
+        options : circleOptions,
+        currentTag : 0
+    },
+    defs: {
+        options : defsOptions,
+        currentTag : 0
+    },
+    g: {
+        options : gOptions,
+        currentTag : 0
+    },
+    image: {
+        options : imageOptions,
+        currentTag : 0
+    },
+    linearGradient:{
+        options : linearGradientOptions,
+        currentTag : 0
+    }, 
+    path: {
+        options : pathOptions,
+        currentTag : 0
+    },
+    pattern: {
+        options : patternOptions,
+        currentTag : 0
+    },
+    rect: {
+        options : rectOptions,
+        currentTag : 0
+    },
+    stop:{
+        options : stopOptions,
+        currentTag : 0
+    },  
 };
 
 const svgStructureForType = svgStructure[group];
@@ -17,25 +55,26 @@ const svgStructureForType = svgStructure[group];
 const svgOutput = createSVGElements(svgStructureForType, group);
 
 
-function createOptions(tagName, group, index = 0) {
-    const optionsData = optionsMap[tagName];
+function createOptions(tagName: string, group: string | number) {
+    const optionsData = optionsMap[tagName]["options"];
+    const index = optionsMap[tagName]["currentTag"]++; 
     const allOptions = [];
 
     for (let key in optionsData) {
         const specialized = key === "class" || key === "d" ? true : false; 
         let value = specialized && type ? optionsData[key][type] : optionsData[key][group];
 
-        if (Array.isArray(value)) {
-            value = value[index];
-        }
         if (value) {
+            value = value[index];
+             // @ts-ignore
             allOptions.push(`${key}="${value}"`);
+      
         }
     }
     return allOptions.join(" ");
 }
 
-function createSVGElements(elements, group, parentIndex = 0) {
+function createSVGElements(elements: string | any[], group: string) {
     let result = "";
 
     for (let i = 0; i < elements.length; i++) {
@@ -45,7 +84,7 @@ function createSVGElements(elements, group, parentIndex = 0) {
             const options = createOptions(el, group);
             result += `<${el} ${options}></${el}>`;
         } else {
-            const options = createOptions(el.tag, group, i);  // Using 'i' as index for children
+            const options = createOptions(el.tag, group);  // Using 'i' as index for children
             result += `<${el.tag} ${options}>`;  // Open the tag with the options
             if (el.children) {
                 result += createSVGElements(el.children, group);  // Do not increment index for direct children
@@ -57,5 +96,4 @@ function createSVGElements(elements, group, parentIndex = 0) {
 }
 ---
 <slot set:html={svgOutput}/>
-
 

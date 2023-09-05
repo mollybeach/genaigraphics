@@ -1,24 +1,27 @@
 ---
-//path: src/components/animations/CanvasBar.astro
+//path: /src/components/animations/CanvasBar.astro
 import ArrowSvg from "../primitives/Svg.astro";
 import Button from "../primitives/Button.astro";
 import ZoomSvg from "../primitives/Svg.astro";
+import {classNames} from "../../styles/classStyles";
 ---
-<section class="flex flex-row items-center h-16 rounded-xl bg-white mt-[108px] px-4">
-    <div class="flex flex-row flex-grow ml-8 relative w-full">
-        <Button className="purpleButton" onClicked="rotateLeft">
-            <ArrowSvg type="arrowLeft" group="arrow" />
-        </Button>
-        <Button className="purpleButton" onClicked="rotateRight">
-            <ArrowSvg type="arrowRight" group="arrow" />
-        </Button>
-    </div>
-    <div class="flex mr-8 flex-row">
-        <Button className="purpleButton" onClicked="zoomIn">
-            <ZoomSvg type="zoomIn" group="zoom" />
-        </Button>
-        <Button className="purpleButton" onClicked="zoomOut">
-            <ZoomSvg type="zoomOut" group="zoom" />
-        </Button>
+<section id="canvas-bar-container" class={classNames("canvasBarContainer")} >
+    <div id="canvas-bar" class={classNames("canvasBar")} > 
+        <div id="canvas-bar-icon-container-arrow" class={classNames("canvasBarIconContainer")}>
+            <Button id="primitives-button-light-purple-arrow-rotate-left" classes="primitivesButtonLightPurple" onClicked="rotateX">
+                <ArrowSvg type="rotateArrowLeft" group="rotateArrow" />
+            </Button>
+            <Button  id="primitives-button-light-purple-arrow-rotate-right"classes="primitivesButtonLightPurple" onClicked="rotateY">
+                <ArrowSvg type="rotateArrowRight" group="rotateArrow" />
+            </Button>
+        </div>
+        <div id="canvas-bar-icon-container-zoom" class={classNames("canvasBarIconContainer")}>
+            <Button id="primitives-button-light-purple-zoom-in" classes="primitivesButtonLightPurple" onClicked="zoomIn">
+                <ZoomSvg type="zoomIn" group="zoom" />
+            </Button>
+            <Button id="primitives-button-light-purple-zoom-out" classes="primitivesButtonLightPurple" onClicked="zoomOut">
+                <ZoomSvg type="zoomOut" group="zoom" />
+            </Button>
+        </div>
     </div>
 </section>

@@ -1,0 +1,42 @@
+---
+//path: /src/components/messages/ChatBlinkButtons.astro
+import { classNames } from "../../styles/classStyles";
+const { router } = Astro.props as {
+    router: string;
+};
+---
+
+{router && (
+<div id="chat-blink-buttons-container" class={classNames("chatBlinkButtonsContainer")}>
+    <button id="chat-blink-button-orange" type="button" class={classNames("chatBlinkButton", "chatBlinkOrange")}>
+      <div id="chat-blink-dot-orange" class={classNames("chatBlinkDot", "chatBlinkDotOrange")}>
+      </div>
+      Orange blink 
+    </button>
+  <button type="button" class={classNames("chatBlinkButton", "chatBlinkPurple")}>
+      <div class={classNames("chatBlinkDot", "chatBlinkDotPurple")}> 
+      </div> 
+      Purple Blink 
+  </button>
+  <button type="button" class={classNames("chatBlinkButton", "chatBlinkRed")}>
+      <div class={classNames("chatBlinkDot", "chatBlinkDotRed")}> 
+      </div> 
+      Red blink 
+    </button>
+  <button type="button" class={classNames("chatBlinkButton", "chatBlinkGreen")}>
+      <div class={classNames("chatBlinkDot", "chatBlinkDotGreen")}>
+      </div> 
+      Green blink 
+  </button>
+    <button type="button" class={classNames("chatBlinkButton", "chatBlinkBlue")}>
+      <div class={classNames("chatBlinkDot", "chatBlinkDotBlue")}>
+      </div> 
+      Blue blink
+    </button>
+  <button type="button" class={classNames("chatBlinkButton", "chatBlinkYellow")}>
+    <div class={classNames("chatBlinkDot", "chatBlinkDotYellow")}>
+    </div> 
+    Yellow blink 
+  </button>
+</div>
+)}

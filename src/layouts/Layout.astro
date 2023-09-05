@@ -1,24 +1,22 @@
 ---
 //Layout.astro
-import Footer from "../components/templates/Footer.astro";
-import Header from "../components/templates/Header.astro";
+import {classNames} from "../styles/classStyles.js";
+//import Footer from "../components/templates/Footer.astro";
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="font-urbanist scroll-smooth">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="images/png/bot.png" />
-        <meta name="generator" content={Astro.generator} />
-        <meta name="description" content="3D Graphics Rendering and AI Chat Application" />
-        <title>jostaberry</title>
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<html id="html" lang="en" class={classNames("html")}>
+    <head id="head">
+        <meta id="head-meta-charset" charset="UTF-8" />
+        <meta id="head-meta-viewport" name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link id="head-icon" rel="icon" type="image/svg+xml" href="images/png/bot.png" />
+        <meta id="head-meta-generator" name="generator" content={Astro.generator} />
+        <meta id="head-meta-description" name="description" content="3D Graphics Rendering and AI Chat Application" />
+        <title id="head-title" >TeleHero</title>
     </head>
-    <body class="bg-white dark:bg-gray-100 m-0">
-        <Header />
+    <body id="body" class={classNames("body")}>
         <slot />
-        <Footer />
+    
     </body>
 </html>
 

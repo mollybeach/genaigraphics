@@ -1,33 +1,30 @@
-// src/stores/store.js
-import { atom } from 'nanostores';
-import { getSampleSuggestionsData } from '../data/sampleSuggestionsData.js';
+// /src/stores/store.js
+import { atom} from 'nanostores';
+import { sampleSuggestionsData } from '../data/sampleSuggestionsData.js';
 import { postAzureMLMessagesData, postAzureMLSuggestionsData, postAzureMLAnimationsData } from '../api/azureML.js';
-import { getSampleMessagesData } from '../data/sampleMessageData.js';
+import { sampleMessagesData } from '../data/sampleMessageData.js';
+import { activeAssets } from '../data/baseCommand.js';
+import { mapAssetAttributesByCommand } from '../data/mapAttributes.js';
 import { ThreeCanvas } from '../graphics/ThreeCanvas';
 
-// Sample Data
-const sampleMessagesData = getSampleMessagesData();
-const sampleSuggestionsState = getSampleSuggestionsData();
-
 // Stores
-export const questionState = atom("");
-export const botResponseState = atom("");
-export const allMessagesState = atom(sampleMessagesData);
-export const animationState = atom("");
-export const previousAnimationState = atom("light");
-export const suggestionsState = atom(sampleSuggestionsState);
-export const inputValueSuggestionState = atom("");
+export const $question = atom("");
+export const $botResponse = atom("");
+export const $allMessages = atom(sampleMessagesData);
+export const $suggestions = atom(sampleSuggestionsData);
+export const $textAreaValue = atom("");
+export const $canvasTitle = atom(activeAssets[0].title);
 
 // Events
 export const updateMessagesStateEvent = (question) => {
 
-    questionState.set(question);
-    allMessagesState.set( [...allMessagesState.get(), createMessage("me") ]);
+    $question.set(question);
+    $allMessages.set( [...$allMessages.get(), createMessage("me") ]);
     
-  postAzureMLMessagesData(question, allMessagesState.get())
+  postAzureMLMessagesData(question, $allMessages.get())
    .then(response => {
-      botResponseState.set(response.answer);
-      allMessagesState.set( [...allMessagesState.get(), createMessage("you") ]);
+      $botResponse.set(response.answer);
+      $allMessages.set( [...$allMessages.get(), createMessage("you") ]);
       updateAnimationsStateEvent();
       updateSuggestionsStateEvent();
     })
@@ -35,29 +32,25 @@ export const updateMessagesStateEvent = (question) => {
 
 export const updateAnimationsStateEvent = () =>{
 
-  postAzureMLAnimationsData((questionState.get(), allMessagesState.get()))
+  postAzureMLAnimationsData(($question.get(), $allMessages.get()))
     .then(response => {
-      previousAnimationState.set(animationState.get());
-      animationState.set(response.answer);
-      console.log(response.answer)
-      ThreeCanvas.instance?.executeCommand(response.answer);
+      const cleanResponse = response.answer.replace(/'/g, '');
+      console.log('cleanResponse', cleanResponse);
+      const asset =  mapAssetAttributesByCommand(cleanResponse);
+      $canvasTitle.set(asset.title)
+     console.log('canvasTitleHeader', $canvasTitle.get());
+     ThreeCanvas.instance?.execute(asset);
   })
 };
 
 export const updateSuggestionsStateEvent = () => {
-  
-  postAzureMLSuggestionsData(questionState.get(), allMessagesState.get())
+
+  postAzureMLSuggestionsData($question.get(), $allMessages.get())
   .then(response => {
-    suggestionsState.set(response.answer);
-    consoleLogResponses();
+    $suggestions.set(response.answer);
   }).catch(error => {
     catchErrorEvent("suggestions", error)
   });
-};
-
-export const updateInputValueSuggestionStateEvent = (event) => {
-    inputValueSuggestionState.set(event);
-    console.log('inputValueSuggestionState', inputValueSuggestionState.get());
 };
 
 // Create Message 
@@ -65,17 +58,12 @@ export const createMessage = (sender) => {
   return  {
     name: sender === "me" ? "Customer" : "Ai Agent",
     sender: sender,
-    message: sender === "me" ? questionState.get() : botResponseState.get() ,
-    image:  sender === "me" ?  'images/png/user.png' : 'images/png/bot.png',
+    message: sender === "me" ? $question.get() : $botResponse.get() ,
+    image:  sender === "me" ?  'images/png/user.png' : 'images/svg/ai-logo.svg',
     timestamp: (new Date().getTime()).toString()
   }
 }
-// Logging Responses
-export const consoleLogResponses = () => {
-  console.log('myQuestion:', questionState.get());
-  console.log('bot response from azureML:', botResponseState.get());
-  console.log('All messages:', allMessagesState.get());
-  console.log('Animation AzureML Response:', animationState.get());
-  console.log('suggestionsState response from azureML:', suggestionsState.get());
+// CLEAN RESPONSE
+export const cleanResponse = (response) => {
+  return response.answer.replace(/'/g, ''); // Replace all occurrences of double quotes with an empty string
 }
-

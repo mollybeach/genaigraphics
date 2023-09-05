@@ -3,13 +3,9 @@
 import Box from "../common/Box.astro";
 import CanvasBar from "./CanvasBar.astro";
 import CanvasScene from "./CanvasScene.astro";
-import CardHeader from "../primitives/CardHeader.astro";
-import CubeSvg from "../primitives/Svg.astro";
+import CardHeader from "../common/CardHeader.astro";
 ---
-<Box>
-  <CardHeader title="3D Animation">
-    <CubeSvg type="cube" group="cube"/>
+  <CardHeader classes="commonCardHeaderAnimation" title={} type="animation">
   </CardHeader>
   <CanvasScene/>
   <CanvasBar/>
-</Box>

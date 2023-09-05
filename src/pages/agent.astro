@@ -1,17 +1,18 @@
 ---
 // pages/agent.astro
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/common/Card.astro';;
-import Canvas from '../components/Canvas.astro';
-import Chat from '../components/Chat.astro';
+import Card from '../components/common/Card.astro';
+import CardHolder from '../components/common/CardHolder.astro';
+import Canvas from '../components/animations/Canvas.astro';
+import Chat from '../components/messages/Chat.astro';
 ---
-<Layout title="AboutThreeJS Sculpture AI Tool">
-    <section class="page-content flex h-screen">
-      <Card>
-        <Chat />
-      </Card>
-      <Card>
-        <Canvas />
-      </Card>
-    </section>
+<Layout title="About Verizon ThreeJS Sculpture AI Tool">
+  <CardHolder>
+    <Card type="message">
+      <Chat/>
+    </Card>
+    <Card type="animation">
+      <Canvas/>
+    </Card>
+  </CardHolder>
 </Layout>

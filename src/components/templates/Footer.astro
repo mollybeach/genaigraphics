@@ -1,31 +1,40 @@
 ---
-//Footer.astro
-import GitHubButton from '../primitives/GitHubButton.astro'
-import TwitterButton from './primitives/TwitterButton.astro'
+//path: /src/components/templates/Footer.astro
+import FacebookSvg from '../primitives/Svg.astro';
+import TwitterSvg from '../primitives/Svg.astro';
+import GoogleSvg from '../primitives/Svg.astro';
+import InstagramSvg from '../primitives/Svg.astro';
+import LinkedInSvg from '../primitives/Svg.astro';
+import GitHubSvg from '../primitives/Svg.astro';
+import Link from "../primitives/Link.astro";
+import {classNames} from "../../styles/classStyles";
 ---
-<footer class="py-5 md:py-5 bg-purple-600 ">
-      <div class="m-auto md:w-10/12 lg:w-8/12 xl:w-6/12">
-        <div class="flex flex-wrap items-center justify-between md:flex-nowrap">
-          <div class="flex w-full justify-center space-x-12 text-gray-600 dark:text-gray-300 sm:w-7/12 md:justify-start">
-            <ul role="list" class="space-y-8">
-              <li>
-                <GitHubButton />
-              </li>
-              <li>
-                <TwitterButton />
-              </li>
-            </ul>
-          </div>
-          <div class="m-auto mt-16 w-10/12 space-y-6 text-center sm:mt-auto sm:w-5/12 sm:text-left">
-            <span class="flex justify-between text-gray-600 dark:text-white">
-              <a href="/" class="font-medium">Terms of Use </a>
-              <a href="/" class="font-medium"> Home</a>
-              <a href="/agent" class="font-medium"> Agent</a>
-            </span>
-            <span class="block text-gray-500 dark:text-gray-400">Need help? 
-              <a href="/" class="font-semibold text-gray-600 dark:text-white"> Contact Us</a>
-            </span>
-          </div>
-        </div>
-      </div>
+<footer id="footer"class={classNames("footer")}>
+  <div id="footer-social-links-container" class={classNames("footerSocialLinksContainer")}>
+    <div id="footer-social-links-inner-container" class={classNames("footerSocialLinksInnerContainer")}>
+      <Link route="https://facebook.com" >
+        <FacebookSvg  type="facebook" group="footer" />
+      </Link>
+      <Link route="twitter.com" >
+        <TwitterSvg  type="twitter" group="footer" />
+      </Link>
+      <Link route="https://google.com" >
+        <GoogleSvg  type="google" group="footer" />
+      </Link>
+      <Link route="https://instagram.com" >
+        <InstagramSvg  type="instagram" group="footer" />
+      </Link>
+      <Link route="https://linkedin.com" >
+        <LinkedInSvg  type="linkedin" group="footer" />
+      </Link>
+      <Link route="https://github.com" >
+        <GitHubSvg  type="github" group="footer" />
+      </Link> 
+    </div>
+    <div id="footer-company-name-link-container" class={classNames("footerCompanyNameLinkContainer")}>
+      <a href="/" id="footer-company-name-link" class={classNames("footerCompanyNameLink")}>
+        Telehero
+      </a>
+    </div>
+  </div>
 </footer>

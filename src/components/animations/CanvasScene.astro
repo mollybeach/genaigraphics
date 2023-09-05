@@ -1,18 +1,31 @@
 ---
 //path: src/components/animations/CanvasScene.astro
+import { classNames } from "../../styles/classStyles";
 ---
 <script>
   import { ThreeCanvas } from '../../graphics/ThreeCanvas';
-  const canvasElement = document.querySelector<HTMLSectionElement>('#canvas-scene');
 
-  if (canvasElement) {
+  const canvasElement = document.getElementById('canvas-scene') as HTMLElement;
+
+    if (canvasElement) {
+      console.log('canvasElement', canvasElement)
+   
     const canvas = new ThreeCanvas(canvasElement);
-    window.myCanvas = canvas; // Expose the canvas instance to the window
-    
+    window.myCanvas = canvas;
+  
     window.addEventListener('beforeunload', () => {
       canvas.dispose();
+    });
+
+    // Add a resize event listener to update the renderer size
+    window.addEventListener('resize', () => {
+      console.log("window resize");
+     console.log("clientWidth", canvasElement.clientWidth);
+      console.log("clientHeight", canvasElement.clientHeight);
+      canvas.updateRendererSize(canvasElement.clientWidth, canvasElement.clientHeight);
     });
   }
 </script>
 
-<section id="canvas-scene" class="w-full overflow-x-auto mt-6 rounded-2xl"></section>
+
+<div id="canvas-scene" class={classNames("canvasScene")}></div>

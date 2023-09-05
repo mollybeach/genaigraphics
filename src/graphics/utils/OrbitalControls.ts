@@ -1,4 +1,4 @@
-// path: src/graphics/utils/OrbitControls.ts
+// path: /src/graphics/utils/OrbitControls.ts
 import { OrbitControls as OC } from 'three/examples/jsm/controls/OrbitControls'
 import { gl } from '../core/WebGL'
 

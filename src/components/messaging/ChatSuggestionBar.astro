@@ -1,55 +1,81 @@
 ---
-//path: src/components/messages/ChatSuggestionBar.astro
+//path: /src/components/messages/ChatSuggestionBar.astro
+import {classNames} from "../../styles/classStyles";
+
 ---
 <script>
     import {  
-        inputValueSuggestionState, 
-        updateInputValueSuggestionStateEvent,  
-        suggestionsState
+        $textAreaValue, 
+        updateTextareaValueSuggestionStateEvent,  
+        $suggestions,
+        updateMessagesStateEvent
     } from "../../stores/store";
-    const targetDiv = document.querySelector<HTMLDivElement>('#suggestion-parent');
+    import {classNames} from "../../styles/classStyles";
+    const buttonElement = document.querySelector<HTMLButtonElement>('#suggestion');
+    const textareaElement = document.querySelector("#chat-bar-textarea") as HTMLTextareaElement;
     
     // Render Suggestion Buttons
     function renderMySuggestions(suggestion: any) {
         const suggestionHtml = `
             <button
-              id="select-suggestion-option"
-              class="flex items-center justify-center bg-gray-300 bg-opacity-50 hover:bg-purple-600 hover:bg-opacity-75 active:bg-purple-800 transform transition-transform duration-150 active:scale-95 rounded-xl text-white px-4 py-1 flex-shrink-0 mb-1 focus:outline-none"
+              id="suggestion-button"
+              class="${classNames("suggestionButton")}"
             >
               ${suggestion}
             </button>
         `;
-        targetDiv.innerHTML += suggestionHtml;
+        buttonElement.innerHTML += suggestionHtml;
     }
     let unsubscribe;
     unsubscribe;
     function initialize() {
-        unsubscribe = suggestionsState.subscribe(updatedSuggestions => {  
-            targetDiv.innerHTML = '';
+        unsubscribe = $suggestions.subscribe(updatedSuggestions => {  
+            buttonElement.innerHTML = '';
             updatedSuggestions.forEach(renderMySuggestions);
         }); 
+          
     }
     initialize();
 
-    // Update Value of Input Placeholder
+    // CREATE MESSAGE
+      function createMessage(event: Event) {
+      event.preventDefault();
+      const messageContent = textareaElement.value.trim();
+      if (!messageContent) {
+        alert("Please fill in the message.");
+        return;
+      }
+      updateMessagesStateEvent(messageContent);
+      textareaElement.value = '';
+    }
+
+    // UPDATE TEXTAREA VALUE ON SUGGESTION BUTTON CLICK
     document.addEventListener("click", (event) => {
-        const target = event.target as HTMLElement;
-        // Handling suggestion button click
-        if (target.matches("#select-suggestion-option")) {
-            const suggestion = target.textContent;
-            updateInputValueSuggestionStateEvent(suggestion);
+        const target = event.target as HTMLButtonElement;
+        if (target.matches("#suggestion-button")) {
+            const suggestion = target.innerText;
+            $textAreaValue.set(suggestion);
             return;
         }
     });
 
-    // Listen to changes in the inputValueSuggestionState store and update the input value
-    const input = document.querySelector("#input-message") as HTMLInputElement;
-    inputValueSuggestionState.subscribe((suggestion) => {
-      input.value = suggestion;
+    //ADD KEYDOWN EVENT LISTENER TO SUGGESTION BUTTONS
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+        const target = event.target as HTMLButtonElement;
+        if (target.matches("#suggestion-button")) {
+            const suggestion = target.innerText;
+            if (event.key === "Enter") {
+                createMessage(event);
+                return;
+            }
+        }
+    });
+ 
+  // UPDATE SUGGESTION STATE STORE 
+    $textAreaValue.subscribe((suggestion) => {
+      textareaElement.value = suggestion;
     });
 </script>
 
-<section class="mb-1">
-    <div id="suggestion-parent">
-    </div>
-</section>
+<div id="suggestion" class={classNames("suggestion")}>
+</div>

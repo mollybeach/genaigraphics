@@ -1,19 +1,20 @@
 ---
-//path: src/components/messages/Chat.astro
-import Box from "../common/Box.astro";
-import CardHeader from '../primitives/CardHeader.astro';
+//path: /src/components/messages/Chat.astro
+import CardHeader from '../common/CardHeader.astro';
 import ChatMessages from './ChatMessages.astro';
 import ChatSuggestionBar from './ChatSuggestionBar.astro';
 import ChatBar from './ChatBar.astro';
-import ChatBubbleSvg from '../primitives/Svg.astro';
+import HomeSvg from '../primitives/Svg.astro';
+import Button from '../primitives/Button.astro';
+
 ---
-<Box>
-  <CardHeader 
-    title="Brand Agent"
-  >
-    <ChatBubbleSvg type="chat" group="message"/>
-  </CardHeader>
-  <ChatMessages/>
-  <ChatSuggestionBar/>
+<CardHeader classes="commonCardHeaderMessage" title={"Virtual Agent"} type="message">
+  <Button id="home-button" classes="homeButton" page="agent" onClicked="route">
+    <HomeSvg type="home" group="home" />
+  </Button>
+</CardHeader>
+
+  <ChatMessages />
+  <ChatSuggestionBar />
   <ChatBar page="agent" />
-</Box>
+

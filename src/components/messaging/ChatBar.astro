@@ -1,71 +1,79 @@
----
-//path: src/components/messages/ChatBar.astro
 import Button from '../primitives/Button.astro';
 import EmojiSvg from '../primitives/Svg.astro';
 import FileSvg from '../primitives/Svg.astro';
 import SendSvg from '../primitives/Svg.astro';
-import form from '../../data/classData';
+import { classNames } from "../../styles/classStyles";
 
 const { page } = Astro.props as {
     page: string;
 };
 ---
 <script>
-    import { updateMessagesStateEvent } from "../../stores/store";
+    import { updateMessagesStateEvent, $textAreaValue } from "../../stores/store";
 
-    function createMessage(event: any) {
+  //HANDLE FORM SUBMISSION
+    const formElement = document.getElementById('chat-bar-form') as HTMLFormElement;
+    const textareaElement = document.getElementById('chat-bar-textarea') as HTMLTextAreaElement;
+    const suggestionsElement = document.getElementById('suggestion-button') as HTMLElement;
+
+  // CREATE MESSAGE
+    function createMessage(event: Event) {
       event.preventDefault();
-
-      const messageContent = event.target.elements.message.value.trim();
+      const messageContent = textareaElement.value.trim();
       if (!messageContent) {
         alert("Please fill in the message.");
         return;
       }
       updateMessagesStateEvent(messageContent);
-      event.target.elements.message.value = "";
+      textareaElement.value = '';
     }
 
-    function clearInputOnFocus(event: Event) {
-      const input = event.target as HTMLInputElement;
-      input.value = '';
+    function clearTextareaOnFocus(event: Event) {
+      textareaElement.value = '';
     }
-
     
-    const formElement = document.querySelector<HTMLFormElement>('#message-form');
-    if (formElement) {
-      formElement.addEventListener("submit", createMessage);
-    } else {
-      console.warn("Could not find the '.message-form' element.");
-    }
+  // ADD EVENT LISTENERS
+    document.addEventListener("DOMContentLoaded", () => {
+  //ADD SUGGESTION BUTTON LISTENERS
+      suggestionsElement? suggestionsElement.addEventListener("keydown",handleTextareaKeydown): console.warn("Could not find the '#suggestion-button' element.");
+  //ADD FORM EVENT LISTENERS
+      formElement? formElement.addEventListener("submit", createMessage): console.warn("Could not find the '.chat-bar-form' element.");
+      
+  //ADD TEXTAREA EVENT LISTENERS
+      if (textareaElement) {
+        textareaElement.addEventListener("focus", clearTextareaOnFocus);
+        textareaElement.addEventListener("keydown", handleTextareaKeydown);
+      
+      } else {
+        console.warn("Could not find the '#chat-bar-textarea' element.")
+      }
 
-    const inputElement = document.querySelector<HTMLInputElement>('#input-message');
-    if (inputElement) {
-      inputElement.addEventListener("click", clearInputOnFocus);
-    } else {
-      console.warn("Could not find the '#input-message' element.");
-    }
+      function handleTextareaKeydown(event: KeyboardEvent) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          createMessage(event);
+        }
+      }
+  });
+
 </script>
 
-<section>
-  <form id="message-form" class="flex flex-row items-center h-16 rounded-xl bg-white px-4">
-    <Button className="purpleButton">
-      <FileSvg type="file" group="message"/>
-    </Button>
-    <div class="flex-grow ml-4 relative gap-7">
-      <input
-        id="input-message"
-        type="text"
-        name="message"
-        class="w-full border rounded-xl focus:outline-none focus:border-purple-300 pl-2 h-10"
-        placeholder="Message..."
-        value=""
-      />
-      <Button className="emojiButton">
-        <EmojiSvg type="emoji" group="message"/>
-      </Button>
-    </div>
-    <Button className="purpleButton" text="Send" page={page} onClicked="route">
-      <SendSvg type="send" group="message"/>
-    </Button>
-  </form>
-</section>
+<form id="chat-bar-form" class={classNames("chatBarForm")}>
+  <label id="chat-bar-label" for="chat" class={classNames("chatBarLabel")}>Your message</label>
+  <Button id="primitives-file-button" classes="primitivesFileButton">
+    <FileSvg type="file" group="message"/>
+  </Button>
+  <textarea 
+    id="chat-bar-textarea"" 
+    rows="1" 
+    class={classNames("chatBarTextarea")}
+    placeholder=" Message..." 
+    value=""
+    >
+  </textarea>
+  <Button id="primitives-purple-button-send" classes="primitivesPurpleButton" page={page} onClicked="route" type="submit">
+    <SendSvg type="send" group="message"/>
+  </Button>
+    <span id="chat-bar-span" class={classNames("chatBarSpan")}>
+      Send message
+    </span>
+</form>

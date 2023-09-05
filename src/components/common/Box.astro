@@ -1,6 +1,7 @@
 ---
 // path: src/components/common/Box.astro
+import {classNames} from "../../styles/classStyles.js";
 ---
-<section class="flex flex-col rounded-2xl bg-purple-100 p-4">
+<section id="common-box" class={classNames("commonBox")}>
     <slot/> 
 </section>

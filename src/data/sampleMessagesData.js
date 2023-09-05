@@ -1,12 +1,8 @@
-export function getSampleMessagesData() {
-  const sampleMessagesData =  [
-      {
-        "name": "AI Agent",
-        "sender": "you",
-        "message": "Hello and welcome to jostaberry Support. Whether you're seeking guidance on router set up, need technical assistance, or have general inquiries about our services, I'm here to help. How can I assist you today?",
-        "image": "https://cdn-icons-png.flaticon.com/512/2432/2432846.png",
-        "timestamp": "10:00"
-      }
+// path: /src/data/sampleSuggestionsData.js
+export const sampleSuggestionsData =  [
+  "Hi there! I'm having trouble with my router setup. It doesn't seem to connect to the internet.",
+  "Hello! I'm interested in learning more about the additional services Telehero offers.",
+  "I've been experiencing some technical issues with my connection dropping intermittently."
 ];
-  return sampleMessagesData;
-}
+
+

@@ -1,6 +1,10 @@
 ---
 // path: src/components/common/Card.astro
+import {classNames} from "../../styles/classStyles";
+const { type} = Astro.props as {
+    type: string;
+};
 ---
-<div class="flex h-5/6 w-full sm:flex-col bg-purple-100 rounded-lg shadow-sm mb-1 p-5 rounded-2xl">
-  <slot />
+<div id="common-card" class={classNames("commonCard", type === "message" ? "commonCardMessage" : "commonCardAnimation")} >
+    <slot />
 </div>

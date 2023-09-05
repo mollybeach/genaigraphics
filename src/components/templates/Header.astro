@@ -1,6 +1,8 @@
 ---
-// Header.astro
+//path: /src/components/templates/Header.astro
 import Container from "../common/Container.astro";
+import { WEBSITE_NAME} from "../../../config/config.js"
+import { classNames } from "../../styles/classStyles.js";
 const links = [
   {
     to: "/",
@@ -11,13 +13,33 @@ const links = [
     label: "Agent",
   }
 ];
+export const classData = {
+  "nav": "w-full bg-primary-purple lg:border-transparent",
+  "navContentsContainer": "relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4",
+  "navLogoContainer": "relative flex w-full justify-between md:px-0 lg:w-max",
+  "navLogoLink": "flex items-center space-x-2",
+  "navLogoImageContainer": "flex space-x-1",
+  "navLogoImage": "w-10 h-10",
+  "navLogoImageDot": "h-6 w-2 bg-primary",
+  "navLogoCompanySpan": "text-1xl font-bold text-white",
+  "navHamburgerContainer": "relative flex max-h-10 items-center lg:hidden",
+  "navHamburgerButton": "relative mr-6 p-6",
+  "navHamburgerLineOne": "m-auto h-0.5 w-5 rounded bg-sky-900 transition duration-300 dark:bg-gray-300",
+  "navHamburgerLineTwo": "m-auto mt-2 h-0.5 w-5 rounded bg-sky-900 transition duration-300 dark:bg-gray-300",
+  "navLinks": "invisible z-10 absolute top-full left-0 w-full origin-top-right translate-y-1 scale-90 flex-col flex-wrap justify-end gap-6 rounded-3xl border border-gray-100 bg-primary-white p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all duration-300 dark:border-gray-700 dark:bg-gray-800 dark:shadow-none lg:visible lg:relative lg:flex lg:w-7/12 lg:translate-y-0 lg:scale-100 lg:flex-row lg:items-center lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none",
+  "navLinksListContainer": "w-full text-white lg:w-auto lg:pr-4 lg:pt-0",
+  "navLinksList": "flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm",
+  "navLinksListLi": "font-bold hover:text-primary block transition dark:hover:text-white md:px-4",
+  "navLinksListSpan": "",
+
+}
 ---
 <script>
   let isToggled = false;
-  const navlinks = document.querySelector("#navlinks");
-  const hamburger = document.querySelector("#hamburger");
+  const navlinks = document.querySelector("#nav-links");
+  const hamburger = document.querySelector("nav-hamburger-button");
   const layer = document.querySelector("#navLayer");
-  const links = [...document.querySelectorAll("#navlinks a")];
+  const links = [...document.querySelectorAll("#nav-links a")];
 
   function toggleNavlinks() {
     if (isToggled) {
@@ -45,39 +67,39 @@ const links = [
 </script>
 
 <header>
-  <nav class="absolute z-10 w-full border-b border-black/5 bg-purple-600 dark:border-white/5 lg:border-transparent">
+  <nav id="nav" class={classNames("nav")}>
     <Container>
-      <div class="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
-        <div class="relative z-20 flex w-full justify-between md:px-0 lg:w-max">
-          <a href="/" aria-label="logo" class="flex items-center space-x-2">
-           
-            <div aria-hidden="true" class="flex space-x-1">
-              <img src="https://cdn-icons-png.flaticon.com/512/2432/2432846.png" alt="logo" class="w-10 h-10" />
-              <div class="h-6 w-2 bg-primary"></div>
+      <div id="nav-contents-container" class={classNames("navContentsContainer")}>
+        <div id="nav-logo-container" class={classNames("navLogContainer")}>
+          <a id="nav-logo-link" ref="/" aria-label="logo" class={classNames("navLogoLink")}>
+            <div id="nav-logo-image-container" aria-hidden="true" class={classNames("navLogoImageContainer")}>
+              <img id="nav-logo-image" src="/images/svg/ai-logo.svg" alt="logo" class={classNames("navLogoImage")} />
+              <div id="nav-logo-image-dot" class={classNames("navLogoImageDot")}>
+              </div>
             </div>
-            <span class="text-1xl font-bold text-gray-900 dark:text-white">Telecommunication Client Customer Support Agent</span>
+            <span id="nav-logo-company-span" class="text-1xl font-bold text-white">{WEBSITE_NAME}</span>
           </a>
-          <div class="relative flex max-h-10 items-center lg:hidden">
-            <button aria-label="hamburger" id="hamburger" class="relative -mr-6 p-6">
-              <div aria-hidden="true" id="line" class="m-auto h-0.5 w-5 rounded bg-sky-900 transition duration-300 dark:bg-gray-300"></div>
-              <div aria-hidden="true" id="line2" class="m-auto mt-2 h-0.5 w-5 rounded bg-sky-900 transition duration-300 dark:bg-gray-300"></div>
+          <div id="nav-hamburger-container" class={classNames("navHamburgerContainer")}>
+            <button id="nav-hamburger-button" aria-label="hamburger" id="hamburger" class={classNames("navHamburgerButton")}>
+              <div id="nav-hamburger-line-one" aria-hidden="true" id="line" class={classNames("navHamburgerLineOne")}>
+              </div>
+              <div id="nav-hamburger-line-two" aria-hidden="true" id="line2" class={classNames("navHamburgerLineTwo")}>
+              </div>
             </button>
           </div>
         </div>
-        <div id="navLayer" aria-hidden="true" class="fixed inset-0 z-10 h-screen w-screen origin-bottom scale-y-0 bg-white/70 backdrop-blur-2xl transition duration-500 dark:bg-gray-900/70 lg:hidden"></div>
-        <div id="navlinks" class="invisible absolute top-full left-0 z-20 w-full origin-top-right translate-y-1 scale-90 flex-col flex-wrap justify-end gap-6 rounded-3xl border border-gray-100 bg-white p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all duration-300 dark:border-gray-700 dark:bg-gray-800 dark:shadow-none lg:visible lg:relative lg:flex lg:w-7/12 lg:translate-y-0 lg:scale-100 lg:flex-row lg:items-center lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none">
-          <div class="w-full text-gray-600 dark:text-gray-200 lg:w-auto lg:pr-4 lg:pt-0">
-            <ul class="flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm">
+        <div id="nav-links" class={classNames("navLinks")}>
+          <div "id="nav-links-list-container" class={classNames("navLinksListContainer")}>
+            <ul id="nav-links-list" class={classNames("navLinksList")}>
               {
                 links.map((link) => (
                   <li>
-                    <a href={link.to} class="hover:text-primary block transition dark:hover:text-white md:px-4">
-                      <span>{link.label}</span>
+                    <a id="nav-links-list-li" href={link.to} class={classNames("navLinksListLi")}>
+                      <span id="nav-links-list-span" class={classNames("navLinksListSpan")}> {link.label}</span>
                     </a>
                   </li>
                 ))
               }
-
             </ul>
           </div>
         </div>
@@ -85,4 +107,9 @@ const links = [
     </Container>
   </nav>
 </header>
+
+
+
+
+  
 

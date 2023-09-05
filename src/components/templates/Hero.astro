@@ -1,17 +1,20 @@
 ---
-//Hero.astro
+//path: /src/components/templates/Hero.astro
 import Container from "../common/Container.astro"
-import ChatBar from "../ChatBar.astro"
+import ChatBar from "../messages/ChatBar.astro"
+import {classNames} from "../../styles/classStyles.js"
 ---
-<section class="flex flex-col h-screen" id="home">
+<section id="hero" class={classNames("hero")}>
     <Container>
-        <div class="h-full mb-20"></div>
-            <h1 class="text-gray-400 font-bold text-5xl md:text-6xl xl:text-7xl">
-                <span class="text-primary">Ask me anything?</span>
+        <div id="hero-spacer" class={classNames("heroSpacer")}></div>
+            <h1 id="hero-heading" class={classNames("heroHeading")}>
+                <span id="hero-span" class={classNames("heroSpan")}>
+                    Ask me anything?
+                </span>
             </h1>
-        </div>
-        <div class="flex-grow-0 mt-10">
-            <ChatBar/>
+        <div id="heroChatBarContainer" class={classNames("heroChatBarContainer")}>
+            <ChatBar page="home"/>
         </div>
     </Container>
 </section>
+

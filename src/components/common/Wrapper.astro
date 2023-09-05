@@ -1,6 +1,7 @@
 ---
 // path: src/components/common/Wrapper.astro
+import {classNames} from "../../styles/classStyles";
 ---
-<span class="pr-2">
-    <slot/> 
+<span id="common-wrapper" class={classNames("commonWrapper")}>
+    <slot/>
 </span>

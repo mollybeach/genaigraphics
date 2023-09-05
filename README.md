@@ -54,7 +54,7 @@ npm run start
 Inside of your Astro project, you'll see the following folders and files:
 
 ```
-webapp/
+/
 ├── config/
 │   ├── astro.config.mjs
 │   ├── config.js
@@ -63,6 +63,9 @@ webapp/
 │   └── tsconfig.json
 ├── public/
 │   ├── images/
+│   │   ├── png/
+│   │   │   ├── bot.png
+│   │   │   └── user.png
 │   │   ├── readme/
 │   │   │   ├── brand-agent.png
 │   │   │   ├── cable-router.png
@@ -72,21 +75,64 @@ webapp/
 │   │       └── favicon.svg
 │   └── models/
 │       ├── fbx/
-│       │   ├── router_diff.png
-│       │   ├── router_nrm.png
-│       │   └── routerModel.fbx
+│       │   ├── model_RouterDiff.png
+│       │   ├── model_RouterNrm.png
+│       │   └── model_RouterOriginal.fbx
 │       ├── glb/
-│       │   ├── routerModel_noTexture.glb
-│       │   ├── routerModel_cableTexture.glb
-│       │   ├── routerModel_lightBlinkTexture.glb
-│       │   └── routerModel_resetButtonTexture.glb
-│       └── gltf/
-│           ├── router_notexture.gltf
-│           ├── router_texture_cabletest4.gltf
-│           ├── router_texture_lightblinktest.gltf
-│           └── router_texture_restbuttontest.gltf
-├── server/
-│   └── server.js
+│       │   ├── model_BoomBox.glb
+│       │   ├── model_CreditCard.glb
+│       │   ├── model_DesktopPC.glb
+│       │   ├── model_EmojiHeart.glb
+│       │   ├── model_FilmClapperBoard.glb
+│       │   ├── model_FolderIcon.glb
+│       │   ├── model_Laptop.glb
+│       │   ├── model_LowPolyPhone.glb
+│       │   ├── model_MovieReel.glb
+│       │   ├── model_MusicIcons.glb
+│       │   ├── model_PhoneCallIcon.glb
+│       │   ├── model_PhoneRingIcon.glb
+│       │   ├── model_Plane.glb
+│       │   ├── model_RemoteControl.glb
+│       │   ├── model_RollingBag.glb
+│       │   ├── model_SaveToCloud.glb
+│       │   ├── model_SecurityCamera.glb
+│       │   ├── model_Sports.glb
+│       │   ├── model_Television.glb
+│       │   ├── model_VideoGameController.glb
+│       │   ├── model_VideoGameController2.glb 
+│       │   ├── model_WifiExtender.glb
+│       │   ├── model_WifiIcon.glb
+│       │   ├── model_LogoAccenture.glb
+│       │   ├── model_Router90DegreeRotation.glb
+│       │   ├── model_RouterCableTexture.glb
+│       │   ├── model_RouterLightBlinkTexture.glb
+│       │   ├── model_RouterNoTexture.glb
+│       │   └── model_RouterResetButtonTexture.glb
+│       ├── gltf/
+│       │   ├── model_RouterCableTexture.gltf
+│       │   ├── model_RouterLightBlinkTexture.gltf
+│       │   ├── model_RouterNoTexture.gltf
+│       │   └── model_RouterResetButtonTexture.gltf
+│       └── mp4/
+│           ├── model_PhoneBlack.mp4
+│           ├── model_PhoneBlue.mp4
+│           ├── model_PhoneColorsAll.mp4
+│           ├── model_PhoneColorsMauve.mp4
+│           ├── model_PhoneColorsRed.mp4
+│           ├── model_PhoneColorsWhite.mp4
+│           ├── model_PhoneColorsYellow.mp4
+│           ├── model_House.mp4
+│           ├── model_House1stHalf.mp4
+│           ├── model_House2ndHalf.mp4
+│           ├── model_House2nd.mp4
+│           ├── model_HouseZoom.mp4
+│           ├── model_Upsell1st.mp4
+│           ├── model_Upsell2nd.mp4
+│           ├── model_Upsell3rd.mp4
+│           ├── model_Upsell4th.mp4
+│           ├── model_Upsell5th.mp4
+│           ├── model_UpsellPhoneColorsMultiStep1st.mp4
+│           └── model_UpsellPhoneColorMultistep2nd.mp4
 ├── src/
 │   ├── api/
 │   │   └── azureML.js
@@ -97,7 +143,8 @@ webapp/
 │   │   │   └── CanvasScene.astro 
 │   │   ├── common/
 │   │   │   ├── Box.astro
-│   │   │   ├── Card.
+│   │   │   ├── Card.astro
+│   │   │   ├── CardHeader.astro
 │   │   │   ├── CardHolder.astro
 │   │   │   └── Container.astro
 │   │   ├── messages/
@@ -107,7 +154,6 @@ webapp/
 │   │   │   └── ChatSuggestionBar.astro
 │   │   ├── primitives/
 │   │   │   ├── Button.astro
-│   │   │   ├── CardHeader.astro
 │   │   │   ├── Link.astro
 │   │   │   └── Svg.astro
 │   │   └── templates/
@@ -115,11 +161,11 @@ webapp/
 │   │       ├── Header.astro
 │   │       └── Hero.astro 
 │   ├── data/
+│   │   ├── assetMap.js
+│   │   ├── baseCommand.js
+│   │   ├── commandMap.js
 │   │   ├── sampleMessageData.js
-│   │   ├── sampleMessageData.json
-│   │   ├── sampleSuggestionsData.js
-│   │   ├── sampleSuggestionsData.json
-│   │   └── svgData.js
+│   │   └── sampleSuggestionsData.js
 │   ├── graphics/ 
 │   │   ├── core/
 │   │   │   └── WebGL.js
@@ -127,16 +173,18 @@ webapp/
 │   │   │   ├── fragmentShader.glsl
 │   │   │   └── vertexShader.glsl
 │   │   ├──utils/
-│   │   │       ├── assetLoader.js
-│   │   │       └── OrbitControls.js
+│   │   │       └── OrbitControls.ts
 │   │   └── ThreeCanvas.ts
 │   ├── layouts/
 │   │   └── Layout.astro
 │   ├── pages/
 │   │   ├── agent.astro
 │   │   └── index.astro
-│   └── stores/
-│       └── store.js     
+│   ├── stores/
+│   │   └── store.js    
+│   └── styles/
+│       ├── classStyles.js 
+│       └── svgStyles.js
 ├── types/
 │   └── env.d.ts
 │       ├── env.d.ts
@@ -145,7 +193,6 @@ webapp/
 ├── package.json
 └── README.md
 ```
-
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
 There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
