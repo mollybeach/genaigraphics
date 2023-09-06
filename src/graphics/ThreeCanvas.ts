@@ -1,12 +1,11 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { controls } from './utils/OrbitControls';
-import Stats from 'three/examples/jsm/libs/stats.module';
-import { activeAssets } from '../data/baseCommand';
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { controls } from "./utils/OrbitControls";
+import Stats from "three/examples/jsm/libs/stats.module";
+import { activeAssets } from "../data/baseCommand";
 
 export class ThreeCanvas {
-   
   public getWidth = () => this.canvasElement.clientWidth;
   public getHeight = () => this.canvasElement.clientHeight;
   public FOV = 50;
@@ -24,25 +23,23 @@ export class ThreeCanvas {
   public stats?: Stats;
   public renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   public time = { delta: 0, elapsed: 0 };
-  public background = new THREE.Color('#fff');
+  public background = new THREE.Color("#fff");
   public mixers: THREE.AnimationMixer[] = [];
   public currentAsset = activeAssets[0];
   public currentModel = activeAssets[0].data.scene;
 
-  static instance : ThreeCanvas | null = null;
+  static instance: ThreeCanvas | null = null;
 
-  constructor(private canvasElement : HTMLElement) {
+  constructor(private canvasElement: HTMLElement) {
     ThreeCanvas.instance = this;
     this.init();
-    activeAssets.forEach((asset : any) => {
-        
-        this.loadModel(asset).then(() => {
-
-            if(asset.type!= 'multipleMp4s' || asset.type!= 'multipleGlbs'){
-                this.addAsset(asset);
-            }
-        });
-        this.animate();
+    activeAssets.forEach((asset: any) => {
+      this.loadModel(asset).then(() => {
+        if (asset.type != "multipleMp4s" || asset.type != "multipleGlbs") {
+          this.addAsset(asset);
+        }
+      });
+      this.animate();
     });
   }
 
@@ -52,52 +49,51 @@ export class ThreeCanvas {
     //@ts-ignore
     this.renderer.setPixelRatio(this.canvasElement.devicePixelRatio);
     this.renderer.shadowMap.enabled = true;
-   // this.renderer.domElement.width = this.canvasElement.clientWidth;
-   // this.renderer.domElement.height = this.canvasElement.clientHeight;
     this.canvasElement.appendChild(this.renderer.domElement);
     this.camera.fov = this.FOV;
   }
-  
+
   // UPDATE RENDER SIZE
   updateRendererSize(width: number, height: number) {
-    console.log('updateRendererSize', width, height);
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
-    }
+  }
 
-   //EXECUTE ANIMATION
-   async execute(asset: any) {
-   // REMOVE ALL PREVIOUS MODELS FROM SCENE
-   const removeAllPreviousModels = new Promise<void>((resolve) => {
-    const promises = activeAssets.map((asset : any) => this.removeAsset(asset));
-    Promise.all(promises).then(() => resolve());
+  //EXECUTE ANIMATION
+  async execute(asset: any) {
+    // REMOVE ALL PREVIOUS MODELS FROM SCENE
+    const removeAllPreviousModels = new Promise<void>((resolve) => {
+      const promises = activeAssets.map((asset: any) =>
+        this.removeAsset(asset)
+      );
+      Promise.all(promises).then(() => resolve());
     });
     await removeAllPreviousModels;
 
-   console.log('switching models ...');
-   this.init();
+    console.log("execute switching models ...");
+    this.init();
     // LOAD NEW MODEL
     asset = await this.loadModel(asset);
-    if(asset.type!= 'multipleMp4s'){
-        this.addAsset(asset);
+    if (asset.type != "multipleMp4s") {
+      this.addAsset(asset);
     }
     this.animate();
   }
 
   private async loadModel(asset: any) {
     switch (asset.type) {
-      case 'glb':
+      case "glb":
         return this.loadGLB(asset);
-      case 'fbx':
+      case "fbx":
         return this.loadFBX(asset);
-      case 'mp4':
+      case "mp4":
         return this.loadMP4(asset);
-      case 'multipleMp4s':
+      case "multipleMp4s":
         return this.loadMultipleMp4s(asset.assets);
-      case 'multipleGlbs':
+      case "multipleGlbs":
         return this.loadMultipleGlbs(asset.assets);
-      default: 
+      default:
         return this.loadGLB(asset);
     }
   }
@@ -110,18 +106,17 @@ export class ThreeCanvas {
     const scaleMultiplier = 1;
     gltf.scene.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
 
-    
     //ADD LIGHTING
     this.addLighting(gltf);
     //PLAY ANIMATION
     const mixer = new THREE.AnimationMixer(gltf.scene);
 
     this.mixers.push(mixer);
-    gltf.animations.forEach(clip => {
+    gltf.animations.forEach((clip) => {
       mixer.clipAction(clip).play();
     });
 
-    console.log('loading glb ...');
+    console.log("loading glb ...");
     return asset;
   }
   // ADD LIGHTING TO SCENE
@@ -131,25 +126,27 @@ export class ThreeCanvas {
     this.scene.add(directionalLight);
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     this.scene.add(ambientLight);
-
-    const newColor = new THREE.Color(0.7, 0.7, 0.7);
-    model.scene.traverse(child => {
-      if (child instanceof THREE.Mesh) {
-        const material = child.material as THREE.MeshStandardMaterial;
-        const blackThreshold = 0.1;
-        if (
-          material.color.r < blackThreshold &&
-          material.color.g < blackThreshold &&
-          material.color.b < blackThreshold
-        ) {
-          material.color = newColor;
+    
+    if(model.scene) {
+      const newColor = new THREE.Color(0.7, 0.7, 0.7);
+      model.scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          const material = child.material as THREE.MeshStandardMaterial;
+          const blackThreshold = 0.1;
+          if (
+            material.color.r < blackThreshold &&
+            material.color.g < blackThreshold &&
+            material.color.b < blackThreshold
+          ) {
+            material.color = newColor;
+          }
         }
-      }
-    });
+      });
+    }
   }
   // REMOVE LIGHTS FROM SCENE
   private removeLights() {
-    this.scene.children.forEach(child => {
+    this.scene.children.forEach((child) => {
       if (child instanceof THREE.Light) {
         this.scene.remove(child);
       }
@@ -165,89 +162,94 @@ export class ThreeCanvas {
 
   // LOAD MP4 TO THE SCENE
   private async loadMP4(asset: any) {
-
     //CREATE VIDEO ELEMENT ADD PROPERTIES APPEND TO DOM
-    const video = document.createElement('video');
+    const video = document.createElement("video");
     video.src = asset.path;
     video.playsInline = true;
     video.loop = true;
     video.muted = true;
     video.autoplay = true;
-    video.preload = 'metadata';
+    video.preload = "metadata";
     video.play();
-    
-     // WAIT FOR VIDEO METADATA TO LOAD
-     await new Promise<void>((resolve) => {
-        video.addEventListener('loadedmetadata', () => resolve());
-     });
- 
+
+    // WAIT FOR VIDEO METADATA TO LOAD
+    await new Promise<void>((resolve) => {
+      video.addEventListener("loadedmetadata", () => resolve());
+    });
+
     // GET VIDEO DURATION
     const videoDuration = video.duration;
     asset.data.duration = videoDuration;
- 
+
     //GET VIDEO ASPECT RATIO
     const mp4Width = video.videoWidth;
     const mp4Height = video.videoHeight;
 
     // CALCULATE ASPECT RATIO BASED ON VIDEO WIDTH AND HEIGHT
-    function reduceFraction(numerator: number,denominator: number){
-      let gcd = function gcd(a: number,b: number){
-        return b ? gcd(b, a%b) : a;
+    function reduceFraction(numerator: number, denominator: number) {
+      let gcd = function gcd(a: number, b: number) {
+        return b ? gcd(b, a % b) : a;
       };
-      const greatestCommonDenominator = gcd(numerator,denominator);
+      const greatestCommonDenominator = gcd(numerator, denominator);
       const result = {
-        width: numerator/greatestCommonDenominator,
-        height: denominator/greatestCommonDenominator
-      }
+        width: numerator / greatestCommonDenominator,
+        height: denominator / greatestCommonDenominator,
+      };
       return result;
     }
- 
+
     const aspect = reduceFraction(mp4Width, mp4Height);
- 
+
     // CREATE VIDEO TEXTURE
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
- 
+
     // CREATE VIDEO MODEL FROM MESH
-    const videoGeometry = new THREE.PlaneGeometry(aspect.width, aspect.height, 32); 
-    const videoMaterial = new THREE.MeshBasicMaterial( { map: videoTexture, side: THREE.DoubleSide } );
-    const mp4 = new THREE.Mesh( videoGeometry, videoMaterial );
+    const videoGeometry = new THREE.PlaneGeometry(
+      aspect.width,
+      aspect.height,
+      32
+    );
+    const videoMaterial = new THREE.MeshBasicMaterial({
+      map: videoTexture,
+      side: THREE.DoubleSide,
+    });
+    const mp4 = new THREE.Mesh(videoGeometry, videoMaterial);
     asset.data.scene = mp4;
     this.addLighting(mp4);
-    console.log('loading mp4 ...');
-    return asset
+    console.log("loading mp4 ...");
+    return asset;
   }
 
-// LOAD MULTIPLE MP4s
- async loadMultipleMp4s(assets: any[]) {
-
+  // LOAD MULTIPLE MP4s
+  async loadMultipleMp4s(assets: any[]) {
     // LOOP THROUGH EACH MP4 ASSET
     for (const asset of assets) {
-     const mp4 = await this.loadMP4(asset);
-     console.log('mp4: multipleMp4s : ', mp4)
-
+      const mp4 = await this.loadMP4(asset);
+      console.log("loading one mp4 of multipleMp4s : ", mp4);
       this.addAsset(mp4);
-   
-     // WAIT FOR VIDEO TO FINISH PLAYING BEFORE LOADING NEXT VIDEO
-     await new Promise<void>((resolve) => {
-       setTimeout(() => {
-         resolve();
-       }, mp4.data.duration * 1000);
-     });
 
-     // REMOVE VIDEO FROM SCENE TO MAKE ROOM FOR NEXT VIDEO
-      if (asset !== assets[assets.length - 1]){
+      // WAIT FOR VIDEO TO FINISH PLAYING BEFORE LOADING NEXT VIDEO
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, mp4.data.duration * 1000);
+      });
+
+      // REMOVE VIDEO FROM SCENE TO MAKE ROOM FOR NEXT VIDEO
+      if (asset !== assets[assets.length - 1]) {
         this.removeAsset(mp4);
       }
-   }
- };
+    }
+  }
 
- // write a function that loads multiple glbs and puts them 5 seconds apart
+  // write a function that loads multiple glbs and puts them 5 seconds apart
   async loadMultipleGlbs(assets: any[]) {
     // LOOP THROUGH EACH GLB ASSET
     for (const asset of assets) {
       const glb = await this.loadGLB(asset);
+      console.log("loading one glb of multipleGlbs : ", glb);
       this.addAsset(glb);
       // WAIT FOR 5 seconds BEFORE LOADING NEXT GLB
       await new Promise<void>((resolve) => {
@@ -256,24 +258,22 @@ export class ThreeCanvas {
         }, 3000);
       });
       // REMOVE GLB FROM SCENE TO MAKE ROOM FOR NEXT GLB
-      if (asset !== assets[assets.length - 1]){
+      if (asset !== assets[assets.length - 1]) {
         this.removeAsset(glb);
       }
     }
   }
 
-// GET MODEL
-  getModel(asset:any) {
+  // GET MODEL
+  getModel(asset: any) {
     const model = asset.data.scene;
     return model;
   }
   // ADD ASSET TO SCENE
   addAsset(asset: any) {
-    
     activeAssets.push(asset);
     this.currentAsset = asset;
-    console.log('adding asset..... : ', asset);
-    
+    console.log("adding asset..... : ", asset);
 
     // UPDATE RENDERER SIZE
     this.updateRendererSize(this.getWidth(), this.getHeight());
@@ -286,16 +286,14 @@ export class ThreeCanvas {
     const model = this.getModel(asset);
     this.currentModel = model;
     this.scene.add(model);
-
-    }
+  }
 
   // REMOVE ASSET FROM SCENE
-  removeAsset(asset: any) {  
-
+  removeAsset(asset: any) {
     activeAssets.splice(0, activeAssets.length);
     this.currentAsset = asset;
-    console.log('removing asset..... : ', asset);
-   
+    console.log("removing asset..... : ", asset);
+
     // GET MODEL
     const model = this.getModel(asset);
     this.currentModel = null;
@@ -306,34 +304,34 @@ export class ThreeCanvas {
     //this.scene.clear();
   }
 
-   // ZOOM CAMERA BUTTONS
-    zoomIn(delta = 5) {
-        this.camera.fov = this.camera.fov - delta
-        this.camera.updateProjectionMatrix();
-        console.log(this.camera.fov)
-    }
-    
-    zoomOut(delta = 5) {
-       this.camera.fov = this.camera.fov + delta;
-       this.camera.updateProjectionMatrix();
-         console.log(this.camera.fov)
-    }
+  // ZOOM CAMERA BUTTONS
+  zoomIn(delta = 5) {
+    this.camera.fov = this.camera.fov - delta;
+    this.camera.updateProjectionMatrix();
+    console.log(this.camera.fov);
+  }
 
-     // ROTATE MODEL BUTTONS
-    rotateY(delta = 0.1) {
-        this.currentModel.rotation.y += delta;
-    }
+  zoomOut(delta = 5) {
+    this.camera.fov = this.camera.fov + delta;
+    this.camera.updateProjectionMatrix();
+    console.log(this.camera.fov);
+  }
 
-    rotateX(delta = 0.1) {
-        this.currentModel.rotation.x += delta;
-    };
+  // ROTATE MODEL BUTTONS
+  rotateY(delta = 0.1) {
+    this.currentModel.rotation.y += delta;
+  }
 
-// SPIN MODEL
+  rotateX(delta = 0.1) {
+    this.currentModel.rotation.x += delta;
+  }
+
+  // SPIN MODEL
   spin = () => {
-   //this.currentModel.rotation.x += 0.01;
+    //this.currentModel.rotation.x += 0.01;
     this.currentModel.rotation.y += 0.01;
   };
-// CANCEL ANIMATION FRAME
+  // CANCEL ANIMATION FRAME
   cancelAnimationFrame() {
     this.renderer.setAnimationLoop(null);
   }
@@ -349,21 +347,18 @@ export class ThreeCanvas {
     this.stats?.begin();
     controls?.update();
 
-    if(this.currentAsset.animate && this.currentAsset.animate === "spin") {
-      console.log('spinning model ...');
-      console.log('this.currentAsset.animate : ', this.currentAsset.animate);
-        this.cancelAnimationFrame();
-        this.spin();
+    if (this.currentAsset.animate && this.currentAsset.animate === "spin") {
+      console.log("spinning model ...");
+      console.log("this.currentAsset.animate : ", this.currentAsset.animate);
+      this.cancelAnimationFrame();
+      this.spin();
     }
-    //UPDATE ANIMATION 
-    this.mixers.forEach(mixer => mixer.update(0.01)); // Use an appropriate delta time
+    //UPDATE ANIMATION
+    this.mixers.forEach((mixer) => mixer.update(0.01)); // Use an appropriate delta time
     this.renderer.render(this.scene, this.camera);
     this.stats?.end();
 
     //RECURSIVE CALL TO ANIMATE
     requestAnimationFrame(() => this.animate());
   }
-  
 }
-
-
