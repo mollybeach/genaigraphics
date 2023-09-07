@@ -1,46 +1,88 @@
 ---
-//path: /src/components/messages/ChatMessages.astro
+//path: webapp/src/components/messages/ChatMessages.astro
 import { classNames } from "../../styles/classStyles";
 
 ---
 <script>
     import { $allMessages } from "../../stores/store";
     import { classNames } from "../../styles/classStyles";
-    const targetDiv = document.querySelector<HTMLDivElement>('#chat-message');
+    const messageElement = document.querySelector<HTMLDivElement>('#chat-message') as HTMLDivElement;
 
-    function renderMyMessages(message: any) {
+   // TYPE ANIMATE THE NEW MESSAGE   
+   async function typeMessage(messageSpan: HTMLElement, messageText: string) {
+
+      function typeWriter(text, i, fnCallback) {
+           if (i < text.length) {
+             // ADD NEXT CHARACTER TO SPAN
+             messageSpan.innerHTML =
+               text.substring(0, i + 1) +
+               '<span class="border-r-1 border-solid border-black w-1 h-6 animate-caret" aria-hidden="true"></span>';
+
+             setTimeout(function () {
+               typeWriter(text, i + 1, fnCallback);
+             }, 10);
+           }
+         }
+      // START A TYPEWRITER ANIMATION FOR A TEXT IN THE MESSAGES ARRAY
+      function StartTextAnimation(i) {
+
+        if (typeof messageText == "undefined") {
+          setTimeout(function () {
+            StartTextAnimation(0);
+          }, 20000);
+        }
+        if (i < messageText.length) {
+          // START A TYPEWRITER ANIMATION FOR A TEXT IN THE MESSAGES ARRAY
+          typeWriter(messageText, 0, function () {
+            StartTextAnimation(i + 1);
+          });
+        }
+      }
+      // START THE TYPEWRITER ANIMATION 
+      StartTextAnimation(0);
+    }
+    
+     // RENDER EACH MESSAGE IN MESSAGE STORE
+    function renderMyMessages(message: any, index: number, messages: any[]) {
       const messageHtml = `
         <div id="chat-message-column-container" class="${classNames("chatMessageColumnContainer")}${message.sender === 'me' ? classNames("chatMessageColumnContainerYou") : classNames("chatMessageColumnContainerYou")}">
           <div id="chat-message-row-container" class="${classNames("chatMessageRowContainer")} ${message.sender === 'me' ? classNames("chatMessageRowContainerMe") : classNames("chatMessageRowContainerYou")}">
             <div id="chat-message-avatar-container" class="${classNames("chatMessageAvatarContainer")}">
               <img id="chat-message-avatar" class="rounded-full" src=${message.image} alt=${message.name} />
             </div>
-            <div id="chat-message-bubble" class="${classNames("chatMessageBubble")}${message.sender === 'you' ? classNames("chatMessageBubbleMe"): classNames("chatMessageBubbleYou")}">
-              ${message.message} 
+            <div  id="${index === messages.length - 1 && message.sender === 'you' ? 'new-message' : 'chat-message-bubble'}" class="${message.sender === 'you' ? classNames("chatMessageBubble", "chatMessageBubbleMe"): classNames("chatMessageBubble", "chatMessageBubbleYou")}">
+              ${index === messages.length - 1 && message.sender === 'you' ? "" : message.message}
             </div>
           </div>
         </div>
       `;
-      targetDiv.innerHTML += messageHtml; 
+      messageElement.innerHTML += messageHtml; 
 
-      // Scroll the chat messages container to the bottom after adding a new message
-      const chatMessagesContainer = document.getElementById("chat-messages");
+      
+
+      // SCROLL THE CHAT MESSAGES CONTAINER TO THE BOTTOM AFTER ADDING A NEW MESSAGE
+      const chatMessagesContainer = document.getElementById("chat-messages") as HTMLDivElement;
       chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    }
-    
-    let unsubscribe;
-    unsubscribe;
-    function initialize() {
-        unsubscribe = $allMessages.subscribe(updatedMessages => {  
-            targetDiv.innerHTML = '';
-            updatedMessages.forEach(renderMyMessages);
-        });
+
+      // TYPE THE NEW MESSAGE
+      const newMessageSpan = messageElement.querySelector("#new-message") as HTMLDivElement;
+     // ONLY CALL TYPEMESSAGE IF THE MESSAGE IS FROM THE OTHER PERSON AND IT'S  THE NEWEST MESSAGE
+      if (index === messages.length - 1 && message.sender === 'you'){
+      typeMessage(newMessageSpan, message.message);
+      }
     }
 
-    initialize();
+    //SUBSCRIBE TO THE STORE TO GET THE UPDATED MESSAGES
+    $allMessages.subscribe(updatedMessages => {  
+        messageElement.innerHTML = '';
+        updatedMessages.forEach(renderMyMessages);
+    });
 </script>
     
-<section id="chat-messages" class={classNames("chatMessages")}>
+<div id="chat-messages" class={classNames("chatMessages")}>
    <div id="chat-message" class={classNames("chatMessage")}>
   </div>
-</section>
+</div>
+
+
+
