@@ -5,8 +5,8 @@ import { controls } from "./utils/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
 import { activeAssets } from "../data/baseCommand";
 import { $activeAssetsState, $animationState } from "../stores/store";
-import {createSculptureWithGeometry} from "shader-park-core";
-import { TorusKnotGeometry, SphereGeometry } from "three";
+import {createSculptureWithGeometry, glslToThreeJSMesh,} from "shader-park-core";
+import { Color, TorusKnotGeometry, SphereGeometry, BoxGeometry } from "three";
 export class ThreeCanvas {
   public getWidth = () => this.canvasElement.clientWidth;
   public getHeight = () => this.canvasElement.clientHeight;
@@ -41,10 +41,11 @@ export class ThreeCanvas {
 
   private init() {
     this.renderer.setSize(this.getWidth(), this.getHeight());
-    this.renderer.setClearColor(this.background);
+   // this.renderer.setClearColor(this.background);
     //@ts-ignore
     this.renderer.setPixelRatio(this.canvasElement.devicePixelRatio);
-    this.renderer.shadowMap.enabled = true;
+   // this.renderer.shadowMap.enabled = true;
+    this.renderer.setClearColor( new Color(1, 1, 1), 1 );
     this.canvasElement.appendChild(this.renderer.domElement);
     this.camera.fov = this.FOV;
   }
@@ -105,6 +106,8 @@ export class ThreeCanvas {
         return this.loadMultipleMp4s(asset.assets);
       case "multipleGlbs":
         return this.loadMultipleGlbs(asset.assets);
+      case "spjs":
+        return this.loadSPJS(asset);
       default:
         return this.loadGLB(asset);
     }
@@ -238,14 +241,10 @@ export class ThreeCanvas {
   // LOAD MULTIPLE MP4s
   async loadMultipleMp4s(assets: any[]) {
    // console.log("loading multiple mp4s ...");
-    // LOOP THROUGH EACH MP4 ASSET
     for (const asset of assets) {
       //console.log("loading one mp4 of multipleMp4s : #", assets.indexOf(asset)+1);
       const mp4 = await this.loadMP4(asset);
-      // get the index of the mp4: 
-    
       this.addAsset(mp4);
-
       // WAIT FOR VIDEO TO FINISH PLAYING BEFORE LOADING NEXT VIDEO
       await new Promise<void>((resolve) => {
         setTimeout(() => {
@@ -262,7 +261,7 @@ export class ThreeCanvas {
     activeAssets.splice(0, activeAssets.length); 
   }
 
-  //\loads multiple glbs and puts them 5 seconds apart
+  //LOAD MULTIPLE GLBs
   async loadMultipleGlbs(assets: any[]) {
     // LOOP THROUGH EACH GLB ASSET
     for (const asset of assets) {
@@ -282,83 +281,33 @@ export class ThreeCanvas {
       }
     }
   }
-
+  //LOAD GLSL TO THE SCENE
   async loadGLSL(asset: any) {
-    
-    const spCode =  `
-    rotateY(PI/2*(time))
-    let thickness = 0.02;
-    let zed = 0.0;
-    let change;
-    /*************COLORING FUNCTION*******************/
-        let colorBook = (varient) => {
-          let colorX = 0.9 * Math.random();
-          let colorY = colorX - Math.random();
-          let colorZ = colorY - 0.2;
-          let rainbow = color(colorX, colorY, colorZ);
-          return rainbow;
-        };
-    /*****************SPHERE VARIABLES**********/
-    let positiveTopSphere = 0.1;
-    let negativeTopSphere = 0.1;
-    let positiveBottomSphere = -0.1;
-    let negativeBottomSphere = -0.1;
-    /**************SNP VARIABLES***********/
-    let positiveTopSNP1 = 0.1;
-    let negativeTopSNP1 = 0.021;//0.0
-    let positiveBottomSNP2 = -0.1;
-    let negativeBottomSNP2 = -0.02; //0.0
-    /****************OUTER SPHERES**************/
-    let pos1 = vec3(positiveTopSphere, positiveTopSphere, zed); //x,y
-    let pos2 = vec3(negativeTopSphere, negativeTopSphere, zed); //-x, -y
-    let pos3 = vec3(positiveBottomSphere, positiveBottomSphere, zed); //x,y
-    let pos4 = vec3(negativeBottomSphere, negativeBottomSphere, zed); //-x, -y
-    /*******************SNPS**********************/
-    let pos5 = vec3(positiveTopSNP1, positiveTopSNP1, zed); //x,y
-    let pos6 = vec3(negativeTopSNP1, negativeTopSNP1, zed); //-x, -y
-    let pos7 = vec3(positiveBottomSNP2, positiveBottomSNP2, zed); //x,y
-    let pos8 = vec3(negativeBottomSNP2, negativeBottomSNP2, zed); //-x, -y
-    /*****************STRAND****************/
-    let strand = function () {
-      rotateX(PI / 2);
-      let j = 0;
-      for (j = 0; j < 50; j++) {
-      
-        let pairSpheres = function () {
-          color(1.0, 1.0, 1.0);
-          line(pos1, pos2, thickness * 2);
-          line(pos3, pos4, thickness * 2);
-        };
-        let pairSNPs = function () {
-        //  mirrorX();
-          colorBook(Math.random());
-          rotateZ(3);
-          displace(0.0, 0.0, 0.0);
-        line(pos5, pos6, thickness);
-          
-          line(pos7, pos8, thickness);
-        }
-        pairSNPs();
-        pairSpheres();
-        displace(-0.30, 0.061, -0.0345); //space between SNPS
-      }
-    };
-    
-    displace(0.0, -0.8, 0.0); //position of entire strand
-    strand(); 
-`
-   let geometry = new SphereGeometry( 12, 100, 100);
- //  let geometry = new TorusKnotGeometry( 10, 3, 192, 96);
-    geometry.computeBoundingSphere();
-    geometry.center();
-
-    let mesh = createSculptureWithGeometry(geometry, spCode, () => ( {
+    const response = await fetch(asset.path); 
+    const glsl = await response.text();
+    const mesh = glslToThreeJSMesh(glsl, () => ( {
       time: this.params.time,
-    } ));
-  
+    }));
     asset.data.scene = mesh;
     return asset;
   }
+  //LOAD SPJS TO THE SCENE
+  async loadSPJS(asset: any) {
+    const response = await fetch(asset.path); 
+    const spjs = await response.text();
+    // let geometry = new BoxGeometry( 10, 10, 10);
+    //let geometry = new TorusKnotGeometry( 10, 3, 192, 96);
+    let geometry = new SphereGeometry( 12, 100, 100);
+    geometry.computeBoundingSphere();
+    geometry.center();
+
+    let mesh = createSculptureWithGeometry(geometry, spjs, () => ( {
+      time: this.params.time,
+    } ));
+    console.log("mesh : ", mesh);
+    asset.data.scene = mesh;
+    return asset;
+ }
 
   // GET MODEL
   getModel(asset: any) {
