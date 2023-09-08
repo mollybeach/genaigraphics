@@ -3,8 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { controls } from "./utils/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
-import { activeAssets } from "../data/baseCommand";
-import { $activeAssetsState, $animationState } from "../stores/store";
+import { $animationState } from "../stores/store";
 import {createSculptureWithGeometry, glslToThreeJSMesh,} from "shader-park-core";
 import { Color, TorusKnotGeometry, SphereGeometry, BoxGeometry } from "three";
 
@@ -23,13 +22,13 @@ export class ThreeCanvas {
     this.FAR_PLANE
   );
   public clock = new THREE.Clock();
+  public raycaster = new THREE.Raycaster();
   public stats?: Stats;
   public renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   public time = { delta: 0, elapsed: 0 };
   public params = { time: 0 };
   public background = new THREE.Color("#fff");
   public mixers: THREE.AnimationMixer[] = [];
-  public activeAssets = $activeAssetsState.get();
   public currentAsset = $animationState.get();
   public currentModel = this.currentAsset.data.scene;
 
@@ -45,14 +44,10 @@ export class ThreeCanvas {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor( new Color(1, 1, 1), 1 );
     this.canvasElement.appendChild(this.renderer.domElement);
-    this.camera.fov = this.FOV;
+    this.camera.fov = this.currentAsset.cameraPosition.fov;
   }
 
   async initialize() {
-    $activeAssetsState.subscribe((activeAssets) => {
-      //@ts-ignore
-      this.activeAssets = activeAssets;
-    });
     $animationState.subscribe((animationState) => {
       this.currentAsset = animationState;
     });
@@ -66,12 +61,12 @@ export class ThreeCanvas {
 
   async execute() {
     this.initialize();
+
     const removeAllPreviousModels = new Promise<void>((resolve) => {
-      const promises = this.activeAssets.map((asset: any) =>
-        this.removeAsset(asset)
-      );
-      Promise.all(promises).then(() => resolve());
+      this.removeAsset(this.currentAsset);
+      resolve();
     });
+
     await removeAllPreviousModels;
 
     console.log("RENDERING NEW ANIMATION ...");
@@ -201,24 +196,28 @@ export class ThreeCanvas {
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
 
+
+
     const videoGeometry = new THREE.PlaneGeometry(
       aspect.width,
       aspect.height,
       32
     );
+
     const videoMaterial = new THREE.MeshBasicMaterial({
       map: videoTexture,
       side: THREE.DoubleSide,
     });
     const mp4 = new THREE.Mesh(videoGeometry, videoMaterial);
     asset.data.scene = mp4;
-
+    
     return asset;
   }
 
   async loadMultipleGlbs(assets: any[]) {
     for (const asset of assets) {
       const glb = await this.loadGLB(asset);
+      
       
       this.addAsset(glb);
 
@@ -249,7 +248,6 @@ export class ThreeCanvas {
         this.removeAsset(mp4);
       }
     }
-    activeAssets.splice(0, activeAssets.length); 
   }
 
   async loadGLSL(asset: any) {
@@ -282,7 +280,6 @@ export class ThreeCanvas {
   }
 
   addAsset(asset: any) {
-    activeAssets.push(asset);
     this.currentAsset = asset;
     this.updateRendererSize(this.getWidth(), this.getHeight());
     this.camera.position.z = asset.cameraPosition.z;
@@ -295,7 +292,6 @@ export class ThreeCanvas {
   }
 
   removeAsset(asset: any) {
-    activeAssets.splice(0, activeAssets.length);
     this.currentAsset = asset;
     const model = this.getModel(asset);
     this.currentModel = null;
@@ -312,9 +308,13 @@ export class ThreeCanvas {
   zoomOut(delta = 5) {
     this.camera.fov = this.camera.fov + delta;
     this.camera.updateProjectionMatrix();
+    console.log(this.camera.fov);
   }
 
   rotateY(delta = 0.1) {
+    console.log(this.currentAsset);
+    console.log( this.currentAsset.data.scene.rotation.y )
+    this.currentModel = this.currentAsset.data.scene;
     this.currentModel.rotation.y += delta;
   }
 
