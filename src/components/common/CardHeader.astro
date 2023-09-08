@@ -1,7 +1,5 @@
 ---
-// path: /src/components/primitives/CardHeader.astro
-import HomeButton from './Button.astro';
-import Svg from './Svg.astro';
+// path: webapp/src/components/primitives/CardHeader.astro
 import { classNames } from "../../styles/classStyles";
 
 const { classes, title, type} = Astro.props as {
@@ -14,7 +12,7 @@ const { classes, title, type} = Astro.props as {
 <script>
     import { $canvasTitle } from "../../stores/store";
     import { classNames } from "../../styles/classStyles";
-    const targetDiv = document.querySelector<HTMLDivElement>('#common-card-header-animation-container');
+    const targetDiv = document.querySelector<HTMLDivElement>('#common-card-header-animation-container') as HTMLDivElement;
     function renderTitle() {
         const titleHtml = `
             <div id="common-card-header-title" class="${classNames("commonCardHeaderTitleAnimation")}">
@@ -23,29 +21,27 @@ const { classes, title, type} = Astro.props as {
             `;
             targetDiv.innerHTML += titleHtml;
     }
-    function initialize() {
-        $canvasTitle.subscribe( newState => {  
-            targetDiv.innerHTML = ''; // clear the div
-            renderTitle();
-        }); 
-    }
-    initialize();
+    // SUBSCRUBE TO CANVAS TITLE STORE AND RENDER TITLE
+    $canvasTitle.subscribe( _newState => {  
+        targetDiv.innerHTML = ''; // Clear the previous title
+        renderTitle();
+    }); 
 </script>
 
 {type === "message" && (
-    <section id="common-card-header" class={classNames(classes)}>
+    <div id="common-card-header" class={classNames(classes)}>
         <div id="card-header-slot-container" class={classNames("commonCardHeaderSlotContainer")}>
             <slot/>
         </div>
         <div class={classNames("commonCardHeaderTitleMessages")}> 
             {title} 
         </div>
-    </section>
+    </div>
 )}
 {type === "animation" && (
-    <section id="common-card-header" class={classNames(classes)}>
+    <div id="common-card-header" class={classNames(classes)}>
        <div id="common-card-header-animation-container" class={classNames("commonCardHeaderAnimationContainer")}>
         </div>
-    </section>
+    </div>
 )}
 

@@ -1,7 +1,11 @@
 ---
-// path: /src/components/common/CardHolder.astro
+// path: webapp/src/components/common/CardHolder.astro
 import {classNames} from "../../styles/classStyles";
+
 ---
 <section id="common-card-holder" class={classNames("commonCardHolder")} >
       <slot/>
+      <div class={classNames("commonCardAnimationBottom")}>
+           Telehero
+      </div>
 </section>

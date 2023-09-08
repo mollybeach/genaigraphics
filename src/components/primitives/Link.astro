@@ -1,9 +1,8 @@
 ---
-// path: /src/components/primitives/Link.astro
-import Svg from "./Svg.astro";
+// path: webapp/src/components/primitives/Link.astro
 import {classNames} from "../../styles/classStyles.js";
-const { route} = Astro.props as {
-    type: string; 
+const {route} = Astro.props as {
+    route: string; 
 };
 ---
 <a

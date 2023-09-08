@@ -64,6 +64,7 @@ Inside of your Astro project, you'll see the following folders and files:
 
 ```
 /
+webapp/
 ├── config/
 │   ├── astro.config.mjs
 │   ├── config.js
@@ -122,26 +123,32 @@ Inside of your Astro project, you'll see the following folders and files:
 │       │   ├── model_RouterLightBlinkTexture.gltf
 │       │   ├── model_RouterNoTexture.gltf
 │       │   └── model_RouterResetButtonTexture.gltf
-│       └── mp4/
-│           ├── model_PhoneBlack.mp4
-│           ├── model_PhoneBlue.mp4
-│           ├── model_PhoneColorsAll.mp4
-│           ├── model_PhoneColorsMauve.mp4
-│           ├── model_PhoneColorsRed.mp4
-│           ├── model_PhoneColorsWhite.mp4
-│           ├── model_PhoneColorsYellow.mp4
-│           ├── model_House.mp4
-│           ├── model_House1stHalf.mp4
-│           ├── model_House2ndHalf.mp4
-│           ├── model_House2nd.mp4
-│           ├── model_HouseZoom.mp4
-│           ├── model_Upsell1st.mp4
-│           ├── model_Upsell2nd.mp4
-│           ├── model_Upsell3rd.mp4
-│           ├── model_Upsell4th.mp4
-│           ├── model_Upsell5th.mp4
-│           ├── model_UpsellPhoneColorsMultiStep1st.mp4
-│           └── model_UpsellPhoneColorMultistep2nd.mp4
+│       ├── glsl/
+│       │   ├── earth.glsl
+│       │   └── sphere.glsl
+│       ├── mp4/
+│       │   ├── model_PhoneBlack.mp4
+│       │   ├── model_PhoneBlue.mp4
+│       │   ├── model_PhoneColorsAll.mp4
+│       │   ├── model_PhoneColorsMauve.mp4
+│       │   ├── model_PhoneColorsRed.mp4
+│       │   ├── model_PhoneColorsWhite.mp4
+│       │   ├── model_PhoneColorsYellow.mp4
+│       │   ├── model_House.mp4
+│       │   ├── model_House1stHalf.mp4
+│       │   ├── model_House2ndHalf.mp4
+│       │   ├── model_House2nd.mp4
+│       │   ├── model_HouseZoom.mp4
+│       │   ├── model_Upsell1st.mp4
+│       │   ├── model_Upsell2nd.mp4
+│       │   ├── model_Upsell3rd.mp4
+│       │   ├── model_Upsell4th.mp4
+│       │   ├── model_Upsell5th.mp4
+│       │   ├── model_UpsellPhoneColorsMultiStep1st.mp4
+│       │   └── model_UpsellPhoneColorMultistep2nd.mp4
+│       └── spjs/
+│           ├── torus.spjs
+│           └── sphere.spjs
 ├── src/
 │   ├── api/
 │   │   └── azureML.js
@@ -160,7 +167,7 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │   │   ├── Chat.astro
 │   │   │   ├── ChatBar.astro
 │   │   │   ├── ChatMessages.astro
-│   │   │   └── ChatSuggestionBar.astro
+│   │   │   └── ChatRecommendationBar.astro
 │   │   ├── primitives/
 │   │   │   ├── Button.astro
 │   │   │   ├── Link.astro
@@ -170,11 +177,20 @@ Inside of your Astro project, you'll see the following folders and files:
 │   │       ├── Header.astro
 │   │       └── Hero.astro 
 │   ├── data/
+│   │   ├── assets
+│   │   │   ├── fbxAssets.js
+│   │   │   ├── glbAssets.js
+│   │   │   ├── glslAssets.js
+│   │   │   ├── mp4Assets.js
+│   │   │   ├── multipleGlbsAssets.js
+│   │   │   ├── multipleMp4sAssets.js
+│   │   │   └── spjsAssets.js
+│   │   ├── text
+│   │   │   ├── sampleMessageData.js
+│   │   │   └── sampleRecommendationsData.js
 │   │   ├── assetMap.js
 │   │   ├── baseCommand.js
-│   │   ├── commandMap.js
-│   │   ├── sampleMessageData.js
-│   │   └── sampleSuggestionsData.js
+│   │   └── commandMap.js
 │   ├── graphics/ 
 │   │   ├── core/
 │   │   │   └── WebGL.js

@@ -10,12 +10,12 @@ const { page } = Astro.props as {
 };
 ---
 <script>
-    import { updateMessagesStateEvent, $textAreaValue } from "../../stores/store";
+    import { updateMessagesStateEvent} from "../../stores/store";
 
   //HANDLE FORM SUBMISSION
     const formElement = document.getElementById('chat-bar-form') as HTMLFormElement;
     const textareaElement = document.getElementById('chat-bar-textarea') as HTMLTextAreaElement;
-    const suggestionsElement = document.getElementById('suggestion-button') as HTMLElement;
+    const recommendationsElement = document.getElementById('recommendation-button') as HTMLElement;
 
   // CREATE MESSAGE
     function createMessage(event: Event) {
@@ -28,21 +28,21 @@ const { page } = Astro.props as {
       updateMessagesStateEvent(messageContent);
       textareaElement.value = '';
     }
-
-    function clearTextareaOnFocus(event: Event) {
+    /*
+    function clearTextareaOnFocus() {
       textareaElement.value = '';
-    }
+    }*/
     
   // ADD EVENT LISTENERS
     document.addEventListener("DOMContentLoaded", () => {
-  //ADD SUGGESTION BUTTON LISTENERS
-      suggestionsElement? suggestionsElement.addEventListener("keydown",handleTextareaKeydown): console.warn("Could not find the '#suggestion-button' element.");
+  //ADD RECOMMENDATION BUTTON LISTENERS
+      recommendationsElement? recommendationsElement.addEventListener("keydown",handleTextareaKeydown): console.warn("Could not find the '#recommendation-button' element.");
   //ADD FORM EVENT LISTENERS
       formElement? formElement.addEventListener("submit", createMessage): console.warn("Could not find the '.chat-bar-form' element.");
       
   //ADD TEXTAREA EVENT LISTENERS
       if (textareaElement) {
-        textareaElement.addEventListener("focus", clearTextareaOnFocus);
+        //textareaElement.addEventListener("focus", clearTextareaOnFocus);
         textareaElement.addEventListener("keydown", handleTextareaKeydown);
       
       } else {
@@ -64,10 +64,10 @@ const { page } = Astro.props as {
     <FileSvg type="file" group="message"/>
   </Button>
   <textarea 
-    id="chat-bar-textarea"" 
+    id="chat-bar-textarea"
     rows="1" 
     class={classNames("chatBarTextarea")}
-    placeholder=" Message..." 
+    placeholder="Ask a question ..." 
     value=""
     >
   </textarea>

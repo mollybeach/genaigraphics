@@ -1,4 +1,4 @@
-// path: config/astro.config.mjs
+// path: webapp/config/astro.config.mjs
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import { fileURLToPath } from 'url';

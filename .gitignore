@@ -22,10 +22,9 @@ pnpm-debug.log*
 
 # Ignore Visual Studio Code 
 .vscode/* 
-.vscode
+
 **/.vscode/
 # Ignore Visual Studio Code settings
-.vscode/
 
 # Ignore VS Code workspace settings
 *.code-workspace

@@ -1,10 +1,10 @@
-// path: /src/data/commandMap.js
+// path: webapp/src/data/commandMap.js
 
 export const commandMap = {
     "cable": {
         id: "model_RouterCableTexture",
         command: "cable",
-        title: "Install Your Router",
+        title: "Verify Your Router Setup",
         type: "glb"
       },
       "cord": {
@@ -34,25 +34,25 @@ export const commandMap = {
       "boombox": {
         id: "model_BoomBox",
         command: "boombox",
-        title: "Verify your Boombox",
+        title: "Verify your Speaker's Bluetooth Connection",
         type: "glb"
       },
       "Credit Card": {
         id: "model_CreditCard",
         command: "Credit Card",
-        title: "Verify your Credit Card",
+        title: "Provide your Credit Card Details for Payment",
         type: "glb"
       },
       "Desktop PC": {
         id: "model_DesktopPC",
         command: "Desktop PC",
-        title: "Verify your Desktop PC",
+        title: "Confirm PC Network Settings",
         type: "glb"
       },
       "emoji heart": {
         id: "model_EmojiHeart",
         command: "emoji heart",
-        title: "Emoji Heart",
+        title: "",
         type: "glb"
       },
       "Film Clapper Board": {
@@ -64,37 +64,37 @@ export const commandMap = {
       "Folder Icon": {
         id: "model_FolderIcon",
         command: "Folder Icon",
-        title: "Folder Icon",
+        title: "",
         type: "glb"
       },
       "Laptop": {
         id: "model_Laptop",
         command: "Laptop",
-        title: "Verify your Laptop",
+        title: "Verify your Laptop's Network Settings",
         type: "glb"
       },
       "low poly phone": {
-        id: "model_LowPolyPhone",
-        command: "low poly phone",
-        title: "Verify your Low Poly Phone",
-        type: "glb"
+        id: "model_Upsell",
+        command: "upsell",
+        title: "Sales Track",
+        type: "multipleMp4s"
       },
       "Movie Reel": {
         id: "model_MovieReel",
         command: "Movie Reel",
-        title: "Verify your Movie Reel",
+        title: "",
         type: "glb"
       },
       "Music Icons": {
         id: "model_MusicIcons",
-        command: "Music Icons",
+        command: "",
         title: "Verify your Music Icons",
         type: "glb"
       },
       "phone call icon": {
         id: "model_PhoneCallIcon",
         command: "phone call icon",
-        title: "Phone Call Icon",
+        title: "",
         type: "glb"
       },
       "phone ring icon": {
@@ -106,7 +106,7 @@ export const commandMap = {
       "phone all colors": {
         id: "model_PhoneAllColors",
         command: "phone all colors",
-        title: "Verify your Phone All Colors",
+        title: "",
         type: "mp4"
       },
       "phone black": {
@@ -118,90 +118,96 @@ export const commandMap = {
       "phone blue": {
         id: "model_PhoneBlue",
         command: "phone blue",
-        title: "Verify your Phone Blue",
+        title: "",
         type: "mp4"
       },
       "phone yellow": {
         id: "model_PhoneYellow",
         command: "phone yellow",
-        title: "Verify your Phone Yellow",
+        title: "",
         type: "mp4"
       },
       "phone white": {
         id: "model_PhoneWhite",
         command: "phone white",
-        title: "Verify your Phone White",
+        title: "",
         type: "mp4"
       },
       "plane": {
         id: "model_Plane",
         command: "plane",
-        title: "Verify your Plane",
+        title: "",
         type: "glb"
       },
       "remote control": {
         id: "model_RemoteControl",
         command: "remote control",
-        title: "Verify your Remote Control",
+        title: "",
         type: "glb"
       },
       "rolling bag": {
         id: "model_RollingBag",
         command: "rolling bag",
-        title: "Verify your Rolling Bag",
+        title: "",
         type: "glb"
       },
       "save to cloud": {
         id: "model_SaveToCloud",
         command: "save to cloud",
-        title: "Save to Cloud",
+        title: "",
         type: "glb"
       },
       "security camera": {
         id: "model_SecurityCamera",
         command: "security camera",
-        title: "Verify your Security Camera",
+        title: "Verify your Security Camera's Network Settings",
         type: "glb"
       },
       "Sports": {
         id: "model_Sports",
         command: "sports",
-        title: "Verify your Sports",
+        title: "Telehero Offers Sports Streaming",
         type: "glb"
       },
       "television": {
         id: "model_Television",
         command: "television",
-        title: "Verify your Television",
+        title: "Verify your Smart TV's Network Settings",
         type: "glb"
       },
       "video game controller": {
         id: "model_VideoGameController",
         command: "video game controller",
-        title: "Verify your Video Game Controller",
+        title: "Verify your PC Console's Network Settings",
         type: "glb"
       },
       "video game controller 2": {
         id: "model_VideoGameController2",
         command: "video game controller 2",
-        title: "Verify your Video Game Controller 2",
+        title: "",
         type: "glb"
       },
       "wifi extender": {
         id: "model_WifiExtender",
         command: "wifi extender",
-        title: "Verify your Wifi Extender",
+        title: "Wifi Extendor Placement",
         type: "glb"
       },
       "wifi icon": {
-        id: "model_WifiIcon",
+        id: "model_Network",
         command: "wifiicon",
-        title: "Wifi Icon",
-        type: "glb"
+        title: "Verify Your Network",
+        type: "mp4"
+      },
+      "multipleGlbs": {
+        id: "model_AllGlbs",
+        title: "All Glbs",
+        command: "allGlbs",
+        type: "multipleGlbs"
       },
       "router": {
         id: "model_Router90DegreeRotation",
-        title: "Install Your Router",
+        title: "Verify Your Router Set Up",
         command: "router",
         type: "glb"
       },
@@ -211,19 +217,13 @@ export const commandMap = {
         title: "Verify Indoor Setup Location",
         type: "mp4"
       },
-      "upsell": {
+      "sales track": {
         id: "model_Upsell",
-        title: "Upsell",
-        command: "upsell",
+        title: "Sales Track",
+        command: "sales track",
         type: "multipleMp4s"
       },
-      "multipleGlbs": {
-        id: "model_AllGlbs",
-        title: "All Glbs",
-        command: "allGlbs",
-        type: "multipleGlbs"
-      },
-      "sales track": {
+      "upsell": {
         id: "model_Upsell",
         title: "Upsell",
         command: "upsell",
@@ -232,21 +232,81 @@ export const commandMap = {
       "default": {
         id: "model_LogoAccenture",
         command: "default",
-        title: "Welcome",
+        title: "Telehero Support",
         type: "glb"
       },
-};
+      "acn logo": {
+        id: "model_LogoAccenture",
+        command: "default",
+        title: "Telehero Support",
+        type: "glb"
+      },
 
-/*
-commands:
-glb: 
-  cable, cord, light, reset, routerstatic,
-  boombox, Credit Card, Desktop PC, emoji heart, Film Clapper Board,
-  Folder Icon, Laptop, low poly phone, Movie Reel, Music Icons,
-  phone call icon, phone ring icon, Plane, remote control
-  rolling bag, save to cloud, security camera, Sports, television,
-  video game controller, video game controller 2, wifi extender, wifi icon
-  default, router,
-mp4: 
-  house, upsell
-*/
+      "loadingCircle": {
+        id: "model_LoadingCircle",
+        command: "loadingCircle",
+        title: "Loading...",  
+        type: "mp4"
+      },
+      "bunny": {
+        id: "model_Bunny",
+        command: "bunny",
+        title: "Bunny",
+        type: "spjs"
+      },
+      "dna": {
+        id: "model_Dna",
+        command: "dna",
+        title: "dna",
+        type: "spjs"
+      },
+      "window screen saver": {
+        id: "model_WindowScreenSaver",
+        command: "windowScreenSaver",
+        title: "Window Screen Saver",
+        type: "spjs"
+      },
+      "torus": {
+        id: "model_Torus",
+        command: "torus",
+        title: "Torus",
+        type: "spjs"
+      },
+      "earth": {
+        id: "model_Earth",
+        command: "earth",
+        title: "Earth",
+        type: "glsl"
+      },
+      "mobile plans": {
+        id: "model_UpsellPhonePlans",
+        command: "mobile plans",
+        title: "Mobile Plans",
+        type: "mp4"
+      },
+      "latest phones": {
+        id: "model_PhoneAllColors",
+        command: "latest phones",
+        title: "Latest Phones",
+        type: "mp4"
+      },
+      "network": {
+        id: "model_Network",
+        command: "network",
+        title: "Verify Your Network",
+        type: "mp4"
+      },
+      "area": {
+        id: "model_Earth",
+        command: "area",
+        title: "Earth",
+        type: "glsl"
+      },
+      "map": {
+        id: "model_Earth",
+        command: "map",
+        title: "Earth",
+        type: "glsl"
+      },
+
+};

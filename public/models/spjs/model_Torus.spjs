@@ -1,0 +1,13 @@
+
+  let mouseDown = input(); //make sure the name you use for your input matches the name you pass into your state
+  
+  rotateY(mouse.x * PI / 2 + time * .5);
+  rotateX(mouse.y * PI / 2);
+  metal(.5);
+  shine(.4);
+  color(getRayDirection() + .2);
+  rotateY(getRayDirection().y * 4 + time);
+  boxFrame(vec3(.4), .02);
+  expand(.02);
+  blend(mouseDown * .6);
+  sphere(.2);

@@ -1,56 +1,67 @@
-// /src/stores/store.js
+// webapp/src/stores/store.js
 import { atom} from 'nanostores';
-import { sampleSuggestionsData } from '../data/sampleSuggestionsData.js';
-import { postAzureMLMessagesData, postAzureMLSuggestionsData, postAzureMLAnimationsData } from '../api/azureML.js';
-import { sampleMessagesData } from '../data/sampleMessageData.js';
-import { activeAssets } from '../data/baseCommand.js';
+import { sampleRecommendationsData } from '../data/text/sampleRecommendationsData.js';
+import { postAzureMLMessagesData, postAzureMLRecommendationsData, postAzureMLAnimationsData } from '../api/azureML.js';
+import { sampleMessagesData } from '../data/text/sampleMessageData.js';
+import { currentAsset } from '../data/baseCommand.js';
 import { mapAssetAttributesByCommand } from '../data/mapAttributes.js';
 import { ThreeCanvas } from '../graphics/ThreeCanvas';
 
 // Stores
 export const $question = atom("");
 export const $botResponse = atom("");
-export const $allMessages = atom(sampleMessagesData);
-export const $suggestions = atom(sampleSuggestionsData);
+export const $historyMessages = atom(sampleMessagesData);
+export const $recommendations = atom(sampleRecommendationsData);
 export const $textAreaValue = atom("");
-export const $canvasTitle = atom(activeAssets[0].title);
+export const $canvasTitle = atom(currentAsset.title);
+export const $animationState = atom(currentAsset);
 
 // Events
+export const threejsCanvasEvent = (command) => {
+  const asset =  mapAssetAttributesByCommand(command);
+  $animationState.set(asset);
+  $canvasTitle.set(asset.title)
+  ThreeCanvas.instance?.execute();
+}
+
 export const updateMessagesStateEvent = (question) => {
 
-    $question.set(question);
-    $allMessages.set( [...$allMessages.get(), createMessage("me") ]);
-    
-  postAzureMLMessagesData(question, $allMessages.get())
-   .then(response => {
-      $botResponse.set(response.answer);
-      $allMessages.set( [...$allMessages.get(), createMessage("you") ]);
-      updateAnimationsStateEvent();
-      updateSuggestionsStateEvent();
-    })
-   };
+  $question.set(question);
+  $historyMessages.set( [...$historyMessages.get(), createMessage("me") ]);
+  threejsCanvasEvent("loadingCircle");
+postAzureMLMessagesData(question, $historyMessages.get())
+ .then(response => {
+    $botResponse.set(response.answer);
+    $historyMessages.set( [...$historyMessages.get(), createMessage("you") ]);
+    updateAnimationsStateEvent(question, $historyMessages.get());
+    updateRecommendationsStateEvent(question, $historyMessages.get());
+  }).catch(error => {
+    console.log("Chat Messages Error ML", error);
+    $botResponse.set("Sorry, I am not able to answer that question. Please try again.");
+    threejsCanvasEvent("default");
+  });
+ };
 
-export const updateAnimationsStateEvent = () =>{
-
-  postAzureMLAnimationsData(($question.get(), $allMessages.get()))
-    .then(response => {
-      const cleanResponse = response.answer.replace(/'/g, '');
-      console.log('cleanResponse', cleanResponse);
-      const asset =  mapAssetAttributesByCommand(cleanResponse);
-      $canvasTitle.set(asset.title)
-     console.log('canvasTitleHeader', $canvasTitle.get());
-     ThreeCanvas.instance?.execute(asset);
-  })
+export const updateAnimationsStateEvent = (question, chat_history) => {
+postAzureMLAnimationsData(question, chat_history)
+  .then(response => {
+    const cleanResponse = response.answer.replace(/'/g, '');
+    console.log('Cleaned Response From AzureML:', cleanResponse);
+    threejsCanvasEvent(cleanResponse);
+  }).catch(error => {
+    console.log("Animations Error ML", error);
+    threejsCanvasEvent("default");
+  });
 };
 
-export const updateSuggestionsStateEvent = () => {
+export const updateRecommendationsStateEvent = (question, chat_history) => {
 
-  postAzureMLSuggestionsData($question.get(), $allMessages.get())
-  .then(response => {
-    $suggestions.set(response.answer);
-  }).catch(error => {
-    catchErrorEvent("suggestions", error)
-  });
+postAzureMLRecommendationsData(question, chat_history)
+.then(response => {
+  $recommendations.set(response.answer);
+}).catch(error => {
+   console.log("Recommendations Error ML", error);
+});
 };
 
 // Create Message 
@@ -65,5 +76,7 @@ export const createMessage = (sender) => {
 }
 // CLEAN RESPONSE
 export const cleanResponse = (response) => {
-  return response.answer.replace(/'/g, ''); // Replace all occurrences of double quotes with an empty string
+  const cleanResponse = response.answer.replace(/'/g, '');
+  console.log('Cleaned Response From AzureML:', cleanResponse);
+  return cleanResponse; // Replace all occurrences of double quotes with an empty string
 }

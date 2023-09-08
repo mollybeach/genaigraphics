@@ -1,11 +1,11 @@
 ---
-//path: /src/components/animations/CanvasBar.astro
+//path: webapp/src/components/animations/CanvasBar.astro
 import ArrowSvg from "../primitives/Svg.astro";
 import Button from "../primitives/Button.astro";
 import ZoomSvg from "../primitives/Svg.astro";
 import {classNames} from "../../styles/classStyles";
 ---
-<section id="canvas-bar-container" class={classNames("canvasBarContainer")} >
+<div id="canvas-bar-container" class={classNames("canvasBarContainer")} >
     <div id="canvas-bar" class={classNames("canvasBar")} > 
         <div id="canvas-bar-icon-container-arrow" class={classNames("canvasBarIconContainer")}>
             <Button id="primitives-button-light-purple-arrow-rotate-left" classes="primitivesButtonLightPurple" onClicked="rotateX">
@@ -24,4 +24,4 @@ import {classNames} from "../../styles/classStyles";
             </Button>
         </div>
     </div>
-</section>
+</div>

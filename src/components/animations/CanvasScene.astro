@@ -1,5 +1,5 @@
 ---
-//path: src/components/animations/CanvasScene.astro
+// path: webapp/src/components/animations/CanvasScene.astro
 import { classNames } from "../../styles/classStyles";
 ---
 <script>
@@ -8,8 +8,7 @@ import { classNames } from "../../styles/classStyles";
   const canvasElement = document.getElementById('canvas-scene') as HTMLElement;
 
     if (canvasElement) {
-      console.log('canvasElement', canvasElement)
-   
+      
     const canvas = new ThreeCanvas(canvasElement);
     window.myCanvas = canvas;
   
@@ -19,9 +18,6 @@ import { classNames } from "../../styles/classStyles";
 
     // Add a resize event listener to update the renderer size
     window.addEventListener('resize', () => {
-      console.log("window resize");
-     console.log("clientWidth", canvasElement.clientWidth);
-      console.log("clientHeight", canvasElement.clientHeight);
       canvas.updateRendererSize(canvasElement.clientWidth, canvasElement.clientHeight);
     });
   }

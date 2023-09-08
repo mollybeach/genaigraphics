@@ -1,8 +1,8 @@
 ---
-//path: /src/components/messages/Chat.astro
+//path: webapp/src/components/messages/Chat.astro
 import CardHeader from '../common/CardHeader.astro';
 import ChatMessages from './ChatMessages.astro';
-import ChatSuggestionBar from './ChatSuggestionBar.astro';
+import ChatRecommendationBar from './ChatRecommendationBar.astro';
 import ChatBar from './ChatBar.astro';
 import HomeSvg from '../primitives/Svg.astro';
 import Button from '../primitives/Button.astro';
@@ -15,6 +15,6 @@ import Button from '../primitives/Button.astro';
 </CardHeader>
 
   <ChatMessages />
-  <ChatSuggestionBar />
+  <ChatRecommendationBar />
   <ChatBar page="agent" />
 

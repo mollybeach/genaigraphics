@@ -1,4 +1,4 @@
-// path: config/prettier.config.cjs
+// path: webapp/config/prettier.config.cjs
 module.exports = {
     printWidth: 1000,
     tabWidth: 4,

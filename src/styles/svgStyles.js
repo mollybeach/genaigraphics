@@ -1,5 +1,5 @@
 
-// path: /src/styles/svgStyles.js
+// path: webapp/src/styles/svgStyles.js
 export const svgStructure = {
     ai: [
         {

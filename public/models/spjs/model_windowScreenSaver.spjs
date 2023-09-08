@@ -1,0 +1,8 @@
+// modified from user nife213
+let hue = abs(sin(time*.2))
+let col = hsv2rgb(vec3(hue, 1, 1))
+color(col)
+sphere(0.5)
+mixGeo(4*sin(2*time))
+box(vec3(.4))
+setStepSize(0.6)

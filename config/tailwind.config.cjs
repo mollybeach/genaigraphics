@@ -1,5 +1,5 @@
 /** @type */
-// path: /config/tailwind.config.cjs
+// path: webapp/config/tailwind.config.cjs
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   presets: [],
@@ -157,6 +157,7 @@ module.exports = {
       'primary-purple':'#A055F5',
       'primary-white': '#FFFFFF',
       'secondary-light-purple':'#F4E5FF',
+      'secondary-light-purple-darker': '#c990f3',
       'accent-light-purple': '#D3C1E5',
    }),
     backgroundImage: {
@@ -357,6 +358,9 @@ module.exports = {
       '3/6': '50%',
       '4/6': '66.666667%',
       '5/6': '83.333333%',
+      '1/8': '12.5%',
+      '5/8': '62.5%',
+      '6/8': '75%',
       '1/12': '8.333333%',
       '2/12': '16.666667%',
       '3/12': '25%',
@@ -583,6 +587,8 @@ module.exports = {
       '2/8': '25%',
       '6/8': '75%',
       '7/8': '87.5%',
+      '3/10': '30%',
+      '4/10': '40%',
       '7/10': '70%',
       '9/10': '90%',
       '1/12': '8.333333%',

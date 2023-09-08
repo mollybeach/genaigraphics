@@ -1,4 +1,4 @@
-// path: src/api/azureML.js
+// path: webapp/src/api/azureML.js
 
 export async function postAzureMLMessagesData(question, my_chat_history) {
     const chat_history = transformChatHistory(my_chat_history);
@@ -14,7 +14,7 @@ export async function postAzureMLMessagesData(question, my_chat_history) {
             throw new Error('Network response was not ok');
         }
         const responseData = await response.json(); // Parse the response as JSON
-        console.log('AZURE ML CHAT BOT RESPONSE:', responseData);
+        //console.log('AZURE ML CHAT BOT RESPONSE:', responseData);
         return responseData;
     } catch (error) {
         if (error.response) {
@@ -28,9 +28,9 @@ export async function postAzureMLMessagesData(question, my_chat_history) {
     }
 }
 
-export async function postAzureMLSuggestionsData(question, my_chat_history) {
+export async function postAzureMLRecommendationsData(question, my_chat_history) {
     const chat_history = transformChatHistory(my_chat_history);
-    question = 'Please provide me three possible question suggestions I can ask the AI to develop the conversation, make the suggestions short and concise.';
+    question = 'Please provide me three possible question recommendations I can ask the AI to develop the conversation, make the recommendations short and concise.';
     try {
         let response = await fetch("https://verison-promptflow-endpoint.azurewebsites.net/api/recommendation-helper?code=oXnQ2KQ_SnevcpIy-Dw8BheBZEsVnCu0tS1Ci_RYSgOXAzFu26mFDA==", {
             method: 'POST',
@@ -46,7 +46,7 @@ export async function postAzureMLSuggestionsData(question, my_chat_history) {
         if (responseData.answer == "out of my scope") {
             return ["N/A", "N/A", "N/A"]
         }
-        console.log('AZUREML SUGGESTIONS RESPONSE:', responseData);
+       // console.log('AZUREML RECOMMENDATIONS RESPONSE:', responseData);
         response = {
             answer: convertToListItems(responseData.answer)
         }
@@ -63,7 +63,7 @@ export async function postAzureMLSuggestionsData(question, my_chat_history) {
     }
 }
 
-export async function postAzureMLAnimationsData(my_chat_history, question) {
+export async function postAzureMLAnimationsData(question, my_chat_history) {
    const chat_history = transformChatHistory(my_chat_history);
    try {
         let response = await fetch("https://verison-promptflow-endpoint.azurewebsites.net/api/animation-helper?code=4qC7KQZqu6ojcca2vSRa_BlVfCzBVJ01FYWGr5WGZyabAzFu3-XCIg==", {
