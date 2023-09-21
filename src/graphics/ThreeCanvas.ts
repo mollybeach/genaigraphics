@@ -35,6 +35,7 @@ export class ThreeCanvas {
   constructor(private canvasElement: HTMLElement) {
     ThreeCanvas.instance = this;
     this.initialize();
+    this.animate();
   }
 
   async initialize() {
@@ -44,7 +45,6 @@ export class ThreeCanvas {
       this.currentAsset = _newState;
     });
     this.execute();
-    this.animate();
   }
 
   private init() {
