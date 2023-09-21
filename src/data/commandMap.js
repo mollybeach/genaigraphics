@@ -308,5 +308,11 @@ export const commandMap = {
         title: "Earth",
         type: "glsl"
       },
+      "outages": {
+        id: "model_Outages",
+        command: "outages",
+        title: "Check for Network Outages",
+        type: "png"
+      },
 
 };

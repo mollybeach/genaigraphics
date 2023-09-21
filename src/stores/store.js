@@ -14,18 +14,17 @@ export const $historyMessages = atom(sampleMessagesData);
 export const $recommendations = atom(sampleRecommendationsData);
 export const $textAreaValue = atom("");
 export const $canvasTitle = atom(currentAsset.title);
-export const $animationState = atom(currentAsset);
+export const $animationAsset = atom(currentAsset);
 
 // Events
 export const threejsCanvasEvent = (command) => {
   const asset =  mapAssetAttributesByCommand(command);
-  $animationState.set(asset);
+  $animationAsset.set(asset);
   $canvasTitle.set(asset.title)
-  ThreeCanvas.instance?.execute();
+  ThreeCanvas.instance?.initialize();
 }
 
 export const updateMessagesStateEvent = (question) => {
-
   $question.set(question);
   $historyMessages.set( [...$historyMessages.get(), createMessage("me") ]);
   threejsCanvasEvent("loadingCircle");
@@ -33,7 +32,7 @@ postAzureMLMessagesData(question, $historyMessages.get())
  .then(response => {
     $botResponse.set(response.answer);
     $historyMessages.set( [...$historyMessages.get(), createMessage("you") ]);
-    updateAnimationsStateEvent(question, $historyMessages.get());
+    updateAnimationsStateEvent($historyMessages.get().slice(-1)[0].message, $historyMessages.get());
     updateRecommendationsStateEvent(question, $historyMessages.get());
   }).catch(error => {
     console.log("Chat Messages Error ML", error);
