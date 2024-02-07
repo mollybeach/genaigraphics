@@ -1,4 +1,4 @@
-# jostaberry - 👾 3D Graphics Rendering and AI Chat Application 💬 
+# genaigraphics - 👾 3D Graphics Rendering and AI Chat Application 💬 
 Project Overview
  
 A web application that integrates advanced graphics rendering with AI chat functionalities, and it is set up using Astro, a modern frontend framework. The application leverages the following key components and features:
