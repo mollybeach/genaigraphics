@@ -220,7 +220,6 @@ End
 
 ```
 
-## Application Flowchart
 ## Server-Side Operations
 ```
 +-------------------------------+
@@ -270,7 +269,7 @@ End
 
 ```
 
-
+## Project Structure 📁
 Inside of your Astro project, you'll see the following folders and files:
 
 ```
