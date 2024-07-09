@@ -1,3 +1,4 @@
+//path: webapp/src/data/assets/fbxAssets.js
 export const fbxAssets = {
   model_RouterOriginal: {
     animate: null,

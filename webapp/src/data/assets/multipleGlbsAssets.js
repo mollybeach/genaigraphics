@@ -1,3 +1,4 @@
+// path: webapp/src/data/assets/multipleGlbsAssets.js
 export const multipleGlbsAssets = {
   model_AllGlbs : {
    animate: null,

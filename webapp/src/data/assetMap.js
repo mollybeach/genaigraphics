@@ -5,6 +5,7 @@ import { fbxAssets } from "./assets/fbxAssets";
 import { mp4Assets } from "./assets/mp4Assets";
 import { multipleMp4sAssets } from "./assets/multipleMp4sAssets";
 import { multipleGlbsAssets } from "./assets/multipleGlbsAssets";
+import { pngAssets } from "./assets/pngAssets";
 import { spjsAssets } from "./assets/spjsAssets";
 export const assetMap = {
     fbx: fbxAssets,
@@ -14,5 +15,6 @@ export const assetMap = {
     mp4: mp4Assets,
     multipleMp4s: multipleMp4sAssets,
     multipleGlbs: multipleGlbsAssets,
+    png: pngAssets,
     spjs: spjsAssets,
 };

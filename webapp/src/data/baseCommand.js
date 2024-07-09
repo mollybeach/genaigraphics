@@ -20,9 +20,15 @@ glb:
   mobile plans, latest phones
   default, router, 
 mp4: 
-  house, upsell, sales track
+  house, loading circle, outage
+multipleMp4s:
+  upsell, sales track
+multipleGlbs:
+  allGlbs
 spjs:
- torus, dna, bunny, windowScreenSaver
+ torus, dna, bunny, window screen saver
+glsl:
+ earth, map
 */
 
 

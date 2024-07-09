@@ -1,4 +1,4 @@
-// webapp/src/stores/store.js
+// path: webapp/src/stores/store.js
 import { atom} from 'nanostores';
 import { sampleRecommendationsData } from '../data/text/sampleRecommendationsData.js';
 import { postAzureMLMessagesData, postAzureMLRecommendationsData, postAzureMLAnimationsData } from '../api/azureML.js';

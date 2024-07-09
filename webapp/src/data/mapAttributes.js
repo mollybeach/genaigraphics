@@ -5,6 +5,7 @@ import {commandMap} from './commandMap.js';
 // RETRIEVES MAPPED CANVAS ATTRIBUTES BASED ON RESPONSE FROM AZURE ML
 export function mapAssetAttributesByCommand(command) {
   console.log("COMMAND", command);
+  
 
   !commandMap[command].id ? command = "default" : command = command;
   const keyName = commandMap[command].id;

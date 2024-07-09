@@ -1,3 +1,4 @@
+// path: webapp/src/data/assets/multipleMp4sAssets.js
 export const multipleMp4sAssets = {
   model_Upsell: {
     animate: null,
@@ -14,7 +15,7 @@ export const multipleMp4sAssets = {
           x: 0,
           y: 0,
           z: 10,
-          fov: 50,
+          fov: 40,
         },
       },
       {
@@ -29,7 +30,7 @@ export const multipleMp4sAssets = {
           x: 0,
           y: 0,
           z: 10,
-          fov: 50,
+          fov: 40,
         },
       },
       {
@@ -44,7 +45,7 @@ export const multipleMp4sAssets = {
           x: 0,
           y: 0,
           z: 10,
-          fov: 50,
+          fov: 40,
         },
       },
       {
@@ -59,7 +60,7 @@ export const multipleMp4sAssets = {
           x: 0,
           y: 0,
           z: 10,
-          fov: 50,
+          fov: 40,
         },
       },
       {
@@ -74,7 +75,7 @@ export const multipleMp4sAssets = {
           x: 0,
           y: 0,
           z: 10,
-          fov: 50,
+          fov: 40,
         },
       },
     ],
@@ -88,7 +89,7 @@ export const multipleMp4sAssets = {
       x: 0,
       y: 0,
       z: 10,
-      fov: 50,
+      fov: 40,
     },
   },
 };

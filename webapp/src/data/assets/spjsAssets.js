@@ -1,3 +1,4 @@
+// path: webapp/src/data/assets/spjsAssets.js
 export const spjsAssets = {
   model_Dna: {
       animate: null,
