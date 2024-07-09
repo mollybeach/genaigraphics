@@ -1,5 +1,8 @@
 # genaigraphics - 👾 3D Graphics Rendering and AI Chat Application 💬 
-Project Overview
+
+Feel free to check out our [live application](https://gentle-ocean-0e505290f.3.azurestaticapps.net/agent) Password: NINEgoal123@*
+
+Project Overview 
  
 A web application that integrates advanced graphics rendering with AI chat functionalities, and it is set up using Astro, a modern frontend framework. The application leverages the following key components and features:
 

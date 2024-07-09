@@ -1,41 +1,46 @@
-on:
-  schedule:
-    - cron: "0 */48 * * *"
+name: Azure Static Web Apps CI/CD
 
-env:
-  GIT_AUTHOR_NAME: mollybeach
-  GIT_AUTHOR_EMAIL: mollyjbeach@gmail.com
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
 jobs:
-  build:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-
+    name: Build and Deploy Job
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_OCEAN_0E505290F }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/webapp" # App source code path
+          api_location: "/azure_functions" # Api source code path - optional
+          output_location: "/dist" # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
+        
 
-    - name: Configure Git
-      run: |
-        git config --global user.email "$GIT_AUTHOR_EMAIL"
-        git config --global user.name "$GIT_AUTHOR_NAME"
-
-    - name: Randomly decide to make changes
-      run: |
-        rand=$(shuf -i 1-2 -n 1)
-        if [ $rand -eq 1 ]; then
-          echo "." >> README.md
-        else
-          echo "No changes made."
-        fi
-
-    - name: Check if changes were made
-      run: |
-        if [[ -n $(git status -s) ]]; then
-          git add .
-          git commit -m "Updated file structure"
-          git push origin HEAD
-        else
-          echo "No changes to commit."
-        fi
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_OCEAN_0E505290F }}
+          action: "close"
