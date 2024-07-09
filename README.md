@@ -8,33 +8,33 @@ Feel free to check out our [live application](https://gentle-ocean-0e505290f.3.a
  An Innovative web application that seamlessly combines advanced 3D graphics rendering with AI chat functionalities to provide a visual aid for customers setting up their technology. Built using the Astro framework, this application integrates Three.js for immersive 3D rendering and Azure ML for intelligent, AI-driven interactions. This project is an excellent learning tool, demonstrating the powerful synergy between AI and 3D graphics.
 
 ## Key Features 
-Visual Technology Setup Assistance 🔌:
+### Visual Technology Setup Assistance 🔌:
   - Helps users visually navigate technology setups, such as configuring a router. Relevant 3D models are loaded, zoomed in, and rotated based on the user's queries to demonstrate specific actions like plugging in, turning on/off, or resetting devices.
-WebGL Integration 🌐:
+### WebGL Integration 🌐:
   - Utilizes Three.js within a core WebGL class to manage rendering, scenes, camera control, resizing events, and frame animations.
-Astro Framework 🚀:
+### Astro Framework 🚀:
   - Frontend is built with Astro, featuring distinct pages and reusable components. TailwindCSS is integrated for styling, and server-side settings are configured for API proxying.
-AI Chat Functionality 🤖:
+### AI Chat Functionality 🤖:
   - AI-driven chatbot powered by Azure ML handles user queries and provides intelligent responses and recommendations.
-Server-Side Operations 🖥️:
+### Server-Side Operations 🖥️:
   - An Express server acts as middleware, managing API requests using Axios, handling CORS, and logging requests.
-Robust Tooling and Configuration 🛠️:
+### Robust Tooling and Configuration 🛠️:
   - Employs TypeScript for static typing and robust tooling. Npm scripts manage build and development processes efficiently.
-Styling with TailwindCSS 🎨:
+### Styling with TailwindCSS 🎨:
   - TailwindCSS is integrated for rapid UI development with utility-first CSS.
 
 ## Getting Started 🔧
-1. Installation
+### 1. Installation
 Clone the repository:
 ```
 git clone https://github.com/mollybeach/genaigraphics.git
 ```
-2. Navigate into the project directory:
+### 2. Navigate into the project directory:
 ```
 cd genaigraphics
 cd webapp
 ```
-3. Start the application:
+### 3. Start the application:
 ```
 npm run start
 ```
@@ -59,30 +59,28 @@ npm run start
 
 ## How it Works 🛠  
 
-1. User Interaction 🖱️:
+### 1. User Interaction 🖱️:
 - The user types a question into the ChatBar Component and submits it.
-2. Initial Store Update 🔄:
+### 2. Initial Store Update 🔄:
 - The store.js triggers the updateMessagesStateEvent(), setting the $question store, adding the message to $historyMessages, and calling threejsCanvasEvent("loadingcircle") to display a loading indicator.
-3. Azure ML Interaction ☁️:
+### 3. Azure ML Interaction ☁️:
 - The store.js then calls postAzureMLMessagesData() to send the question and chat history to Azure ML.
 - Azure ML processes the input and responds with relevant data.
-4. Handling Azure ML Responses 📩:
+### 4. Handling Azure ML Responses 📩:
 - On success, store.js sets $botResponse, adds the AI response to $historyMessages, and calls updateAnimationsStateEvent().
 - azureML.js handles further processing by sending the chat history to Azure ML for - animation and recommendation commands.
-5. Updating Animations and Recommendations 🔧:
+### 5. Updating Animations and Recommendations 🔧:
 - Azure ML returns animation commands, which store.js uses to update animations via threejsCanvasEvent().
 - It also fetches recommendation commands and updates the recommendations.
-6. Rendering and 3D Visualization 🎨:
+### 6. Rendering and 3D Visualization 🎨:
 - The threejsCanvasEvent(command) in store.js calls mapAssetAttributesByCommand(command), setting $animationAsset and $canvasTitle, and initializes ThreeCanvas.instance.
 - ThreeCanvas class initializes the 3D scene, loads assets based on attributes, and supports various asset types like glb, fbx, mp4, png, multipleGlbs, and multipleMp4s. It adds necessary lighting and controls for an interactive experience.
-
-7. Chat Components 💬:
- - The ChatMessages Component subscribes to $historyMessages to render messages with typing animations.
- - The ChatRecommendationBar Component subscribes to $recommendations to display recommendation buttons.
+### 7. Chat Components 💬:
+- The ChatMessages Component subscribes to $historyMessages to render messages with typing animations.
+- The ChatRecommendationBar Component subscribes to $recommendations to display recommendation buttons.
 - The ChatBar Component updates the textarea with selected recommendations, ensuring smooth user interaction.️
 
-
-# Application Flowchart 🌐
+## Application Flowchart 🌐
 
 ```plaintext
 Start
