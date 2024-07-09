@@ -63,159 +63,185 @@ npm run start
 Inside of your Astro project, you'll see the following folders and files:
 
 ```
-/
-webapp/
-├── config/
-│   ├── astro.config.mjs
-│   ├── config.js
-│   ├── pretter.config.cjs
-│   ├── tailwind.config.cjs
-│   └── tsconfig.json
-├── public/
-│   ├── images/
-│   │   ├── png/
-│   │   │   ├── bot.png
-│   │   │   └── user.png
-│   │   ├── readme/
-│   │   │   ├── brand-agent.png
-│   │   │   ├── cable-router.png
-│   │   │   ├── home-page.png
-│   │   │   └── router-green-button.png
-│   │   └── svg/
-│   │       └── favicon.svg
-│   └── models/
-│       ├── fbx/
-│       │   ├── model_RouterDiff.png
-│       │   ├── model_RouterNrm.png
-│       │   └── model_RouterOriginal.fbx
-│       ├── glb/
-│       │   ├── model_BoomBox.glb
-│       │   ├── model_CreditCard.glb
-│       │   ├── model_DesktopPC.glb
-│       │   ├── model_EmojiHeart.glb
-│       │   ├── model_FilmClapperBoard.glb
-│       │   ├── model_FolderIcon.glb
-│       │   ├── model_Laptop.glb
-│       │   ├── model_LowPolyPhone.glb
-│       │   ├── model_MovieReel.glb
-│       │   ├── model_MusicIcons.glb
-│       │   ├── model_PhoneCallIcon.glb
-│       │   ├── model_PhoneRingIcon.glb
-│       │   ├── model_Plane.glb
-│       │   ├── model_RemoteControl.glb
-│       │   ├── model_RollingBag.glb
-│       │   ├── model_SaveToCloud.glb
-│       │   ├── model_SecurityCamera.glb
-│       │   ├── model_Sports.glb
-│       │   ├── model_Television.glb
-│       │   ├── model_VideoGameController.glb
-│       │   ├── model_VideoGameController2.glb 
-│       │   ├── model_WifiExtender.glb
-│       │   ├── model_WifiIcon.glb
-│       │   ├── model_LogoAccenture.glb
-│       │   ├── model_Router90DegreeRotation.glb
-│       │   ├── model_RouterCableTexture.glb
-│       │   ├── model_RouterLightBlinkTexture.glb
-│       │   ├── model_RouterNoTexture.glb
-│       │   └── model_RouterResetButtonTexture.glb
-│       ├── gltf/
-│       │   ├── model_RouterCableTexture.gltf
-│       │   ├── model_RouterLightBlinkTexture.gltf
-│       │   ├── model_RouterNoTexture.gltf
-│       │   └── model_RouterResetButtonTexture.gltf
-│       ├── glsl/
-│       │   ├── earth.glsl
-│       │   └── sphere.glsl
-│       ├── mp4/
-│       │   ├── model_PhoneBlack.mp4
-│       │   ├── model_PhoneBlue.mp4
-│       │   ├── model_PhoneColorsAll.mp4
-│       │   ├── model_PhoneColorsMauve.mp4
-│       │   ├── model_PhoneColorsRed.mp4
-│       │   ├── model_PhoneColorsWhite.mp4
-│       │   ├── model_PhoneColorsYellow.mp4
-│       │   ├── model_House.mp4
-│       │   ├── model_House1stHalf.mp4
-│       │   ├── model_House2ndHalf.mp4
-│       │   ├── model_House2nd.mp4
-│       │   ├── model_HouseZoom.mp4
-│       │   ├── model_Upsell1st.mp4
-│       │   ├── model_Upsell2nd.mp4
-│       │   ├── model_Upsell3rd.mp4
-│       │   ├── model_Upsell4th.mp4
-│       │   ├── model_Upsell5th.mp4
-│       │   ├── model_UpsellPhoneColorsMultiStep1st.mp4
-│       │   └── model_UpsellPhoneColorMultistep2nd.mp4
-│       └── spjs/
-│           ├── torus.spjs
-│           └── sphere.spjs
-├── src/
-│   ├── api/
-│   │   └── azureML.js
-│   ├── components/
-│   │   ├── animations/
-│   │   │   ├── Canvas.astro
-│   │   │   ├── CanvasBar.astro
-│   │   │   └── CanvasScene.astro 
-│   │   ├── common/
-│   │   │   ├── Box.astro
-│   │   │   ├── Card.astro
-│   │   │   ├── CardHeader.astro
-│   │   │   ├── CardHolder.astro
-│   │   │   └── Container.astro
-│   │   ├── messages/
-│   │   │   ├── Chat.astro
-│   │   │   ├── ChatBar.astro
-│   │   │   ├── ChatMessages.astro
-│   │   │   └── ChatRecommendationBar.astro
-│   │   ├── primitives/
-│   │   │   ├── Button.astro
-│   │   │   ├── Link.astro
-│   │   │   └── Svg.astro
-│   │   └── templates/
-│   │       ├── Footer.astro
-│   │       ├── Header.astro
-│   │       └── Hero.astro 
-│   ├── data/
-│   │   ├── assets
-│   │   │   ├── fbxAssets.js
-│   │   │   ├── glbAssets.js
-│   │   │   ├── glslAssets.js
-│   │   │   ├── mp4Assets.js
-│   │   │   ├── multipleGlbsAssets.js
-│   │   │   ├── multipleMp4sAssets.js
-│   │   │   └── spjsAssets.js
-│   │   ├── text
-│   │   │   ├── sampleMessageData.js
-│   │   │   └── sampleRecommendationsData.js
-│   │   ├── assetMap.js
-│   │   ├── baseCommand.js
-│   │   └── commandMap.js
-│   ├── graphics/ 
-│   │   ├── core/
-│   │   │   └── WebGL.js
-│   │   ├── shader/
-│   │   │   ├── fragmentShader.glsl
-│   │   │   └── vertexShader.glsl
-│   │   ├──utils/
-│   │   │       └── OrbitControls.ts
-│   │   └── ThreeCanvas.ts
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   ├── agent.astro
-│   │   └── index.astro
-│   ├── stores/
-│   │   └── store.js    
-│   └── styles/
-│       ├── classStyles.js 
-│       └── svgStyles.js
-├── types/
-│   └── env.d.ts
-│       ├── env.d.ts
-│       └── glsl.d.ts
-├── .env
-├── package.json
+genaipgraphics/
+├── .github/
+│   └── workflows/
+│       ├── azure-static-web-apps-gentle-ocean-0e505290f.yml
+│       └── main_vz-llm.yml
+├── dells-curry-python/
+│   ├── animation-helper/
+│   │   ├── __init__.py
+│   │   ├── function.json
+│   │   └── sample.dat
+│   ├── recommendation-helper/
+│   │   ├── __init__.py
+│   │   ├── function.json
+│   │   └── sample.dat
+│   ├── secrets-api/
+│   │   ├── __init__.py
+│   │   ├── function.json
+│   │   └── sample.dat
+│   ├── telecom_ai/
+│   │   ├── __init__.py
+│   │   ├── function.json
+│   │   └── sample.dat
+│   ├── .gitignore
+│   ├── host.json
+│   └── requirements.txt
+├── webapp/
+│   ├── config/
+│   │   ├── astro.config.mjs
+│   │   ├── config.js
+│   │   ├── pretter.config.cjs
+│   │   ├── tailwind.config.cjs
+│   │   └── tsconfig.json
+│   ├── public/
+│   │   ├── images/
+│   │   │   ├── png/
+│   │   │   │   ├── bot.png
+│   │   │   │   └── user.png
+│   │   │   ├── readme/
+│   │   │   │   ├── brand-agent.png
+│   │   │   │   ├── cable-router.png
+│   │   │   │   ├── home-page.png
+│   │   │   │   └── router-green-button.png
+│   │   │   └── svg/
+│   │   │       └── favicon.svg
+│   │   └── models/
+│   │       ├── fbx/
+│   │       │   ├── model_RouterDiff.png
+│   │       │   ├── model_RouterNrm.png
+│   │       │   └── model_RouterOriginal.fbx
+│   │       ├── glb/
+│   │       │   ├── model_BoomBox.glb
+│   │       │   ├── model_CreditCard.glb
+│   │       │   ├── model_DesktopPC.glb
+│   │       │   ├── model_EmojiHeart.glb
+│   │       │   ├── model_FilmClapperBoard.glb
+│   │       │   ├── model_FolderIcon.glb
+│   │       │   ├── model_Laptop.glb
+│   │       │   ├── model_LowPolyPhone.glb
+│   │       │   ├── model_MovieReel.glb
+│   │       │   ├── model_MusicIcons.glb
+│   │       │   ├── model_PhoneCallIcon.glb
+│   │       │   ├── model_PhoneRingIcon.glb
+│   │       │   ├── model_Plane.glb
+│   │       │   ├── model_RemoteControl.glb
+│   │       │   ├── model_RollingBag.glb
+│   │       │   ├── model_SaveToCloud.glb
+│   │       │   ├── model_SecurityCamera.glb
+│   │       │   ├── model_Sports.glb
+│   │       │   ├── model_Television.glb
+│   │       │   ├── model_VideoGameController.glb
+│   │       │   ├── model_VideoGameController2.glb 
+│   │       │   ├── model_WifiExtender.glb
+│   │       │   ├── model_WifiIcon.glb
+│   │       │   ├── model_LogoAccenture.glb
+│   │       │   ├── model_Router90DegreeRotation.glb
+│   │       │   ├── model_RouterCableTexture.glb
+│   │       │   ├── model_RouterLightBlinkTexture.glb
+│   │       │   ├── model_RouterNoTexture.glb
+│   │       │   └── model_RouterResetButtonTexture.glb
+│   │       ├── gltf/
+│   │       │   ├── model_RouterCableTexture.gltf
+│   │       │   ├── model_RouterLightBlinkTexture.gltf
+│   │       │   ├── model_RouterNoTexture.gltf
+│   │       │   └── model_RouterResetButtonTexture.gltf
+│   │       ├── glsl/
+│   │       │   ├── earth.glsl
+│   │       │   └── sphere.glsl
+│   │       ├── mp4/
+│   │       │   ├── model_PhoneBlack.mp4
+│   │       │   ├── model_PhoneBlue.mp4
+│   │       │   ├── model_PhoneColorsAll.mp4
+│   │       │   ├── model_PhoneColorsMauve.mp4
+│   │       │   ├── model_PhoneColorsRed.mp4
+│   │       │   ├── model_PhoneColorsWhite.mp4
+│   │       │   ├── model_PhoneColorsYellow.mp4
+│   │       │   ├── model_House.mp4
+│   │       │   ├── model_House1stHalf.mp4
+│   │       │   ├── model_House2ndHalf.mp4
+│   │       │   ├── model_House2nd.mp4
+│   │       │   ├── model_HouseZoom.mp4
+│   │       │   ├── model_Upsell1st.mp4
+│   │       │   ├── model_Upsell2nd.mp4
+│   │       │   ├── model_Upsell3rd.mp4
+│   │       │   ├── model_Upsell4th.mp4
+│   │       │   ├── model_Upsell5th.mp4
+│   │       │   ├── model_UpsellPhoneColorsMultiStep1st.mp4
+│   │       │   └── model_UpsellPhoneColorMultistep2nd.mp4
+│   │       └── spjs/
+│   │           ├── torus.spjs
+│   │           └── sphere.spjs
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── azureML.js
+│   │   ├── components/
+│   │   │   ├── animations/
+│   │   │   │   ├── Canvas.astro
+│   │   │   │   ├── CanvasBar.astro
+│   │   │   │   └── CanvasScene.astro 
+│   │   │   ├── common/
+│   │   │   │   ├── Box.astro
+│   │   │   │   ├── Card.astro
+│   │   │   │   ├── CardHeader.astro
+│   │   │   │   ├── CardHolder.astro
+│   │   │   │   └── Container.astro
+│   │   │   ├── messages/
+│   │   │   │   ├── Chat.astro
+│   │   │   │   ├── ChatBar.astro
+│   │   │   │   ├── ChatMessages.astro
+│   │   │   │   └── ChatRecommendationBar.astro
+│   │   │   ├── primitives/
+│   │   │   │   ├── Button.astro
+│   │   │   │   ├── Link.astro
+│   │   │   │   └── Svg.astro
+│   │   │   └── templates/
+│   │   │       ├── Footer.astro
+│   │   │       ├── Header.astro
+│   │   │       └── Hero.astro 
+│   │   ├── data/
+│   │   │   ├── assets
+│   │   │   │   ├── fbxAssets.js
+│   │   │   │   ├── glbAssets.js
+│   │   │   │   ├── glslAssets.js
+│   │   │   │   ├── mp4Assets.js
+│   │   │   │   ├── multipleGlbsAssets.js
+│   │   │   │   ├── multipleMp4sAssets.js
+│   │   │   │   └── spjsAssets.js
+│   │   │   ├── text
+│   │   │   │   ├── sampleMessageData.js
+│   │   │   │   └── sampleRecommendationsData.js
+│   │   │   ├── assetMap.js
+│   │   │   ├── baseCommand.js
+│   │   │   └── commandMap.js
+│   │   ├── graphics/ 
+│   │   │   ├── core/
+│   │   │   │   └── WebGL.js
+│   │   │   ├── shader/
+│   │   │   │   ├── fragmentShader.glsl
+│   │   │   │   └── vertexShader.glsl
+│   │   │   ├──utils/
+│   │   │   │       └── OrbitControls.ts
+│   │   │   └── ThreeCanvas.ts
+│   │   ├── layouts/
+│   │   │   └── Layout.astro
+│   │   ├── pages/
+│   │   │   ├── agent.astro
+│   │   │   └── index.astro
+│   │   ├── stores/
+│   │   │   └── store.js    
+│   │   └── styles/
+│   │       ├── classStyles.js 
+│   │       └── svgStyles.js
+│   ├── types/
+│   │   └── env.d.ts
+│   │       ├── env.d.ts
+│   │       └── glsl.d.ts
+│   ├── .env
+│   ├── package.json
+│   └── README.md
+├── .gitignore  
 └── README.md
 ```
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
