@@ -15,7 +15,7 @@ Configuration and Build Tools: The project has TypeScript (ts.config.json) for s
 
 Styling with TailwindCSS: TailwindCSS is integrated into the Astro framework, allowing for utility-first CSS, which makes for rapid UI development.
 
-In essence, the jostaberry project seems to be a rich web application that merges 3D graphics rendering capabilities with interactive chat functionalities, AI-powered, all built on a modern stack comprising Astro, Three.js, TypeScript, and Express.
+In essence, the genaigraphics project seems to be a rich web application that merges 3D graphics rendering capabilities with interactive chat functionalities, AI-powered, all built on a modern stack comprising Astro, Three.js, TypeScript, and Express.
 
 
 Getting Started
@@ -24,13 +24,13 @@ Getting Started
 Clone the repository:
 
 ```
-git clone https://github.com/mollybeach/jostaberry.git
+git clone https://github.com/mollybeach/genaigraphics.git
 ```
 
 2. Navigate into the project directory:
 
 ```
-cd jostaberry
+cd genaigraphics
 cd webapp
 ```
 
@@ -39,24 +39,24 @@ cd webapp
 ```
 npm run start
 ```
-![Jostaberry Application Screenshot](https://github.com/mollybeach/jostaberry/blob/master/public/images/readme/lighting-sculpture.gif)
+![genaigraphics Application Screenshot](https://github.com/mollybeach/genaigraphics/blob/master/public/images/readme/lighting-sculpture.gif)
 
-![jostaberry Application Screenshot](public/images/readme/router-green-button.png)
+![genaigraphics Application Screenshot](public/images/readme/router-green-button.png)
 
-![jostaberry Application Screenshot](public/images/readme/brand-agent.png)
+![genaigraphics Application Screenshot](public/images/readme/brand-agent.png)
 
-![jostaberry Application Screenshot](public/images/readme/cable-router.png)
+![genaigraphics Application Screenshot](public/images/readme/cable-router.png)
 
-![jostaberry Application Screenshot](public/images/readme/home-page.png)
+![genaigraphics Application Screenshot](public/images/readme/home-page.png)
 
-![jostaberry Application Screenshot](public/images/readme/readme_ModelBoomBox.png)
+![genaigraphics Application Screenshot](public/images/readme/readme_ModelBoomBox.png)
 
-![jostaberry Application Lighting Screenshot](public/images/readme/readme_ModelWifiExtender.png)
-![jostaberry Application Screenshot](public/images/readme/router-green-button.png)
+![genaigraphics Application Lighting Screenshot](public/images/readme/readme_ModelWifiExtender.png)
+![genaigraphics Application Screenshot](public/images/readme/router-green-button.png)
 
-![jostaberry Application Screenshot](public/images/readme/readme_ModelLaptop.png)
+![genaigraphics Application Screenshot](public/images/readme/readme_ModelLaptop.png)
 
-![jostaberry Application Screenshot](public/images/readme/home-page.png)
+![genaigraphics Application Screenshot](public/images/readme/home-page.png)
 
 ## 🚀 Project Structure
 
