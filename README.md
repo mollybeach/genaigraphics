@@ -42,22 +42,19 @@ npm run start
 ```
 ![genaigraphics Application Screenshot](https://github.com/mollybeach/genaigraphics/blob/master/webapp/public/images/readme/lighting-sculpture.gif)
 
-<div style="max-width:600px;margin:auto;">
-  <div style="position:relative;width:100%;overflow:hidden;">
-    <div style="display:flex;transition:transform 0.5s ease;">
-      <img src="https://github.com/mollybeach/genaigraphics/blob/master/webapp/public/images/readme/lighting-sculpture.gif" alt="Lighting Sculpture" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/router-green-button.png" alt="Router Green Button" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/brand-agent.png" alt="Brand Agent" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/cable-router.png" alt="Cable Router" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/home-page.png" alt="Home Page" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/readme_ModelBoomBox.png" alt="Model BoomBox" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/readme_ModelWifiExtender.png" alt="Model Wifi Extender" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/readme_ModelLaptop.png" alt="Model Laptop" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/router-green-button.png" alt="Router Green Button" style="width:100%;flex-shrink:0;">
-      <img src="webapp/public/images/readme/home-page.png" alt="Home Page" style="width:100%;flex-shrink:0;">
-    </div>
-  </div>
-</div>
+<details>
+  <summary>Application Screenshots 📸</summary>
+  <img src="https://github.com/mollybeach/genaigraphics/blob/master/webapp/public/images/readme/lighting-sculpture.gif" alt="Lighting Sculpture"/>
+  <img src="webapp/public/images/readme/router-green-button.png" alt="Router Green Button"/>
+  <img src="webapp/public/images/readme/brand-agent.png" alt="Brand Agent"/>
+  <img src="webapp/public/images/readme/cable-router.png" alt="Cable Router"/>
+  <img src="webapp/public/images/readme/home-page.png" alt="Home Page"/>
+  <img src="webapp/public/images/readme/readme_ModelBoomBox.png" alt="Model BoomBox"/>
+  <img src="webapp/public/images/readme/readme_ModelWifiExtender.png" alt="Model Wifi Extender"/>
+  <img src="webapp/public/images/readme/readme_ModelLaptop.png" alt="Model Laptop"/>
+  <img src="webapp/public/images/readme/router-green-button.png" alt="Router Green Button"/>
+  <img src="webapp/public/images/readme/home-page.png" alt="Home Page"/>
+</details>
 
 ## How it Works 🛠  
 
