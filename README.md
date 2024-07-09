@@ -1,41 +1,40 @@
 # genaigraphics - 👾 3D Graphics Rendering and AI Chat Application 💬 
-Project Overview
+
+Feel free to check out our [live application](https://gentle-ocean-0e505290f.3.azurestaticapps.net/agent) Password: NINEgoal123@*
+
+
+## Project Overview 💻
  
-A web application that integrates advanced graphics rendering with AI chat functionalities, and it is set up using Astro, a modern frontend framework. The application leverages the following key components and features:
+ An Innovative web application that seamlessly combines advanced 3D graphics rendering with AI chat functionalities to provide a visual aid for customers setting up their technology. Built using the Astro framework, this application integrates Three.js for immersive 3D rendering and Azure ML for intelligent, AI-driven interactions. This project is an excellent learning tool, demonstrating the powerful synergy between AI and 3D graphics.
 
-WebGL Integration: The application has a core WebGL class that sets up Three.js, a popular 3D graphics library. This class, named WebGL, handles rendering, scene, camera, resizing events, and frame animations. Shader programs are also being developed for this purpose, with both vertex and fragment shaders (vertexShader.glsl and fragmentShader.glsl) for various graphical effects.
+## Key Features 
+Visual Technology Setup Assistance 🔌:
+  - Helps users visually navigate technology setups, such as configuring a router. Relevant 3D models are loaded, zoomed in, and rotated based on the user's queries to demonstrate specific actions like plugging in, turning on/off, or resetting devices.
+WebGL Integration 🌐:
+  - Utilizes Three.js within a core WebGL class to manage rendering, scenes, camera control, resizing events, and frame animations.
+Astro Framework 🚀:
+  - Frontend is built with Astro, featuring distinct pages and reusable components. TailwindCSS is integrated for styling, and server-side settings are configured for API proxying.
+AI Chat Functionality 🤖:
+  - AI-driven chatbot powered by Azure ML handles user queries and provides intelligent responses and recommendations.
+Server-Side Operations 🖥️:
+  - An Express server acts as middleware, managing API requests using Axios, handling CORS, and logging requests.
+Robust Tooling and Configuration 🛠️:
+  - Employs TypeScript for static typing and robust tooling. Npm scripts manage build and development processes efficiently.
+Styling with TailwindCSS 🎨:
+  - TailwindCSS is integrated for rapid UI development with utility-first CSS.
 
-Astro Framework: The frontend is built using the Astro framework. There are distinct pages (index.astro, agent.astro) and reusable components (e.g., Hero, Layout, Card, Canvas, and Chat). The Astro configuration (astro.config.mjs) has been set up to work with TailwindCSS and includes server-side configurations to proxy API requests.
-
-Chat Functionality: Within the application, there's a chat component, an AI-driven chatbot. It communicates with Azure ML, as seen from the azureML.js module, which handles posting data to an Azure endpoint. This module was refactored to use Axios for HTTP requests and better handle chat histories.
-
-Server-Side Operations: A separate Express server (server.js) has been established, to act as a middleware or proxy server. This server is responsible for making post requests, using Axios, to an external API. The server is set up with CORS for cross-origin requests and includes logging middleware for monitoring incoming request bodies.
-
-Configuration and Build Tools: The project has TypeScript (ts.config.json) for static typing and robust tooling. The build and development processes are managed using npm scripts defined in package.json.
-
-Styling with TailwindCSS: TailwindCSS is integrated into the Astro framework, allowing for utility-first CSS, which makes for rapid UI development.
-
-In essence, the genaigraphics project seems to be a rich web application that merges 3D graphics rendering capabilities with interactive chat functionalities, AI-powered, all built on a modern stack comprising Astro, Three.js, TypeScript, and Express.
-
-
-Getting Started
+## Getting Started 🔧
 1. Installation
-
 Clone the repository:
-
 ```
 git clone https://github.com/mollybeach/genaigraphics.git
 ```
-
 2. Navigate into the project directory:
-
 ```
 cd genaigraphics
 cd webapp
 ```
-
 3. Start the application:
-
 ```
 npm run start
 ```
@@ -57,6 +56,30 @@ npm run start
 ![genaigraphics Application Screenshot](webapp/public/images/readme/readme_ModelLaptop.png)
 
 ![genaigraphics Application Screenshot](webapp/public/images/readme/home-page.png)
+
+## How it Works 🛠  
+
+1. User Interaction 🖱️:
+- The user types a question into the ChatBar Component and submits it.
+2. Initial Store Update 🔄:
+- The store.js triggers the updateMessagesStateEvent(), setting the $question store, adding the message to $historyMessages, and calling threejsCanvasEvent("loadingcircle") to display a loading indicator.
+3. Azure ML Interaction ☁️:
+- The store.js then calls postAzureMLMessagesData() to send the question and chat history to Azure ML.
+- Azure ML processes the input and responds with relevant data.
+4. Handling Azure ML Responses 📩:
+- On success, store.js sets $botResponse, adds the AI response to $historyMessages, and calls updateAnimationsStateEvent().
+- azureML.js handles further processing by sending the chat history to Azure ML for - animation and recommendation commands.
+5. Updating Animations and Recommendations 🔧:
+- Azure ML returns animation commands, which store.js uses to update animations via threejsCanvasEvent().
+- It also fetches recommendation commands and updates the recommendations.
+6. Rendering and 3D Visualization 🎨:
+- The threejsCanvasEvent(command) in store.js calls mapAssetAttributesByCommand(command), setting $animationAsset and $canvasTitle, and initializes ThreeCanvas.instance.
+- ThreeCanvas class initializes the 3D scene, loads assets based on attributes, and supports various asset types like glb, fbx, mp4, png, multipleGlbs, and multipleMp4s. It adds necessary lighting and controls for an interactive experience.
+
+7. Chat Components 💬:
+ - The ChatMessages Component subscribes to $historyMessages to render messages with typing animations.
+ - The ChatRecommendationBar Component subscribes to $recommendations to display recommendation buttons.
+- The ChatBar Component updates the textarea with selected recommendations, ensuring smooth user interaction.️
 
 
 # Application Flowchart 🌐
@@ -199,7 +222,7 @@ Start
 End
 
 ```
-## 🚀 Project Structure
+## Project Structure 🚀 
 
 Inside of your Astro project, you'll see the following folders and files:
 
