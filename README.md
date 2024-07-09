@@ -1,11 +1,9 @@
-# genaigraphics - 👾 3D Graphics Rendering and AI Chat Application 💬 
+# GenAiGraphics - 👾 3D Graphics Rendering and AI Chat Application 💬 
 
-Feel free to check out our [live application](https://gentle-ocean-0e505290f.3.azurestaticapps.net/agent) Password: NINEgoal123@*
-
+Check out the site!: [GenAiGraphics](https://gentle-ocean-0e505290f.3.azurestaticapps.net/agent) Password: NINEgoal123@*
 
 ## Project Overview 💻
- 
- An Innovative web application that seamlessly combines advanced 3D graphics rendering with AI chat functionalities to provide a visual aid for customers setting up their technology. Built using the Astro framework, this application integrates Three.js for immersive 3D rendering and Azure ML for intelligent, AI-driven interactions. This project is an excellent learning tool, demonstrating the powerful synergy between AI and 3D graphics.
+The GenAiGraphics application aims to address the challenge of guiding users through complex technology setups using a combination of advanced 3D graphics rendering and AI-driven interactions. Traditional setup guides often rely on text-based instructions, which can be challenging for users to follow, especially when dealing with intricate hardware configurations. This project seeks to enhance user experience by visualizing setup processes in a dynamic, interactive manner. By integrating WebGL technology with Three.js for 3D rendering and Azure ML for AI chat functionalities, genaigraphics empowers users to interact with realistic 3D models that demonstrate step-by-step procedures. The goal is to provide intuitive visual aids that simplify the setup process, reduce user errors, and enhance overall user satisfaction.
 
 ## Key Features 
 ### Visual Technology Setup Assistance 🔌:
@@ -44,22 +42,22 @@ npm run start
 ```
 ![genaigraphics Application Screenshot](https://github.com/mollybeach/genaigraphics/blob/master/webapp/public/images/readme/lighting-sculpture.gif)
 
-![genaigraphics Application Screenshot](webapp/public/images/readme/router-green-button.png)
-
-![genaigraphics Application Screenshot](webapp/public/images/readme/brand-agent.png)
-
-![genaigraphics Application Screenshot](webapp/public/images/readme/cable-router.png)
-
-![genaigraphics Application Screenshot](webapp/public/images/readme/home-page.png)
-
-![genaigraphics Application Screenshot](webapp/public/images/readme/readme_ModelBoomBox.png)
-
-![genaigraphics Application Lighting Screenshot](webapp/public/images/readme/readme_ModelWifiExtender.png)
-![genaigraphics Application Screenshot](webapp/public/images/readme/router-green-button.png)
-
-![genaigraphics Application Screenshot](webapp/public/images/readme/readme_ModelLaptop.png)
-
-![genaigraphics Application Screenshot](webapp/public/images/readme/home-page.png)
+<div style="max-width:600px;margin:auto;">
+  <div style="position:relative;width:100%;overflow:hidden;">
+    <div style="display:flex;transition:transform 0.5s ease;">
+      <img src="https://github.com/mollybeach/genaigraphics/blob/master/webapp/public/images/readme/lighting-sculpture.gif" alt="Lighting Sculpture" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/router-green-button.png" alt="Router Green Button" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/brand-agent.png" alt="Brand Agent" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/cable-router.png" alt="Cable Router" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/home-page.png" alt="Home Page" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/readme_ModelBoomBox.png" alt="Model BoomBox" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/readme_ModelWifiExtender.png" alt="Model Wifi Extender" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/readme_ModelLaptop.png" alt="Model Laptop" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/router-green-button.png" alt="Router Green Button" style="width:100%;flex-shrink:0;">
+      <img src="webapp/public/images/readme/home-page.png" alt="Home Page" style="width:100%;flex-shrink:0;">
+    </div>
+  </div>
+</div>
 
 ## How it Works 🛠  
 
