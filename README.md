@@ -34,7 +34,11 @@ git clone https://github.com/mollybeach/genaigraphics.git
 cd genaigraphics
 cd webapp
 ```
-### 3. Start the application:
+### 3. Install the dependencies:
+```
+npm install
+```
+### 4. Start the application:
 ```
 npm run start
 ```
@@ -220,7 +224,57 @@ Start
 End
 
 ```
-## Project Structure 🚀 
+
+## Application Flowchart
+## Server-Side Operations
+```
++-------------------------------+
+| Express Server                |
+| - Serves static files         |
+| - Handles API requests        |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| /api/getSecret/:key           |
+| - Fetches secrets from Azure  |
++-------------------------------+
+  |
+  v
+| Azure Configuration Service   |
+| - Stores configuration data   |
++-------------------------------+
+```
+## Python Azure Functions
+```
++-------------------------------+
+| Python Azure Function:        |
+| telecom_ai/__init__.py        |
+| - Handles AI chat processing  |
+| - Sends question and chat history to Azure ML endpoint |
+| - Receives and processes AI response |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| Python Azure Function:        |
+| animation-helper/__init__.py  |
+| - Handles animation requests  |
+| - Sends question and chat history to Azure ML endpoint |
+| - Receives and processes animation commands |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| Python Azure Function:        |
+| recommendation-helper/__init__.py |
+| - Handles recommendation requests |
+| - Sends question and chat history to Azure ML endpoint |
+| - Receives and processes recommendations |
++-------------------------------+
+
+```
+
 
 Inside of your Astro project, you'll see the following folders and files:
 
