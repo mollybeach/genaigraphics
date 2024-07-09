@@ -1,95 +1,40 @@
 ---
-//path: webapp/src/components/templates/Header.astro
-import Container from "../common/Container.astro";
-import { WEBSITE_NAME} from "../../../config/config.js"
-import { classNames } from "../../styles/classStyles.js";
-const links = [
-  {
-    to: "/",
-    label: "Home",
-  },
-  {
-    to:"agent",
-    label: "Agent",
-  }
-];
+//path: webapp/src/components/templates/Footer.astro
+import FacebookSvg from '../primitives/Svg.astro';
+import TwitterSvg from '../primitives/Svg.astro';
+import GoogleSvg from '../primitives/Svg.astro';
+import InstagramSvg from '../primitives/Svg.astro';
+import LinkedInSvg from '../primitives/Svg.astro';
+import GitHubSvg from '../primitives/Svg.astro';
+import Link from "../primitives/Link.astro";
+import {classNames} from "../../styles/classStyles";
 ---
-<script>
-  let isToggled = false;
-  const navlinks = document.querySelector("#nav-links");
-  const hamburger = document.querySelector("nav-hamburger-button");
-  const layer = document.querySelector("#navLayer");
-  const links = [...document.querySelectorAll("#nav-links a")];
-
-  function toggleNavlinks() {
-    if (isToggled) {
-      navlinks?.classList.add("!visible", "!scale-100", "!opacity-100", "!lg:translate-y-0");
-      hamburger?.classList.add("toggled");
-      layer?.classList.add("origin-top", "scale-y-100");
-    } else {
-      navlinks?.classList.remove("!visible", "!scale-100", "!opacity-100", "!lg:translate-y-0");
-      hamburger?.classList.remove("toggled");
-      layer?.classList.remove("origin-top", "scale-y-100");
-    }
-  }
-
-  hamburger?.addEventListener("click", () => {
-    isToggled = !isToggled;
-    toggleNavlinks();
-  });
-
-  links?.forEach((link) => {
-    link?.addEventListener("click", () => {
-      isToggled = !isToggled;
-      toggleNavlinks();
-    });
-  });
-</script>
-
-<header>
-  <nav id="nav" class={classNames("nav")}>
-    <Container>
-      <div id="nav-contents-container" class={classNames("navContentsContainer")}>
-        <div id="nav-logo-container" class={classNames("navLogContainer")}>
-          <a id="nav-logo-link" ref="/" aria-label="logo" class={classNames("navLogoLink")}>
-            <div id="nav-logo-image-container" aria-hidden="true" class={classNames("navLogoImageContainer")}>
-              <img id="nav-logo-image" src="/images/svg/ai-logo.svg" alt="logo" class={classNames("navLogoImage")} />
-              <div id="nav-logo-image-dot" class={classNames("navLogoImageDot")}>
-              </div>
-            </div>
-            <span id="nav-logo-company-span" class="text-1xl font-bold text-white">{WEBSITE_NAME}</span>
-          </a>
-          <div id="nav-hamburger-container" class={classNames("navHamburgerContainer")}>
-            <button id="nav-hamburger-button" aria-label="hamburger" id="hamburger" class={classNames("navHamburgerButton")}>
-              <div id="nav-hamburger-line-one" aria-hidden="true" id="line" class={classNames("navHamburgerLineOne")}>
-              </div>
-              <div id="nav-hamburger-line-two" aria-hidden="true" id="line2" class={classNames("navHamburgerLineTwo")}>
-              </div>
-            </button>
-          </div>
-        </div>
-        <div id="nav-links" class={classNames("navLinks")}>
-          <div id="nav-links-list-container" class={classNames("navLinksListContainer")}>
-            <ul id="nav-links-list" class={classNames("navLinksList")}>
-              {
-                links.map((link) => (
-                  <li>
-                    <a id="nav-links-list-li" href={link.to} class={classNames("navLinksListLi")}>
-                      <span id="nav-links-list-span" class={classNames("navLinksListSpan")}> {link.label}</span>
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </div>
-    </Container>
-  </nav>
-</header>
-
-
-
-
-  
-
+<footer id="footer"class={classNames("footer")}>
+  <div id="footer-social-links-container" class={classNames("footerSocialLinksContainer")}>
+    <div id="footer-social-links-inner-container" class={classNames("footerSocialLinksInnerContainer")}>
+      <Link route="https://facebook.com" >
+        <FacebookSvg  type="facebook" group="footer" />
+      </Link>
+      <Link route="twitter.com" >
+        <TwitterSvg  type="twitter" group="footer" />
+      </Link>
+      <Link route="https://google.com" >
+        <GoogleSvg  type="google" group="footer" />
+      </Link>
+      <Link route="https://instagram.com" >
+        <InstagramSvg  type="instagram" group="footer" />
+      </Link>
+      <Link route="https://linkedin.com" >
+        <LinkedInSvg  type="linkedin" group="footer" />
+      </Link>
+      <Link route="https://github.com" >
+        <GitHubSvg  type="github" group="footer" />
+      </Link> 
+    </div>
+    <div id="footer-company-name-link-container" class={classNames("footerCompanyNameLinkContainer")}>
+      <a href="/" id="footer-company-name-link" class={classNames("footerCompanyNameLink")}>
+        Telehero
+      </a>
+    </div>
+  </div>
+</footer>
