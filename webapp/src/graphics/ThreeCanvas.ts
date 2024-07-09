@@ -4,7 +4,7 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { controls } from "./utils/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
 import { $animationAsset } from "../stores/store";
-import {createSculptureWithGeometry, glslToThreeJSMesh} from "shader-park-core";
+//import {createSculptureWithGeometry, glslToThreeJSMesh} from "shader-park-core";
 import { Color, TorusKnotGeometry, SphereGeometry, BoxGeometry } from "three";
 
 export class ThreeCanvas {
@@ -28,7 +28,7 @@ export class ThreeCanvas {
   public time = { delta: 0, elapsed: 0 };
   public params = { time: 0 };
   public background = new THREE.Color("#fff");
- public mixer = new THREE.AnimationMixer(this.scene);
+  public mixer = new THREE.AnimationMixer(this.scene);
   public currentAsset = $animationAsset.get();
   static instance: ThreeCanvas | null = null;
 
@@ -45,6 +45,7 @@ export class ThreeCanvas {
       this.currentAsset = _newState;
     });
     this.execute();
+
   }
 
   private init() {
@@ -69,8 +70,8 @@ export class ThreeCanvas {
     switch (asset.type) {
       case "glb":
         return this.loadGLB(asset);
-      case "glsl":
-        return this.loadGLSL(asset);
+      //case "glsl":
+      //  return this.loadGLSL(asset);
       case "fbx":
         return this.loadFBX(asset);
       case "mp4":
@@ -79,8 +80,8 @@ export class ThreeCanvas {
         return this.loadMultipleMp4s(asset.assets);
       case "multipleGlbs":
         return this.loadMultipleGlbs(asset.assets);
-      case "spjs":
-        return this.loadSPJS(asset);
+      //case "spjs":
+      //  return this.loadSPJS(asset);
       case "png":
         return this.loadImage(asset);
       default:
@@ -162,6 +163,12 @@ export class ThreeCanvas {
     video.autoplay = true;
     video.preload = "metadata";
     video.play();
+    //update the style of the video element
+    //video.style.background = "black";
+    // set attributes for the video element
+
+    // set style of the video element
+    video.style.width = "100%";
     video.style.height = "100%";
     video.style.objectFit = "cover";
     video.style.position = "absolute";
@@ -280,7 +287,7 @@ export class ThreeCanvas {
      }
    }
  }
-
+/*
   async loadGLSL(asset: any) {
     const response = await fetch(asset.path); 
     const glsl = await response.text();
@@ -298,7 +305,7 @@ export class ThreeCanvas {
     geometry.computeBoundingSphere();
     geometry.center();
     let state = {
-      mouseDown: 0.0, 
+      mouseDown: 0.0, //make sure the name you use for your input in spCode matches the name you use here
     }
     
     this.canvasElement.addEventListener('pointerdown', () => {
@@ -316,7 +323,7 @@ export class ThreeCanvas {
     asset.data.scene = mesh;
     return asset;
   }
-
+*/
   addAsset(asset: any) {
     this.currentAsset = asset;
     this.updateRendererSize(this.getWidth(), this.getHeight());
