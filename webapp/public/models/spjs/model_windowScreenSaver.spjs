@@ -1,4 +1,7 @@
 // modified from user nife213
+let mouseDown = input();
+rotateY(mouse.x * PI / 2 + time * .5);
+rotateX(mouse.y * PI / 2);
 let hue = abs(sin(time*.2))
 let col = hsv2rgb(vec3(hue, 1, 1))
 color(col)

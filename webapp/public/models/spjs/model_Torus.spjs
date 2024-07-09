@@ -1,4 +1,3 @@
-
   let mouseDown = input(); //make sure the name you use for your input matches the name you pass into your state
   
   rotateY(mouse.x * PI / 2 + time * .5);
