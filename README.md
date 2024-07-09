@@ -270,7 +270,7 @@ End
 ```
 
 ## Project Structure 📁
-Inside of your Astro project, you'll see the following folders and files:
+Inside of GenAiGraphics project, you'll see the following folders and files:
 
 ```
 genaipgraphics/
