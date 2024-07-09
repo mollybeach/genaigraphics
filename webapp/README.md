@@ -42,24 +42,24 @@ cd webapp
 ```
 npm run start
 ```
-![genaigraphics Application Screenshot](https://github.com/mollybeach/genaigraphics/blob/master//webapp/public/images/readme/lighting-sculpture.gif)
+![genaigraphics Application Screenshot](https://github.com/mollybeach/genaigraphics/blob/master/webapp/public/imagesreadme/lighting-sculpture.gif)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/router-green-button.png)
+![genaigraphics Application Screenshot](public/imagesreadme/router-green-button.png)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/brand-agent.png)
+![genaigraphics Application Screenshot](public/imagesreadme/brand-agent.png)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/cable-router.png)
+![genaigraphics Application Screenshot](public/imagesreadme/cable-router.png)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/home-page.png)
+![genaigraphics Application Screenshot](public/imagesreadme/home-page.png)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/readme_ModelBoomBox.png)
+![genaigraphics Application Screenshot](public/imagesreadme/readme_ModelBoomBox.png)
 
-![genaigraphics Application Lighting Screenshot](/webapp/public/images/readme/readme_ModelWifiExtender.png)
-![genaigraphics Application Screenshot](/webapp/public/images/readme/router-green-button.png)
+![genaigraphics Application Lighting Screenshot](public/imagesreadme/readme_ModelWifiExtender.png)
+![genaigraphics Application Screenshot](public/imagesreadme/router-green-button.png)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/readme_ModelLaptop.png)
+![genaigraphics Application Screenshot](public/imagesreadme/readme_ModelLaptop.png)
 
-![genaigraphics Application Screenshot](/webapp/public/images/readme/home-page.png)
+![genaigraphics Application Screenshot](public/imagesreadme/home-page.png)
 
 ## 🚀 Project Structure
 
