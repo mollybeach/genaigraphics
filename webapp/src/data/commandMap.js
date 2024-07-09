@@ -31,27 +31,27 @@ export const commandMap = {
       title: "Install Your Router",
       type: "glb"
     },
-    "Desktop PC": {
+    "desktoppc": {
       id: "model_DesktopPC",
-      command: "Desktop PC",
+      command: "desktoppc",
       title: "Confirm PC Network Settings",
       type: "glb"
     },
-    "Film Clapper Board": {
+    "filmclapperboard": {
       id: "model_FilmClapperBoard",
-      command: "Film Clapper Board",
+      command: "filmclapperboard",
       title: "Verify your Film Clapper Board",
       type: "glb"
     },
-    "Folder Icon": {
+    "foldericon": {
       id: "model_FolderIcon",
-      command: "Folder Icon",
+      command: "foldericon",
       title: "",
       type: "glb"
     },
-    "Laptop": {
+    "laptop": {
       id: "model_Laptop",
-      command: "Laptop",
+      command: "laptop",
       title: "Verify your Laptop's Network Settings",
       type: "glb"
     },
@@ -61,51 +61,51 @@ export const commandMap = {
       title: "Sales Track",
       type: "multipleMp4s"
     },
-    "Music Icons": {
+    "musicicons": {
       id: "model_MusicIcons",
-      command: "",
+      command: "musicicons",
       title: "Verify your Music Icons",
       type: "glb"
     },
-    "phone call icon": {
+    "phonecallicon": {
       id: "model_PhoneCallIcon",
-      command: "phone call icon",
+      command: "phonecallicon",
       title: "",
       type: "glb"
     },
-    "phone ring icon": {
+    "phoneringicon": {
       id: "model_PhoneRingIcon",
-      command: "phone ring icon",
+      command: "phoneringicon",
       title: "Phone Ring Icon",
       type: "glb"
     },
-    "phone all colors": {
+    "phoneallcolors": {
       id: "model_PhoneAllColors",
-      command: "phone all colors",
+      command: "phoneallcolors",
       title: "",
       type: "mp4"
     },
-    "phone black": {
+    "phoneblack": {
       id: "model_PhoneBlack",
-      command: "phone black",
+      command: "phoneblack",
       title: "Verify your Phone Black",
       type: "mp4"
     },
-    "phone blue": {
+    "phoneblue": {
       id: "model_PhoneBlue",
-      command: "phone blue",
+      command: "phoneblue",
       title: "",
       type: "mp4"
     },
-    "phone yellow": {
+    "phoneyellow": {
       id: "model_PhoneYellow",
-      command: "phone yellow",
+      command: "phoneyellow",
       title: "",
       type: "mp4"
     },
-    "phone white": {
+    "phonewhite": {
       id: "model_PhoneWhite",
-      command: "phone white",
+      command: "phonewhite",
       title: "",
       type: "mp4"
     },
@@ -115,27 +115,27 @@ export const commandMap = {
       title: "",
       type: "glb"
     },
-    "remote control": {
+    "remotecontrol": {
       id: "model_RemoteControl",
-      command: "remote control",
+      command: "remotecontrol",
       title: "",
       type: "glb"
     },
-    "rolling bag": {
+    "rollingbag": {
       id: "model_RollingBag",
-      command: "rolling bag",
+      command: "rollingbag",
       title: "",
       type: "glb"
     },
-    "save to cloud": {
+    "savetocloud": {
       id: "model_SaveToCloud",
-      command: "save to cloud",
+      command: "savetocloud",
       title: "",
       type: "glb"
     },
-    "security camera": {
+    "securitycamera": {
       id: "model_SecurityCamera",
-      command: "security camera",
+      command: "securitycamera",
       title: "Verify your Security Camera's Network Settings",
       type: "glb"
     },
@@ -145,35 +145,35 @@ export const commandMap = {
       title: "Verify your Smart TV's Network Settings",
       type: "glb"
     },
-    "video game controller": {
+    "videogamecontroller": {
       id: "model_VideoGameController",
-      command: "video game controller",
+      command: "videogamecontroller",
       title: "Verify your PC Console's Network Settings",
       type: "glb"
     },
-    "video game controller 2": {
+    "videogamecontroller2": {
       id: "model_VideoGameController2",
-      command: "video game controller 2",
+      command: "videogamecontroller2",
       title: "",
       type: "glb"
     },
-    "wifi extender": {
+    "wifiextender": {
       id: "model_WifiExtender",
-      command: "wifi extender",
+      command: "wifiextender",
       title: "Wifi Extendor Placement",
       type: "glb"
     },
-    "wifi icon": {
+    "wifiicon": {
       id: "model_Network",
       command: "wifiicon",
       title: "Verify Your Network",
       type: "mp4"
     },
-    "multipleGlbs": {
+    "multipleglbs": {
       id: "model_AllGlbs",
       title: "All Glbs",
-      command: "allGlbs",
-      type: "multipleGlbs"
+      command: "allglbs",
+      type: "multipleglbs"
     },
     "router": {
       id: "model_Router90DegreeRotation",
@@ -187,10 +187,10 @@ export const commandMap = {
       title: "Verify Indoor Setup Location",
       type: "mp4"
     },
-    "sales track": {
+    "salestrack": {
       id: "model_Upsell",
       title: "Sales Track",
-      command: "sales track",
+      command: "salestrack",
       type: "multipleMp4s"
     },
     "upsell": {
@@ -205,28 +205,27 @@ export const commandMap = {
       title: "Telehero Support",
       type: "glb"
     },
-    "acn logo": {
+    "acnlogo": {
       id: "model_LogoAccenture",
-      command: "default",
+      command: "acnlogo",
       title: "Telehero Support",
       type: "glb"
     },
-
-    "loadingCircle": {
+    "loadingcircle": {
       id: "model_LoadingCircle",
-      command: "loadingCircle",
+      command: "loadingcircle",
       title: "Loading...",  
       type: "mp4"
     },
-    "mobile plans": {
+    "mobileplans": {
       id: "model_UpsellPhonePlans",
-      command: "mobile plans",
+      command: "mobileplans",
       title: "Mobile Plans",
       type: "mp4"
     },
-    "latest phones": {
+    "latestphones": {
       id: "model_PhoneAllColors",
-      command: "latest phones",
+      command: "latestphones",
       title: "Latest Phones",
       type: "mp4"
     },

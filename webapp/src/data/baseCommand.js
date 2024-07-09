@@ -10,27 +10,27 @@ export const currentAsset = mapAssetAttributesByCommand(baseCommand);
 
 /*
 commands:
+default: default ( This is the default model that is first will be displayed on the scene if there is no response from Azure ML)
 glb: 
   cable, cord, light, reset, routerstatic,
-  boombox, Credit Card, Desktop PC, emoji heart, Film Clapper Board,
-  Folder Icon, Laptop, low poly phone, Movie Reel, Music Icons,
-  phone call icon, phone ring icon, Plane, remote control
-  rolling bag, save to cloud, security camera, Sports, television,
-  video game controller, video game controller 2, wifi extender, wifi icon
-  mobile plans, latest phones
-  default, router, 
+  boombox, creditcard, desktoppc, emojiheart, filmclapperboard,
+  foldericon, laptop, lowpolyphone, moviereel, musicicons,
+  phonecallicon, phoneringicon, plane, remotecontrol,
+  rollingbag, savetocloud, securitycamera, sports, television,
+  videogamecontroller, videogamecontroller2, wifiextender, wifiicon,
+  mobileplans, latestphones,
+  default, router,
 mp4: 
-  house, loading circle, outage
+  house, loadingcircle, outage
 multipleMp4s:
-  upsell, sales track
+  upsell, salestrack
 multipleGlbs:
-  allGlbs
+  allglbs
 spjs:
- torus, dna, bunny, window screen saver
+  torus, dna, bunny, windowscreensaver
 glsl:
- earth, map
+  earth, map
 */
-
 
 
 

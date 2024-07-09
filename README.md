@@ -58,6 +58,147 @@ npm run start
 
 ![genaigraphics Application Screenshot](webapp/public/images/readme/home-page.png)
 
+
+# Application Flowchart 🌐
+
+```plaintext
+Start
+  |
+  v
++-------------------------------+
+| ChatBar Component             |
+| - User types a question       |
+| - User submits the question   |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| store.js                      |
+| - updateMessagesStateEvent()  |
+| - Sets $question store        |
+| - Adds message to $historyMessages |
+| - Calls threejsCanvasEvent("loadingcircle") |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| store.js                      |
+| - Calls postAzureMLMessagesData(question, $historyMessages.get()) |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| azureML.js                    |
+| - postAzureMLMessagesData()   |
+| - Sends question and chat history to Azure ML |
+| - Receives response from Azure ML |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| store.js                      |
+| - On success:                |
+|   - Sets $botResponse        |
+|   - Adds AI response to $historyMessages |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| store.js                      |
+|   - Calls updateAnimationsStateEvent() |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| azureML.js                    |
+| - postAzureMLAnimationsData() |
+| - Sends question and chat history to Azure ML |
+| - Receives animation command from Azure ML |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| store.js                      |
+|   - Calls updateRecommendationsStateEvent() |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| azureML.js                    |
+| - postAzureMLRecommendationsData() |
+| - Sends question and chat history to Azure ML |
+| - Receives recommendations from Azure ML |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| store.js                      |
+| - updateAnimationsStateEvent()|
+|   - Calls threejsCanvasEvent() with new command |
+| - updateRecommendationsStateEvent() |
+|   - Sets $recommendations     |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| threejsCanvasEvent(command)   |
+| - Calls mapAssetAttributesByCommand(command) |
+| - Sets $animationAsset and $canvasTitle      |
+| - Initializes ThreeCanvas.instance           |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| mapAttributes.js              |
+| - mapAssetAttributesByCommand(command) |
+| - Retrieves attributes from commandMap and assetMap |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| commandMap.js                 |
+| - Maps commands to assets     |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| assetMap.js                   |
+| - Defines asset details       |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| ThreeCanvas                   |
+| - Initializes 3D scene        |
+| - Loads asset based on attributes |
+| - Supports various asset types (glb, fbx, mp4, png, multipleGlbs, multipleMp4s) |
+| - Adds lighting and controls  |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| ChatMessages Component        |
+| - Subscribes to $historyMessages |
+| - Renders messages including typing animation |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| ChatRecommendationBar Component |
+| - Subscribes to $recommendations |
+| - Renders recommendation buttons |
++-------------------------------+
+  |
+  v
++-------------------------------+
+| ChatBar Component             |
+| - Updates textarea with recommendation on click |
++-------------------------------+
+  |
+  v
+End
+
+```
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
