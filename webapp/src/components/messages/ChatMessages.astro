@@ -11,39 +11,52 @@ import { classNames } from "../../styles/classStyles";
    // TYPE ANIMATE THE NEW MESSAGE   
    async function typeMessage(messageSpan: HTMLElement, messageText: string) {
 
-      function typeWriter(text: string, i: number, fnCallback: () => void) {
-           if (i < text.length) {
-             // ADD NEXT CHARACTER TO SPAN
-             messageSpan.innerHTML =
-               text.substring(0, i + 1) +
-               '<span class="border-r-1 border-solid border-black w-1 h-6 animate-caret" aria-hidden="true"></span>';
-
-             setTimeout(function () {
-               typeWriter(text, i + 1, fnCallback);
-             }, 10);
-           }
+    function typeWriter(text: string, i: number, fnCallback: () => void) {
+         if (i < text.length) {
+           // ADD NEXT CHARACTER TO SPAN
+           messageSpan.innerHTML =
+             text.substring(0, i + 1) +
+             '<span class="border-r-1 border-solid border-black w-1 h-6 animate-caret" aria-hidden="true"></span>';
+        
+           setTimeout(function () {
+             typeWriter(text, i + 1, fnCallback);
+           }, 5); 
          }
-      // START A TYPEWRITER ANIMATION FOR A TEXT IN THE MESSAGES ARRAY
-      function StartTextAnimation(i: number) {
-
-        if (typeof messageText == "undefined") {
-          setTimeout(function () {
-            StartTextAnimation(0);
-          }, 20000);
-        }
-        if (i < messageText.length) {
-          // START A TYPEWRITER ANIMATION FOR A TEXT IN THE MESSAGES ARRAY
-          typeWriter(messageText, 0, function () {
-            StartTextAnimation(i + 1);
-          });
-        }
-      }
-      // START THE TYPEWRITER ANIMATION 
-      StartTextAnimation(0);
-    }
+       }
+    // START A TYPEWRITER ANIMATION FOR A TEXT IN THE MESSAGES ARRAY
+    function StartTextAnimation(i: number) {
     
+      if (typeof messageText == "undefined") {
+        setTimeout(function () {
+          StartTextAnimation(0);
+        }, 20000); 
+      }
+      if (i < messageText.length) {
+        // START A TYPEWRITER ANIMATION FOR A TEXT IN THE MESSAGES ARRAY
+        typeWriter(messageText, 0, function () {
+          StartTextAnimation(i + 1);
+        });
+      }
+    }
+    // START THE TYPEWRITER ANIMATION 
+    StartTextAnimation(0);
+    }
+
+    // SPEAK A MESSAGE USING WEB SPEECH API
+    function speakMessage(text: string): void {
+      window.speechSynthesis.cancel();
+      const synthesis = window.speechSynthesis;
+      const voices = synthesis.getVoices();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voices[2];
+      utterance.rate = 1.1; 
+      utterance.pitch = 0.9;  
+      utterance.volume = 0.8; 
+      synthesis.speak(utterance);
+    }
+
      // RENDER EACH MESSAGE IN MESSAGE STORE
-    function renderMyMessages(message: any, index: number, messages: any[]) {
+     function renderMyMessages(message: any, index: number, messages: any[]) {
       const messageHtml = `
         <div id="chat-message-column-container" class="${classNames("chatMessageColumnContainer")}${message.sender === 'me' ? classNames("chatMessageColumnContainerYou") : classNames("chatMessageColumnContainerYou")}">
           <div id="chat-message-row-container" class="${classNames("chatMessageRowContainer")} ${message.sender === 'me' ? classNames("chatMessageRowContainerMe") : classNames("chatMessageRowContainerYou")}">
@@ -64,6 +77,7 @@ import { classNames } from "../../styles/classStyles";
 
        // ONLY CALL TYPEMESSAGE IF THE MESSAGE IS FROM THE OTHER PERSON AND IT'S  THE NEWEST MESSAGE
         if (index === messages.length - 1 && message.sender === 'you'){
+          speakMessage(message.message);
           typeMessage(newMessageSpan, message.message);
         }
 

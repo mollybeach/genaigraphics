@@ -1,21 +1,19 @@
 ---
-//path: /src/components/messages/ChatrecommendationBar.astro
+//path: webapp/src/components/messages/ChatRecommendationBar.astro
 import {classNames} from "../../styles/classStyles";
-
 ---
 <script>
     import {  
         $textAreaValue, 
-        updateTextareaValuerecommendationStateEvent,  
         $recommendations,
         updateMessagesStateEvent
     } from "../../stores/store";
     import {classNames} from "../../styles/classStyles";
-    const buttonElement = document.querySelector<HTMLButtonElement>('#recommendation');
-    const textareaElement = document.querySelector("#chat-bar-textarea") as HTMLTextareaElement;
+    const buttonElement = document.querySelector<HTMLButtonElement>('#recommendation') as HTMLButtonElement;
+    const textareaElement = document.querySelector<HTMLTextAreaElement>("#chat-bar-textarea") as HTMLTextAreaElement;
     
-    // Render recommendation Buttons
-    function renderMyrecommendations(recommendation: any) {
+    // Render Recommendation Buttons
+    function renderMyRecommendations(recommendation: any) {
         const recommendationHtml = `
             <button
               id="recommendation-button"
@@ -26,17 +24,19 @@ import {classNames} from "../../styles/classStyles";
         `;
         buttonElement.innerHTML += recommendationHtml;
     }
-    let unsubscribe;
-    unsubscribe;
-    function initialize() {
-        unsubscribe = $recommendations.subscribe(updatedrecommendations => {  
-            buttonElement.innerHTML = '';
-            updatedrecommendations.forEach(renderMyrecommendations);
-        }); 
-          
-    }
-    initialize();
 
+    // SUBSCRIBE TO RECOMMENDATION STATE STORE
+    $recommendations.subscribe(updatedRecommendations => {  
+      buttonElement.innerHTML = '';
+      updatedRecommendations.forEach(renderMyRecommendations); 
+    });
+
+    // RESIZE TEXTAREA ON INPUT
+    function handleTextareaInput() {
+      textareaElement.style.height = 'auto'; // Reset the height to auto
+      textareaElement.style.height = (textareaElement.scrollHeight) + 'px'; // Set the height to the scrollHeight
+      textareaElement.dispatchEvent(new Event('input'));
+    }
     // CREATE MESSAGE
       function createMessage(event: Event) {
       event.preventDefault();
@@ -49,21 +49,21 @@ import {classNames} from "../../styles/classStyles";
       textareaElement.value = '';
     }
 
-    // UPDATE TEXTAREA VALUE ON recommendation BUTTON CLICK
+    // UPDATE TEXTAREA VALUE ON RECOMMENDATION BUTTON CLICK
     document.addEventListener("click", (event) => {
         const target = event.target as HTMLButtonElement;
         if (target.matches("#recommendation-button")) {
             const recommendation = target.innerText;
             $textAreaValue.set(recommendation);
+           handleTextareaInput();
             return;
         }
     });
 
-    //ADD KEYDOWN EVENT LISTENER TO recommendation BUTTONS
+    //ADD KEYDOWN EVENT LISTENER TO RECOMMENDATION BUTTONS
     document.addEventListener("keydown", (event: KeyboardEvent) => {
         const target = event.target as HTMLButtonElement;
         if (target.matches("#recommendation-button")) {
-            const recommendation = target.innerText;
             if (event.key === "Enter") {
                 createMessage(event);
                 return;
@@ -71,7 +71,7 @@ import {classNames} from "../../styles/classStyles";
         }
     });
  
-  // UPDATE recommendation STATE STORE 
+  // UPDATE RECOMMENDATION STATE STORE 
     $textAreaValue.subscribe((recommendation) => {
       textareaElement.value = recommendation;
     });
