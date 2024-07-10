@@ -3,7 +3,7 @@
 Check out the site!: [GenAiGraphics](https://gentle-ocean-0e505290f.3.azurestaticapps.net/agent) Password: NINEgoal123@*
 
 ## Project Overview 💻
-The GenAiGraphics application aims to address the challenge of guiding users through complex technology setups using a combination of advanced 3D graphics rendering and AI-driven interactions. Traditional setup guides often rely on text-based instructions, which can be challenging for users to follow, especially when dealing with intricate hardware configurations. This project seeks to enhance user experience by visualizing setup processes in a dynamic, interactive manner. By integrating WebGL technology with Three.js for 3D rendering and Azure ML for AI chat functionalities, genaigraphics empowers users to interact with realistic 3D models that demonstrate step-by-step procedures. The goal is to provide intuitive visual aids that simplify the setup process, reduce user errors, and enhance overall user satisfaction.
+The GenAiGraphics application aims to address the challenge of guiding users through complex technology setups using a combination of advanced 3D graphics rendering and AI-driven interactions. Traditional setup guides often rely on text-based instructions, which can be challenging for users to follow, especially when dealing with intricate hardware configurations. This project seeks to enhance user experience by visualizing setup processes in a dynamic, interactive manner. By integrating WebGL technology with Three.js for 3D rendering and Azure ML Prompt Flow for AI chat functionalities. Genaigraphics empowers users to interact with realistic 3D models that demonstrate step-by-step procedures. The goal is to provide intuitive visual aids that simplify the setup process, reduce user errors, and enhance overall user satisfaction.
 
 ## Key Features 
 ### Visual Technology Setup Assistance 🔌:
@@ -13,7 +13,7 @@ The GenAiGraphics application aims to address the challenge of guiding users thr
 ### Astro Framework 🚀:
   - Frontend is built with Astro, featuring distinct pages and reusable components. TailwindCSS is integrated for styling, and server-side settings are configured for API proxying.
 ### AI Chat Functionality 🤖:
-  - AI-driven chatbot powered by Azure ML handles user queries and provides intelligent responses and recommendations.
+  - AI-driven chatbot powered by Azure ML Prompt Flow handles user queries and provides intelligent responses and recommendations.
 ### Server-Side Operations 🖥️:
   - An Express server acts as middleware, managing API requests using Axios, handling CORS, and logging requests.
 ### Robust Tooling and Configuration 🛠️:
