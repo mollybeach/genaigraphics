@@ -61,3 +61,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             f"The request failed with status code: {error.code}. Error: {error_message}",
             status_code=500
         )
+
