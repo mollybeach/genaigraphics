@@ -86,7 +86,7 @@ If you encounter any issues while running tests, try the following:
 
 If you encounter issues, consider the following steps:
 
-1. Clear Jest Cache
+1. **Clear Jest Cache**
 
     Jest caches test results to improve performance. If you encounter issues, try clearing the Jest cache by running:
     
@@ -94,7 +94,7 @@ If you encounter issues, consider the following steps:
     npm run test -- --clearCache
     ```
 
-2. Check Configuration Files
+2. **Check Configuration Files**
 
     Ensure there are no multiple Jest configuration files that might conflict. Jest configuration should be in either jest.config.js or package.json under the jest key, but not both.
 
