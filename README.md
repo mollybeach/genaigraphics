@@ -298,6 +298,13 @@ genaipgraphics/
 │   ├── .gitignore
 │   ├── host.json
 │   └── requirements.txt
+├── tests/
+│   ├── babel.config.js
+│   ├── chat.test.js
+│   ├── jest.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   └── README.md
 ├── webapp/
 │   ├── config/
 │   │   ├── astro.config.mjs
