@@ -6,6 +6,7 @@ import { sampleMessagesData } from '../data/text/sampleMessageData.js';
 import { currentAsset } from '../data/baseCommand.js';
 import { mapAssetAttributesByCommand } from '../data/mapAttributes.js';
 import { ThreeCanvas } from '../graphics/ThreeCanvas';
+import {BASE_URL} from '../config/config.js';
 
 // Stores
 export const $question = atom("");
@@ -69,7 +70,7 @@ export const createMessage = (sender) => {
     name: sender === "me" ? "Customer" : "Ai Agent",
     sender: sender,
     message: sender === "me" ? $question.get() : $botResponse.get() ,
-    image:  sender === "me" ?  'images/png/user.png' : 'images/svg/ai-logo.svg',
+    image:  sender === "me" ?  `${BASE_URL}/images/png/user.png` : `${BASE_URL}/images/svg/ai-logo.svg`,
     timestamp: (new Date().getTime()).toString()
   }
 }
