@@ -5,7 +5,7 @@ export const glslAssets = {
     data: {
       scene: null,
     },
-    path: "./models/glsl/model_Earth.glsl",
+    path: "/models/glsl/model_Earth.glsl",
     type: "glsl",
     cameraPosition: {
       x: 0,

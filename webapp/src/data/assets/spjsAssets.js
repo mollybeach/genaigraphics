@@ -5,7 +5,7 @@ export const spjsAssets = {
       data: {
         scene: null,
       },
-      path: "./models/spjs/model_Dna.spjs",
+      path: "/models/spjs/model_Dna.spjs",
       type: "spjs",
       cameraPosition: {
         x: 0,
@@ -19,7 +19,7 @@ export const spjsAssets = {
       data: {
         scene: null,
       },
-      path: "./models/spjs/model_Torus.spjs",
+      path: "/models/spjs/model_Torus.spjs",
       type: "spjs",
       cameraPosition: {
         x: 0,
@@ -33,7 +33,7 @@ export const spjsAssets = {
       data: {
         scene: null,
       },
-      path: "./models/spjs/model_windowScreenSaver.spjs",
+      path: "/models/spjs/model_windowScreenSaver.spjs",
       type: "spjs",
       cameraPosition: {
         x: 0,
@@ -47,7 +47,7 @@ export const spjsAssets = {
       data: {
         scene: null,
       },
-      path: "./models/spjs/model_Bunny.spjs",
+      path: "/models/spjs/model_Bunny.spjs",
       type: "spjs",
       cameraPosition: {
         x: 0,

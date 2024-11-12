@@ -9,7 +9,7 @@ export const multipleMp4sAssets = {
           duration: 0,
           scene: null,
         },
-        path: "./models/mp4/model_Upsell1st.mp4",
+        path: "/models/mp4/model_Upsell1st.mp4",
         type: "mp4",
         cameraPosition: {
           x: 0,
@@ -24,7 +24,7 @@ export const multipleMp4sAssets = {
           duration: 0,
           scene: null,
         },
-        path: "./models/mp4/model_Upsell2nd.mp4",
+        path: "/models/mp4/model_Upsell2nd.mp4",
         type: "mp4",
         cameraPosition: {
           x: 0,
@@ -39,7 +39,7 @@ export const multipleMp4sAssets = {
           duration: 0,
           scene: null,
         },
-        path: "./models/mp4/model_Upsell3rd.mp4",
+        path: "/models/mp4/model_Upsell3rd.mp4",
         type: "mp4",
         cameraPosition: {
           x: 0,
@@ -54,7 +54,7 @@ export const multipleMp4sAssets = {
           duration: 0,
           scene: null,
         },
-        path: "./models/mp4/model_Upsell4th.mp4",
+        path: "/models/mp4/model_Upsell4th.mp4",
         type: "mp4",
         cameraPosition: {
           x: 0,
@@ -69,7 +69,7 @@ export const multipleMp4sAssets = {
           duration: 0,
           scene: null,
         },
-        path: "./models/mp4/model_Upsell5th.mp4",
+        path: "/models/mp4/model_Upsell5th.mp4",
         type: "mp4",
         cameraPosition: {
           x: 0,

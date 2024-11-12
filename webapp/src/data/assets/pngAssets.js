@@ -6,7 +6,7 @@ export const pngAssets = {
           duration: 0,
           scene: null,
         },
-        path: "./models/png/model_Outages.png",
+        path: "/models/png/model_Outages.png",
         type: "png",
         cameraPosition: {
           x: 0,

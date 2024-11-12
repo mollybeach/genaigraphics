@@ -6,7 +6,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_PhoneColorsAll.mp4",
+    path: "/models/mp4/model_PhoneColorsAll.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -21,7 +21,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_PhoneBlack.mp4",
+    path: "/models/mp4/model_PhoneBlack.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -36,7 +36,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_PhoneBlue.mp4",
+    path: "/models/mp4/model_PhoneBlue.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -51,7 +51,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_PhoneWhite.mp4",
+    path: "/models/mp4/model_PhoneWhite.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -66,7 +66,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_PhoneYellow.mp4",
+    path: "/models/mp4/model_PhoneYellow.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -81,7 +81,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_House1stHalf.mp4",
+    path: "/models/mp4/model_House1stHalf.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -96,7 +96,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_House2ndHalf.mp4",
+    path: "/models/mp4/model_House2ndHalf.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -111,7 +111,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_House.mp4",
+    path: "/models/mp4/model_House.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -126,7 +126,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_HouseZoom.mp4",
+    path: "/models/mp4/model_HouseZoom.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -141,7 +141,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Upsell1st.mp4",
+    path: "/models/mp4/model_Upsell1st.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -156,7 +156,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Upsell2nd.mp4",
+    path: "/models/mp4/model_Upsell2nd.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -171,7 +171,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Upsell3rd.mp4",
+    path: "/models/mp4/model_Upsell3rd.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -186,7 +186,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Upsell4th.mp4",
+    path: "/models/mp4/model_Upsell4th.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -201,7 +201,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Upsell5th.mp4",
+    path: "/models/mp4/model_Upsell5th.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -216,7 +216,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_LoadingCircle.mp4",
+    path: "/models/mp4/model_LoadingCircle.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -231,7 +231,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Network.mp4",
+    path: "/models/mp4/model_Network.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,
@@ -246,7 +246,7 @@ export const mp4Assets = {
       duration: 0,
       scene: null,
     },
-    path: "./models/mp4/model_Outage.mp4",
+    path: "/models/mp4/model_Outage.mp4",
     type: "mp4",
     cameraPosition: {
       x: 0,

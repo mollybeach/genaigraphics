@@ -1,6 +1,7 @@
 // path: webapp/src/data/mapAttributes.js
 import { assetMap } from './assetMap.js';
 import {commandMap} from './commandMap.js';
+import {BASE_URL} from '../../config/config.js';
 
 // RETRIEVES MAPPED CANVAS ATTRIBUTES BASED ON RESPONSE FROM AZURE ML
 export function mapAssetAttributesByCommand(command) {
@@ -17,7 +18,7 @@ export function mapAssetAttributesByCommand(command) {
     title: commandMap[command].title,
     animate: assetMap[keyType][keyName].animate,
     assets: assetMap[keyType][keyName].assets,
-    path: assetMap[keyType][keyName].path,
+    path: `${BASE_URL}${assetMap[keyType][keyName].path}`,
     data: assetMap[keyType][keyName].data,
     type: assetMap[keyType][keyName].type,
     cameraPosition: assetMap[keyType][keyName].cameraPosition,

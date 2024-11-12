@@ -5,7 +5,7 @@ export const gltfAssets = {
     data: {
       scene: null,
     },
-    path: "./models/gltf/model_RouterCableTexture.gltf",
+    path: "/models/gltf/model_RouterCableTexture.gltf",
     type: "gltf",
     cameraPosition: {
       x: 0,
@@ -19,7 +19,7 @@ export const gltfAssets = {
     data: {
       scene: null,
     },
-    path: "./models/gltf/model_RouterLightBlinkTexture.gltf",
+    path: "/models/gltf/model_RouterLightBlinkTexture.gltf",
     type: "gltf",
     cameraPosition: {
       x: 0,
@@ -33,7 +33,7 @@ export const gltfAssets = {
     data: {
       scene: null,
     },
-    path: "./models/gltf/model_RouterResetButtonTexture.gltf",
+    path: "/models/gltf/model_RouterResetButtonTexture.gltf",
     type: "gltf",
     cameraPosition: {
       x: 0,
@@ -47,7 +47,7 @@ export const gltfAssets = {
     data: {
       scene: null,
     },
-    path: "./models/gltf/model_RouterCableTexture.gltf",
+    path: "/models/gltf/model_RouterCableTexture.gltf",
     type: "gltf",
     cameraPosition: {
       x: 0,

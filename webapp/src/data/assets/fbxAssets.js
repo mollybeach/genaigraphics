@@ -5,7 +5,7 @@ export const fbxAssets = {
     data: {
       scene: null,
     },
-    path: "./models/fbx/model_RouterOriginal.fbx",
+    path: "/models/fbx/model_RouterOriginal.fbx",
     type: "fbx",
     cameraPosition: {
       x: 0,
