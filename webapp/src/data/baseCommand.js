@@ -2,7 +2,7 @@
 import { mapAssetAttributesByCommand } from './mapAttributes.js';
 
 // CHANGE THIS TO CHANGE THE DEFAULT MODEL
-export const baseCommand = "default";
+export const baseCommand = "router";
 
 // REPRESENTS LIST OF MAPPED ATTRIBUTES OF MODELS CURRENTLY PRESENTED ON THE SCENE
 export const currentAsset = mapAssetAttributesByCommand(baseCommand);
