@@ -5,9 +5,10 @@ import { postAzureMLMessagesData, postAzureMLRecommendationsData, postAzureMLAni
 import { sampleMessagesData } from '../data/text/sampleMessageData.js';
 import { currentAsset } from '../data/baseCommand.js';
 import { mapAssetAttributesByCommand } from '../data/mapAttributes.js';
-import { ThreeCanvas } from '../graphics/ThreeCanvas';
-import {BASE_URL} from '../config/config.js';
+import { ThreeCanvas } from '../graphics/ThreeCanvas'
 import { commandMap } from '../data/commandMap.js';
+//import { BASE_URL } from '../../config/config.js';
+const BASE_URL = '/genaigraphics';
 
 // Stores
 export const $question = atom("");
