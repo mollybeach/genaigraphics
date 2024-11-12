@@ -3,6 +3,7 @@
 import Container from "../common/Container.astro";
 import { WEBSITE_NAME} from "../../../config/config.js"
 import { classNames } from "../../styles/classStyles.js";
+import {BASE_URL} from '../../../config/config.js';
 const links = [
   {
     to: "/",
@@ -51,9 +52,9 @@ const links = [
     <Container>
       <div id="nav-contents-container" class={classNames("navContentsContainer")}>
         <div id="nav-logo-container" class={classNames("navLogContainer")}>
-          <a id="nav-logo-link" ref="/" aria-label="logo" class={classNames("navLogoLink")}>
+          <a id="nav-logo-link" href="/" aria-label="logo" class={classNames("navLogoLink")}>
             <div id="nav-logo-image-container" aria-hidden="true" class={classNames("navLogoImageContainer")}>
-              <img id="nav-logo-image" src="/images/svg/ai-logo.svg" alt="logo" class={classNames("navLogoImage")} />
+              <img id="nav-logo-image" src={`${BASE_URL}/images/svg/ai-logo.svg`} alt="logo" class={classNames("navLogoImage")} />
               <div id="nav-logo-image-dot" class={classNames("navLogoImageDot")}>
               </div>
             </div>
