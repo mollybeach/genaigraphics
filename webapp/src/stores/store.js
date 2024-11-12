@@ -30,7 +30,10 @@ export const threejsCanvasEvent = (command) => {
 export const updateMessagesStateEvent = (question) => {
   $question.set(question);
   $historyMessages.set( [...$historyMessages.get(), createMessage("me") ]);
-  threejsCanvasEvent("loadingCircle");
+ // threejsCanvasEvent("loadingCircle");
+ const randomCommand = Object.keys(commandMap)[Math.floor(Math.random() * Object.keys(commandMap).length)];
+ console.log('Random Command:', randomCommand);
+ threejsCanvasEvent(randomCommand);
 postAzureMLMessagesData(question, $historyMessages.get())
  .then(response => {
     $botResponse.set(response.answer);
