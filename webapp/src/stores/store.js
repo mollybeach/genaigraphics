@@ -7,6 +7,7 @@ import { currentAsset } from '../data/baseCommand.js';
 import { mapAssetAttributesByCommand } from '../data/mapAttributes.js';
 import { ThreeCanvas } from '../graphics/ThreeCanvas';
 import {BASE_URL} from '../config/config.js';
+import { commandMap } from '../data/commandMap.js';
 
 // Stores
 export const $question = atom("");
@@ -50,7 +51,10 @@ postAzureMLAnimationsData(question, chat_history)
     threejsCanvasEvent(cleanResponse);
   }).catch(error => {
     console.log("Animations Error ML", error);
-    threejsCanvasEvent("default");
+    // pick a random command from the commandMap for demo purposes
+    const randomCommand = Object.keys(commandMap)[Math.floor(Math.random() * Object.keys(commandMap).length)];
+    threejsCanvasEvent(randomCommand);
+   // threejsCanvasEvent("default");
   });
 };
 
