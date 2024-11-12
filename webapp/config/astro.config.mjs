@@ -24,9 +24,8 @@ export default defineConfig({
     }
   },
   site: 'https://mollybeach.github.io',
-  base: '/genaigraphics', // If your repo name is "genaigraphics"
   build: {
-    out: '../dist', // Change this to your desired output directory
+    outDir: '../dist', // Change this to your desired output directory
   },
 });
 // site: 'http://localhost:'+ PORT,
