@@ -54,6 +54,7 @@ postAzureMLAnimationsData(question, chat_history)
     console.log("Animations Error ML", error);
     // pick a random command from the commandMap for demo purposes
     const randomCommand = Object.keys(commandMap)[Math.floor(Math.random() * Object.keys(commandMap).length)];
+    console.log('Random Command:', randomCommand);
     threejsCanvasEvent(randomCommand);
    // threejsCanvasEvent("default");
   });
